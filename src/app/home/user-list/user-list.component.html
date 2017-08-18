@@ -1,0 +1,152 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> 用户管理
+
+        <span class="card-btn-group">
+          <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" (click)="userModal.show()"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+          <button class="btn btn-sm btn-warning" type="button" data-toggle="modal" (click)="userModal.show()"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+          <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-close"></i>&nbsp; 删除</button>
+          <button class="btn btn-sm btn-success" type="button"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
+          <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
+        </span>
+
+      </div>
+      <div class="card-block">
+
+        <!-- <ngx-datatable class="material" [rows]="rows" [columns]="columns" [columnMode]="flex" [headerHeight]="50" [rowHeight]="50" 
+         [selectionType]="single">
+        </ngx-datatable> -->
+
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+            <tr>
+              <th><input #checkedAll type="checkbox" name="userbox" (change)="selectAll(checkedAll.checked)"></th>
+              <th *ngFor="let th of theads">{{ th }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of userList">
+              <td><input type="checkbox" name="userbox" [(ngModel)]="user.checked"></td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.badge }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.mobilePhone }}</td>
+              <td>{{ user.tel }}</td>
+              <td>{{ user.createTime }}</td>
+              <td>{{ user.loginCount }}</td>
+              <td>{{ user.department }}</td>
+              <td>{{ user.role }}</td>
+              <td>{{ user.remark }}</td>
+
+              <td>
+                <button class="btn btn-sm btn-outline-primary" type="button">编辑</button>
+                <button class="btn btn-sm btn-outline-primary" type="button">打印</button>
+                <button class="btn btn-sm btn-outline-primary" type="button">重置密码</button>
+                <button class="btn btn-sm btn-outline-primary" type="button">删除</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <pagination-comp [totalItems]="totalItems" (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+<!--/.row-->
+
+<div bsModal #userModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{ userModalModel.title }}</h4>
+        <button type="button" class="close" (click)="userModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #userForm="ngForm" class="form-horizontal">
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">用户名</label>
+            <div class="col-md-9">
+              <input type="text" [ngModel]="userFormModel.username" name="username" maxlength="20" class="form-control form-control-sm"
+                placeholder="用户名">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">工号</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="userFormModel.badge" name="badge" class="form-control form-control-sm" placeholder="工号">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">真名</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="userFormModel.name" name="name" class="form-control form-control-sm" placeholder="真名">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">邮箱</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="userFormModel.email" name="email" class="form-control form-control-sm" placeholder="邮箱">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">手机</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="userFormModel.mobilePhone" name="mobilePhone" class="form-control form-control-sm" placeholder="手机">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">固定电话</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="userFormModel.tel" name="tel" class="form-control form-control-sm" placeholder="固定电话">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">创建时间</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="userFormModel.createTime" name="createTime" class="form-control form-control-sm" placeholder="创建时间">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">登录次数</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="userFormModel.loginCount" name="loginCount" class="form-control form-control-sm" placeholder="登录次数">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="select">部门</label>
+            <div class="col-md-9">
+              <select name="select" [(ngModel)]="department" class="form-control form-control-sm">
+                  <option *ngFor="let depart of departList" [value]="depart">{{ depart }}</option>                
+                </select>               
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="select">角色</label>
+            <div class="col-md-9">
+              <select name="select" class="form-control form-control-sm">
+                  <option *ngFor="let role of roleList" value="role">{{ role }}</option>
+                </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">备注</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="userFormModel.remark" name="remark" class="form-control form-control-sm" placeholder="备注">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="userModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.card-header {
+  padding: 0.6rem 1rem;
+  line-height: 2rem;
+}
+
+.card-block {
+  padding: 1rem;
+}
+
+span.card-btn-group {
+  float: right;
+}
+
+select[name="pagesize"] {
+  width: 4rem;
+  display: inline-block;
+}

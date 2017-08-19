@@ -9,12 +9,13 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { NAV_DROPDOWN_DIRECTIVES } from './shared/nav-dropdown.directive';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
 import { AsideToggleDirective } from './shared/aside.directive';
 import { BreadcrumbsComponent } from './shared/breadcrumb.component';
+import { NAV_DROPDOWN_DIRECTIVES } from './shared/nav-dropdown.directive';
 
 // Routing Module
 import { AppRoutingModule } from './app.routing';
@@ -34,6 +35,7 @@ import { ModalsComponent } from './components/modals.component';
     TabsModule.forRoot(),
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
+    AlertModule.forRoot(),
     ChartsModule
   ],
   declarations: [

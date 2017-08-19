@@ -5,6 +5,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AlertModule } from 'ngx-bootstrap/alert';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { HomeComponent } from './home.component';
@@ -26,6 +27,7 @@ import { PaginationComponent } from '../component/pagination-comp.component';
     BsDropdownModule,
     PaginationModule,
     ModalModule,
+    AlertModule,
     NgxDatatableModule
   ],
   declarations: [ 

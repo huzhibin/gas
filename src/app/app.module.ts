@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { HttpModule }    from '@angular/http'
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
@@ -23,13 +24,13 @@ import { AppRoutingModule } from './app.routing';
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
-import { ModalsComponent } from './components/modals.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     NgxDatatableModule,
     FormsModule,
+    HttpModule,
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
@@ -42,7 +43,6 @@ import { ModalsComponent } from './components/modals.component';
     AppComponent,
     FullLayoutComponent,
     SimpleLayoutComponent,
-    ModalsComponent,
     NAV_DROPDOWN_DIRECTIVES,
     BreadcrumbsComponent,
     SIDEBAR_TOGGLE_DIRECTIVES,

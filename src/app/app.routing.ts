@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
-import { ModalsComponent } from './components/modals.component';
 
 export const routes: Routes = [
   {
@@ -61,13 +60,6 @@ export const routes: Routes = [
         loadChildren: './pages/pages.module#PagesModule',
       }
     ]
-  },
-  {
-    path: 'modal',
-    component: ModalsComponent,
-    data: {
-      title: 'modal'
-    }
   }
 ];
 

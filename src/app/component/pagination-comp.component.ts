@@ -5,7 +5,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   template: `<div class="form-group row">
               <label class="col-md-3 form-control-label" for="select">              
                 共{{ totalItems }}行,每页
-                <select #pageSize [ngModel]="itemsPerPage" (ngModelChange)="sizeChanged(pageSize.value)" name="pageSize" class="form-control form-control-sm">
+                <select #pageSize [ngModel]="itemsPerPage" (ngModelChange)="sizeChanged(pageSize.value)" class="form-control form-control-sm pagination">
                   <option *ngFor="let pageSize of pageSizes" [value]="pageSize">{{ pageSize }}</option>
                 </select>行            
               </label>
@@ -15,7 +15,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
               </div>
             </div>`,
   styles: [
-    `select[name="pageSize"] {
+    `select.pagination {
       width: 4rem;
       display: inline-block;
     }`

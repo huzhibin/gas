@@ -6,6 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { HomeComponent } from './home.component';
@@ -18,6 +19,7 @@ import { SNComponent } from './sn/sn.component';
 import { HomeRoutingModule } from './home-routing.module';
 
 import { PaginationComponent } from '../component/pagination-comp.component';
+// import { UserService } from './user-list/user-list.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { PaginationComponent } from '../component/pagination-comp.component';
     PaginationModule,
     ModalModule,
     AlertModule,
+    TabsModule,
     NgxDatatableModule
   ],
   declarations: [ 
@@ -39,6 +42,9 @@ import { PaginationComponent } from '../component/pagination-comp.component';
     PowerComponent,
     SNComponent,
     PaginationComponent
-   ]
+   ],
+  providers: [
+    // UserService
+  ]
 })
 export class HomeModule { }

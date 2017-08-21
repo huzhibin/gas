@@ -1,116 +1,112 @@
-import { Component, TemplateRef, ViewChild, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
+import { DepartList } from "../data/depart";
+// import { UserService } from './user-list.service';
 
-// import { swal } from 'sweetalert/dist/sweetalert.min.js';
-
+import { UserList } from '../data/user'
 
 @Component({
   templateUrl: 'user-list.component.html',
-  styleUrls: ['user-list.component.css']
+  styleUrls: ['user-list.component.css'],
+  providers:[]
 })
 export class UserListComponent implements OnInit {
-  totalItems: Number;//总记录数
-  currentPage: Number;//当前页号
-  pageSize: Number;//分页大小
+  totalItems: number;//总记录数
+  currentPage: number;//当前页号
+  pageSize: number;//分页大小
 
-  departList: Array<{
-    id: Number,
-    name: String
-  }>;//部门列表
+  departList: any;//部门列表
   roleList: Array<{
-    id: Number,
-    name: String
+    id: number,
+    name: string
   }>;//角色列表
 
+  operand: any;//操作对象
   searchParams: {
-    username: String,
-    badge: String,
-    depart: Number,
-    role: Number
+    username: string,
+    badge: string,
+    depart: number,
+    role: number
   } = {
     username: '',
     badge: '',
     depart: null,
     role: null
   };//查询参数
-  theads: Array<String>;//表头字段
+  theads: Array<string>;//表头字段
   userList: Array<{
-    username: String,
-    badge: String,
-    name: String,
-    email: String,
-    mobilePhone: String,
-    tel: String,
-    createTime: String,
-    loginCount: String,
-    department: Number,
-    role: Number,
-    remark: String,
+    id: number,
+    username: string,
+    badge: string,
+    name: string,
+    email: string,
+    mobilePhone: string,
+    tel: string,
+    createTime: string,
+    loginCount: string,
+    department: number,
+    role: number,
+    remark: string,
     checked?: Boolean
   }>;//用户列表
 
-  addUserForm: {
-    username: String,
-    password: String,
-    confirmPwd: String,
-    badge: String,
-    name: String,
-    email: String,
-    mobilePhone: String,
-    tel: String,
-    department: Number,
-    role: Number,
-    remark: String,
+  addForm: {
+    username: string,
+    password: string,
+    confirmPwd: string,
+    badge: string,
+    name: string,
+    email: string,
+    mobilePhone: string,
+    tel: string,
+    department: number,
+    role: number,
+    remark: string,
   };//添加用户表单
-  editUserForm: {
-    username: String,
-    badge: String,
-    name: String,
-    email: String,
-    mobilePhone: String,
-    tel: String,
-    department: Number,
-    role: Number,
-    remark: String
+  editForm: {
+    id: number,
+    username: string,
+    badge: string,
+    name: string,
+    email: string,
+    mobilePhone: string,
+    tel: string,
+    department: number,
+    role: number,
+    remark: string
   };//编辑用户表单
-  deleteUserForm: {
-    username: String
+  deleteForm: {
+    id: number,
+    username: string
   }
   resetPwdForm: {
-    username: String,
-    password: String,
-    confirmPwd: String
+    username: string,
+    password: string,
+    confirmPwd: string
   }
 
   // TODO:在提示消失的时候，将它从数组中清除
   alerts: any = [
   ];
 
+  alertShift() {
+    this.alerts.shift();
+  }
+
+  // constructor(private userService: UserService) {
+
+  // }
+
   changePage(event) {
     this.pageSize = event.itemsPerPage;
     this.currentPage = event.page;
-    this.getUserList(
-      this.searchParams.username,
-      this.searchParams.badge,
-      this.searchParams.depart,
-      this.searchParams.role,
-      this.pageSize,
-      this.currentPage
-    );
+    this.getList();
   }
 
   changeSize(event) {
     this.pageSize = event;
     this.currentPage = 1;
-    this.getUserList(
-      this.searchParams.username,
-      this.searchParams.badge,
-      this.searchParams.depart,
-      this.searchParams.role,
-      this.pageSize,
-      this.currentPage
-    );
+    this.getList();
   }
 
   selectAll(checkedAll) {
@@ -121,24 +117,33 @@ export class UserListComponent implements OnInit {
 
   pageChanged(event: any): void {
     console.log('Page changed to: ' + event.page);
-    console.log('Number items per page: ' + event.itemsPerPage);
+    console.log('number items per page: ' + event.itemsPerPage);
   }
 
-  addUser(valid, modal) {
+  add(valid, modal) {
     if (valid) {
       this.alerts.push({
         type: 'success',
         msg: '添加成功',
         timeout: 1000
       });
-      this.getUserList(
-      this.searchParams.username,
-      this.searchParams.badge,
-      this.searchParams.depart,
-      this.searchParams.role,
-      this.pageSize,
-      this.currentPage
-    );
+      let user = {
+        id: Math.random(),
+        username: this.addForm.username,
+        badge: this.addForm.badge,
+        name: this.addForm.name,
+        email: this.addForm.email,
+        mobilePhone: this.addForm.mobilePhone,
+        tel: this.addForm.tel,
+        createTime: new Date() + '',
+        loginCount: '0',
+        department: this.addForm.department,
+        role: this.addForm.role,
+        remark: this.addForm.remark
+
+      }
+      UserList.push(user);
+      this.getList();
       modal.hide();
     } else {
       this.alerts.push({
@@ -148,22 +153,27 @@ export class UserListComponent implements OnInit {
       });
     }
   }
-  editUser(valid, modal) {
+  edit(valid, modal) {
     if (valid) {
       this.alerts.push({
         type: 'success',
         msg: '编辑成功',
         timeout: 1000
       });
-
-      this.getUserList(
-        this.searchParams.username,
-        this.searchParams.badge,
-        this.searchParams.depart,
-        this.searchParams.role,
-        this.pageSize,
-        this.currentPage
-      );
+      for (let index = 0; index < UserList.length; index++) {
+        if (UserList[index].id == this.editForm.id) {
+          UserList[index].username = this.editForm.username;
+          UserList[index].badge = this.editForm.badge;
+          UserList[index].name = this.editForm.name;
+          UserList[index].email = this.editForm.email;
+          UserList[index].mobilePhone = this.editForm.mobilePhone;
+          UserList[index].tel = this.editForm.tel;
+          UserList[index].department = this.editForm.department;
+          UserList[index].role = this.editForm.role;
+          UserList[index].remark = this.editForm.remark;
+        }
+      }
+      this.getList();
       modal.hide();
     } else {
       this.alerts.push({
@@ -173,21 +183,19 @@ export class UserListComponent implements OnInit {
       });
     }
   }
-  deleteUser(modal) {
+  delete(modal) {
     this.alerts.push({
       type: 'success',
       msg: '删除成功',
       timeout: 1000
     });
+    for (let index = 0; index < UserList.length; index++) {
+      if (UserList[index].id == this.deleteForm.id) {
+        UserList.splice(index, 1);
+      }
+    }
     modal.hide();
-    this.getUserList(
-      this.searchParams.username,
-      this.searchParams.badge,
-      this.searchParams.depart,
-      this.searchParams.role,
-      this.pageSize,
-      this.currentPage
-    );
+    this.getList();
   }
   resetPwd(valid, modal) {
     if (valid) {
@@ -207,55 +215,35 @@ export class UserListComponent implements OnInit {
   }
 
   refresh() {
-    // this.userList = Object.assign({}, this.userList);
-    this.getUserList(
-      this.searchParams.username,
-      this.searchParams.badge,
-      this.searchParams.depart,
-      this.searchParams.role,
-      this.pageSize,
-      this.currentPage
-    );
-    this.userList = [
-      {
-        username: 'sg',
-        badge: '00001',
-        name: '嘎斯',
-        email: '2850354580@qq.com',
-        mobilePhone: '4006918851',
-        tel: '4006918851',
-        createTime: '2017-05-07',
-        loginCount: '0',
-        department: 3,
-        role: 2,
-        remark: ''
-      }
-    ]
+    this.getList();
   }
   export() {
 
   }
   search() {
-    this.getUserList(
-      this.searchParams.username,
-      this.searchParams.badge,
-      this.searchParams.depart,
-      this.searchParams.role,
-      this.pageSize,
-      this.currentPage
-    );
+    this.getList();
   }
-  getUserList(username: String, badge: String, depart: Number, role: Number, pageSize: Number, currentPage: Number) {
-    console.log('查询后台--getUserList:' + JSON.stringify([
-      { 'username': username },
-      { 'badge': badge },
-      { 'depart': depart },
-      { 'role': role },
-      { 'pageSize': pageSize },
-      { 'currentPage': currentPage }
-    ]));
+  getList(username?: string, badge?: string, depart?: number, role?: number, pageSize?: number, currentPage?: number) {
+
+    let params = {
+      username: this.searchParams.username,
+      badge: this.searchParams.badge,
+      depart: this.searchParams.depart,
+      role: this.searchParams.role,
+      pageSize: this.pageSize,
+      currentPage: this.currentPage
+    };
+    console.log('查询后台--getList:' + JSON.stringify(params));
+    // this.userService.getUserList(params).then(data => {
+    //   this.userList = data.data.list;
+    //   this.totalItems = data.data.totalItems
+    // });
+
+    this.userList = UserList.slice(params.pageSize * (params.currentPage - 1), params.pageSize * params.currentPage);
+    this.totalItems = UserList.length;
   }
 
+  //获取选中的第一个对象
   getChecked() {
     for (let i = 0; i < this.userList.length; i++) {
       if (this.userList[i].checked) {
@@ -264,50 +252,23 @@ export class UserListComponent implements OnInit {
     }
     return null;
   }
-  editUserFormChecked(user) {
-    if ((user && user.username) || this.getChecked()) {
-      let temp = user || this.getChecked();
-      this.initEditUserForm(temp);
+  //检查并设置操作对象
+  checkOperand(obj) {
+    if (obj || this.getChecked()) {
+      this.operand = obj || this.getChecked();
       return true;
     } else {
       this.alerts.push({
         type: 'danger',
-        msg: '请先选择要编辑的用户',
+        msg: '请先选择要操作的对象',
         timeout: 1000
       });
       return false;
     }
   }
-  deleteUserFormChecked(user) {
-    if ((user && user.username) || this.getChecked()) {
-      let temp = user || this.getChecked();
-      this.initDeleteUserForm(temp);
-      return true;
-    } else {
-      this.alerts.push({
-        type: 'danger',
-        msg: '请先选择要删除的用户',
-        timeout: 1000
-      });
-      return false;
-    }
-  }
-  // resetPwdFormChecked(user) {
-  //   if ((user && user.username) || this.getChecked()) {
-  //     let temp = user || this.getChecked();
-  //     this.initResetPwdForm(temp);
-  //     return true;
-  //   } else {
-  //     this.alerts.push({
-  //       type: 'danger',
-  //       msg: '请先选择要删除的用户',
-  //       timeout: 1000
-  //     });
-  //     return false;
-  //   }
-  // }
-  initAddUserForm() {
-    this.addUserForm = {
+
+  initAddForm() {
+    this.addForm = {
       username: '',
       password: '',
       confirmPwd: '',
@@ -321,43 +282,42 @@ export class UserListComponent implements OnInit {
       remark: ''
     };
   }
-  initEditUserForm(editUser?) {
-    editUser = Object.assign({}, editUser);
-    this.editUserForm = {
-      username: editUser.username || '',
-      badge: editUser.badge || '',
-      name: editUser.name || '',
-      email: editUser.email || '',
-      mobilePhone: editUser.mobilePhone || '',
-      tel: editUser.tel || '',
-      department: editUser.department || null,
-      role: editUser.role || null,
-      remark: editUser.remark || ''
+  initEditForm(editObj?) {
+    // editObj = Object.assign({}, editObj);
+    this.editForm = {
+      id: this.operand.id || '',
+      username: this.operand.username || '',
+      badge: this.operand.badge || '',
+      name: this.operand.name || '',
+      email: this.operand.email || '',
+      mobilePhone: this.operand.mobilePhone || '',
+      tel: this.operand.tel || '',
+      department: this.operand.department || null,
+      role: this.operand.role || null,
+      remark: this.operand.remark || ''
     };
   }
-  initDeleteUserForm(deleteUser?) {
-    deleteUser = Object.assign({}, deleteUser);
-    this.deleteUserForm = {
-      username: deleteUser.username || '',
+  initDeleteForm(deleteObj?) {
+    // deleteObj = Object.assign({}, deleteObj);
+    this.deleteForm = {
+      id: this.operand.id || '',
+      username: this.operand.username || '',
     };
   }
-  initResetPwdForm(resetUser) {
-    resetUser = Object.assign({}, resetUser);
+  initResetPwdForm(resetUser?) {
+    // resetUser = Object.assign({}, resetUser);
     this.resetPwdForm = {
-      username: resetUser.username || '',
-      password: resetUser.password || '',
-      confirmPwd: resetUser.confirmPwd || '',
+      username: this.operand.username || '',
+      password: this.operand.password || '',
+      confirmPwd: this.operand.confirmPwd || '',
     };
   }
   ngOnInit(): void {
-    this.totalItems = 22;
-    this.currentPage = 2;
+    this.totalItems = 0;
+    this.currentPage = 1;
+    this.pageSize = 20;
 
-    this.departList = [
-      { id: 1, name: '研发部' },
-      { id: 2, name: '投资部' },
-      { id: 3, name: '销售部' }
-    ];
+    this.departList = DepartList;
     this.roleList = [
       { id: 1, name: '员工' },
       { id: 2, name: '项目经理' },
@@ -365,11 +325,8 @@ export class UserListComponent implements OnInit {
       { id: 4, name: '董事长' },
       { id: 5, name: '人事经理' }
     ];
+    this.operand = {};
 
-    this.initAddUserForm();
-    this.initEditUserForm();
-    this.initDeleteUserForm();
-    this.initResetPwdForm(null);
     this.theads = [
       '用户名',
       '工号',
@@ -384,47 +341,12 @@ export class UserListComponent implements OnInit {
       '备注',
       '操作'
     ];
-    this.userList = [
-      {
-        username: 'hecf',
-        badge: '00001',
-        name: '啊哈',
-        email: '2850354580@qq.com',
-        mobilePhone: '4006918851',
-        tel: '4006918851',
-        createTime: '2017-05-07',
-        loginCount: '0',
-        department: 3,
-        role: 2,
-        remark: ''
-      },
-      {
-        username: 'eas',
-        badge: '00001',
-        name: '主打歌',
-        email: '2850354580@qq.com',
-        mobilePhone: '4006918851',
-        tel: '4006918851',
-        createTime: '2017-05-07',
-        loginCount: '0',
-        department: 3,
-        role: 1,
-        remark: ''
-      },
-      {
-        username: 'edsg',
-        badge: '00001',
-        name: '凡人',
-        email: '2850354580@qq.com',
-        mobilePhone: '4006918851',
-        tel: '4006918851',
-        createTime: '2017-05-07',
-        loginCount: '0',
-        department: 3,
-        role: 4,
-        remark: ''
-      },
 
-    ];
+    this.initAddForm();
+    this.initEditForm();
+    this.initDeleteForm();
+    this.initResetPwdForm();
+
+    this.getList();
   }
 }

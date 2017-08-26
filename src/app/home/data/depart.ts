@@ -1,0 +1,50 @@
+export const DepartList = [
+  {
+    "ParentName": "",
+    "id": 1017,
+    "SnNum": "CBB032B8F98647AF934A613BDD0EDF94",
+    "DepartNum": "00018",
+    "departName": "qqrwer",
+    "ChildCount": 0,
+    "ParentNum": "ECE37234EAC9442BABBB0583C2F3B011",
+    "Depth": 2,
+    "Left": 2,
+    "Right": 5,
+    "IsDelete": 0,
+    "CreateUser": "",
+    "CreateTime": "2017-08-05 09:45:10",
+    "CompanyID": "60E3A1791E2944B1812184E16C02ADFE"
+  },
+  {
+    "ParentName": "",
+    "id": 1018,
+    "SnNum": "34720A726DF5434187EC5043B97B7546",
+    "DepartNum": "00019",
+    "departName": "速度",
+    "ChildCount": 0,
+    "ParentNum": "ECE37234EAC9442BABBB0583C2F3B011",
+    "Depth": 2,
+    "Left": 6,
+    "Right": 7,
+    "IsDelete": 0,
+    "CreateUser": "",
+    "CreateTime": "2017-08-10 16:03:47",
+    "CompanyID": "60E3A1791E2944B1812184E16C02ADFE"
+  },
+  {
+    "ParentName": "qqrwer",
+    "id": 1019,
+    "SnNum": "11358ABDD98B41EABCD29F8795E3E057",
+    "DepartNum": "00020",
+    "departName": "as",
+    "ChildCount": 0,
+    "ParentNum": "CBB032B8F98647AF934A613BDD0EDF94",
+    "Depth": 3,
+    "Left": 3,
+    "Right": 4,
+    "IsDelete": 0,
+    "CreateUser": "",
+    "CreateTime": "2017-08-20 11:08:44",
+    "CompanyID": "60E3A1791E2944B1812184E16C02ADFE"
+  }
+]

@@ -5,7 +5,11 @@ import { Routes,
 import { InformationComponent } from './information.component';
 import { OrderComponent } from './order/order.component';
 import { MapComponent } from './map/map.component';
-
+import { CustomerComponent } from './customer/customer.component';
+import { DeliverymanComponent } from './deliveryman/deliveryman.component';
+import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
+import { CarComponent } from './car/car.component';
+import { GasWorksComponent } from './gas-works/gas-works.component';
 const routes: Routes = [
   {
     path: '',
@@ -35,35 +39,35 @@ const routes: Routes = [
       },
       {
         path: 'gas-works',
-        component: OrderComponent,
+        component: GasWorksComponent,
         data: {
           title: '气站管理'
         },
       },
       {
         path: 'gas-cylinder',
-        component: OrderComponent,
+        component: GasCylinderComponent,
         data: {
           title: '气瓶管理'
         },
       },
       {
         path: 'diliveryman',
-        component: OrderComponent,
+        component: DeliverymanComponent,
         data: {
           title: '配送员管理'
         },
       },
       {
         path: 'customer',
-        component: OrderComponent,
+        component: CustomerComponent,
         data: {
           title: '客户管理'
         },
       },
       {
         path: 'car',
-        component: OrderComponent,
+        component: CarComponent,
         data: {
           title: '车辆管理'
         },

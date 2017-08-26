@@ -17,12 +17,6 @@ import { PowerComponent } from './power/power.component';
 import { SNComponent } from './sn/sn.component';
 import { HomeRoutingModule } from './home-routing.module';
 
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryUserService } from './service/in-memory-user.service';
-import { InMemoryDepartService } from './service/in-memory-depart.service';
-import { InMemoryRoleService } from './service/in-memory-role.service';
-import { InMemoryResourceService } from './service/in-memory-resource.service';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -33,8 +27,7 @@ import { InMemoryResourceService } from './service/in-memory-resource.service';
     ModalModule,
     AlertModule,
     TabsModule,
-    GasCommonModule,
-    InMemoryWebApiModule.forRoot(InMemoryUserService)
+    GasCommonModule
   ],
   declarations: [
     HomeComponent,
@@ -46,10 +39,7 @@ import { InMemoryResourceService } from './service/in-memory-resource.service';
     SNComponent
   ],
   providers: [
-    InMemoryUserService,
-    // InMemoryRoleService,
-    // InMemoryDepartService,
-    // InMemoryResourceService
+    
   ]
 })
 export class HomeModule { }

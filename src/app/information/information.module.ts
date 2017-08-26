@@ -12,6 +12,12 @@ import { InformationComponent } from './information.component';
 import { OrderComponent } from './order/order.component';
 import { MapComponent } from './map/map.component';
 
+import { CustomerComponent } from './customer/customer.component';
+import { DeliverymanComponent } from './deliveryman/deliveryman.component';
+import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
+import { CarComponent } from './car/car.component';
+import { GasWorksComponent } from './gas-works/gas-works.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -27,7 +33,12 @@ import { MapComponent } from './map/map.component';
   declarations: [
     InformationComponent,
     OrderComponent,
-    MapComponent
+    MapComponent,
+    CustomerComponent ,
+    DeliverymanComponent,
+    GasCylinderComponent,
+    CarComponent ,
+    GasWorksComponent
   ]
 })
 export class InformationModule { }

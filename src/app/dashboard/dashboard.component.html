@@ -1,3 +1,11 @@
-<div class="animated fadeIn">
+<div class="animated fadeIn map-container">
   dashBoard
+  <div id="container">
+    <div class="button-group">
+      <input type="button" class="button" style="background-color:rgb(244, 81, 30);" value="气瓶" (click)="gasVisible=!gasVisible;gasToggle();" />
+      <input type="button" class="button" value="车辆" (click)="carVisible=!carVisible;carToggle();" />
+      <input type="button" class="button" value="路径" (click)="setLine(null)" />
+    </div>
+  </div>
+
 </div>

@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { DatepickerModule } from 'ngx-bootstrap';
+// import { NgxAmapModule } from 'ngx-amap';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
   imports: [
+    CommonModule,
+    FormsModule,
     DashboardRoutingModule,
-    ChartsModule,
-    BsDropdownModule
+    BsDropdownModule,
+    DatepickerModule,
   ],
-  declarations: [ DashboardComponent ]
+  declarations: [DashboardComponent]
 })
 export class DashboardModule { }

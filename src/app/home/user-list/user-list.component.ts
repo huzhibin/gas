@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 import { DepartList } from "../data/depart";
-// import { UserService } from './user-list.service';
+import { UserService } from './user-list.service';
 
 import { UserList } from '../data/user'
 
 @Component({
   templateUrl: 'user-list.component.html',
   styleUrls: ['user-list.component.css'],
-  providers:[]
+  providers: [UserService]
 })
 export class UserListComponent implements OnInit {
   totalItems: number;//总记录数
@@ -93,9 +93,7 @@ export class UserListComponent implements OnInit {
     this.alerts.shift();
   }
 
-  // constructor(private userService: UserService) {
-
-  // }
+  constructor(private userService: UserService) { }
 
   changePage(event) {
     this.pageSize = event.itemsPerPage;
@@ -122,29 +120,16 @@ export class UserListComponent implements OnInit {
 
   add(valid, modal) {
     if (valid) {
-      this.alerts.push({
-        type: 'success',
-        msg: '添加成功',
-        timeout: 1000
+      this.userService.addUser(this.addForm).then(data => {
+        console.dir(data);
+        this.alerts.push({
+          type: 'success',
+          msg: '添加成功',
+          timeout: 1000
+        });
+        this.getList();
+        modal.hide();
       });
-      let user = {
-        id: Math.random(),
-        username: this.addForm.username,
-        badge: this.addForm.badge,
-        name: this.addForm.name,
-        email: this.addForm.email,
-        mobilePhone: this.addForm.mobilePhone,
-        tel: this.addForm.tel,
-        createTime: new Date() + '',
-        loginCount: '0',
-        department: this.addForm.department,
-        role: this.addForm.role,
-        remark: this.addForm.remark
-
-      }
-      UserList.push(user);
-      this.getList();
-      modal.hide();
     } else {
       this.alerts.push({
         type: 'danger',
@@ -155,26 +140,16 @@ export class UserListComponent implements OnInit {
   }
   edit(valid, modal) {
     if (valid) {
-      this.alerts.push({
-        type: 'success',
-        msg: '编辑成功',
-        timeout: 1000
+      this.userService.updateUser(this.editForm).then(data => {
+        console.dir(data);
+        this.alerts.push({
+          type: 'success',
+          msg: '编辑成功',
+          timeout: 1000
+        });
+        this.getList();
+        modal.hide();
       });
-      for (let index = 0; index < UserList.length; index++) {
-        if (UserList[index].id == this.editForm.id) {
-          UserList[index].username = this.editForm.username;
-          UserList[index].badge = this.editForm.badge;
-          UserList[index].name = this.editForm.name;
-          UserList[index].email = this.editForm.email;
-          UserList[index].mobilePhone = this.editForm.mobilePhone;
-          UserList[index].tel = this.editForm.tel;
-          UserList[index].department = this.editForm.department;
-          UserList[index].role = this.editForm.role;
-          UserList[index].remark = this.editForm.remark;
-        }
-      }
-      this.getList();
-      modal.hide();
     } else {
       this.alerts.push({
         type: 'danger',
@@ -184,18 +159,16 @@ export class UserListComponent implements OnInit {
     }
   }
   delete(modal) {
-    this.alerts.push({
-      type: 'success',
-      msg: '删除成功',
-      timeout: 1000
+    this.userService.updateUser(this.deleteForm).then(data => {
+      console.dir(data);
+      this.alerts.push({
+        type: 'success',
+        msg: '删除成功',
+        timeout: 1000
+      });
+      this.getList();
+      modal.hide();
     });
-    for (let index = 0; index < UserList.length; index++) {
-      if (UserList[index].id == this.deleteForm.id) {
-        UserList.splice(index, 1);
-      }
-    }
-    modal.hide();
-    this.getList();
   }
   resetPwd(valid, modal) {
     if (valid) {
@@ -234,13 +207,11 @@ export class UserListComponent implements OnInit {
       currentPage: this.currentPage
     };
     console.log('查询后台--getList:' + JSON.stringify(params));
-    // this.userService.getUserList(params).then(data => {
-    //   this.userList = data.data.list;
-    //   this.totalItems = data.data.totalItems
-    // });
-
-    this.userList = UserList.slice(params.pageSize * (params.currentPage - 1), params.pageSize * params.currentPage);
-    this.totalItems = UserList.length;
+    this.userService.getUserList(params).then(data => {
+      console.log(data);
+      this.userList = data;
+      this.totalItems = data.length;
+    });
   }
 
   //获取选中的第一个对象

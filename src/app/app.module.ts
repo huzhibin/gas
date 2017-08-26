@@ -2,8 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { HttpModule }    from '@angular/http'
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { HttpModule } from '@angular/http'
 
 import { AppComponent } from './app.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -21,14 +20,15 @@ import { NAV_DROPDOWN_DIRECTIVES } from './shared/nav-dropdown.directive';
 // Routing Module
 import { AppRoutingModule } from './app.routing';
 
-// Layouts
-import { FullLayoutComponent } from './layouts/full-layout.component';
-import { SimpleLayoutComponent } from './layouts/simple-layout.component';
+// pages
+import { FullLayoutComponent } from './pages/full-layout.component';
+import { P404Component } from './pages/404.component';
+
+import { AuthGuard } from './service/auth-guard.service';
 
 @NgModule({
   imports: [
     BrowserModule,
-    NgxDatatableModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
@@ -37,21 +37,24 @@ import { SimpleLayoutComponent } from './layouts/simple-layout.component';
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
-    ChartsModule
+    ChartsModule,
   ],
   declarations: [
     AppComponent,
     FullLayoutComponent,
-    SimpleLayoutComponent,
+    P404Component,
     NAV_DROPDOWN_DIRECTIVES,
     BreadcrumbsComponent,
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective,
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
-  bootstrap: [ AppComponent ]
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
+    AuthGuard
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

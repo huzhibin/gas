@@ -26,7 +26,7 @@ export class PaginationComponent {
   @Input() totalItems;//总行数
   @Output() changePage: EventEmitter<number> = new EventEmitter<number>();//当前页号变化
   @Output() changeSize: EventEmitter<number> = new EventEmitter<number>();//分页大小改变
-  private pageSizes = [5, 10, 20, 30];
+  private pageSizes = [5, 10, 20, 30, 50];
   private maxSize = 5;//显示的分页链接数目
   private itemsPerPage = 10;//默认分页大小
 

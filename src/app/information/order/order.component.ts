@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
-import { DepartList } from "../data/depart";
-import { UserService } from './user-list.service';
+// import { DepartList } from "../data/depart";
+// import { UserService } from './user-list.service';
 
-import { UserList } from '../data/user'
+import { OrderList } from '../../home/data/order'
 
 @Component({
-  templateUrl: 'user-list.component.html',
-  styleUrls: ['user-list.component.css'],
-  providers: [UserService]
+  templateUrl: 'order.component.html',
+  // providers: [UserService]
 })
-export class UserListComponent implements OnInit {
+export class OrderComponent implements OnInit {
   totalItems: number;//总记录数
   currentPage: number;//当前页号
   pageSize: number;//分页大小
@@ -34,18 +33,19 @@ export class UserListComponent implements OnInit {
     role: null
   };//查询参数
   theads: Array<string>;//表头字段
-  userList: Array<{
+  orderList: Array<{
     id: number,
-    username: string,
-    badge: string,
-    name: string,
-    email: string,
+    gasCylinderSN: string,
+    amount: number,
+    addr: string,
+    userName: string,
     mobilePhone: string,
-    tel: string,
+    userTel: string,
     createTime: string,
-    loginCount: string,
-    department: number,
-    role: number,
+    receiveTime: string,
+    orderStatus: string,
+    price: number,
+    orderSource: string,
     remark: string,
     checked?: Boolean
   }>;//用户列表
@@ -93,7 +93,7 @@ export class UserListComponent implements OnInit {
     this.alerts.shift();
   }
 
-  constructor(private userService: UserService) { }
+  // constructor(private userService: UserService) { }
 
   changePage(event) {
     this.pageSize = event.itemsPerPage;
@@ -108,8 +108,8 @@ export class UserListComponent implements OnInit {
   }
 
   selectAll(checkedAll) {
-    for (let index = 0; index < this.userList.length; index++) {
-      this.userList[index].checked = checkedAll ? true : false;
+    for (let index = 0; index < this.orderList.length; index++) {
+      this.orderList[index].checked = checkedAll ? true : false;
     }
   }
 
@@ -119,56 +119,56 @@ export class UserListComponent implements OnInit {
   }
 
   add(valid, modal) {
-    if (valid) {
-      this.userService.addUser(this.addForm).then(data => {
-        console.dir(data);
-        this.alerts.push({
-          type: 'success',
-          msg: '添加成功',
-          timeout: 1000
-        });
-        this.getList();
-        modal.hide();
-      });
-    } else {
-      this.alerts.push({
-        type: 'danger',
-        msg: '表单填写不正确',
-        timeout: 1000
-      });
-    }
+    // if (valid) {
+    //   this.userService.addUser(this.addForm).then(data => {
+    //     console.dir(data);
+    //     this.alerts.push({
+    //       type: 'success',
+    //       msg: '添加成功',
+    //       timeout: 1000
+    //     });
+    //     this.getList();
+    //     modal.hide();
+    //   });
+    // } else {
+    //   this.alerts.push({
+    //     type: 'danger',
+    //     msg: '表单填写不正确',
+    //     timeout: 1000
+    //   });
+    // }
   }
   edit(valid, modal) {
-    if (valid) {
-      this.userService.updateUser(this.editForm).then(data => {
-        console.dir(data);
-        this.alerts.push({
-          type: 'success',
-          msg: '编辑成功',
-          timeout: 1000
-        });
-        this.getList();
-        modal.hide();
-      });
-    } else {
-      this.alerts.push({
-        type: 'danger',
-        msg: '表单填写不正确',
-        timeout: 1000
-      });
-    }
+    // if (valid) {
+    //   this.userService.updateUser(this.editForm).then(data => {
+    //     console.dir(data);
+    //     this.alerts.push({
+    //       type: 'success',
+    //       msg: '编辑成功',
+    //       timeout: 1000
+    //     });
+    //     this.getList();
+    //     modal.hide();
+    //   });
+    // } else {
+    //   this.alerts.push({
+    //     type: 'danger',
+    //     msg: '表单填写不正确',
+    //     timeout: 1000
+    //   });
+    // }
   }
   delete(modal) {
-    this.userService.updateUser(this.deleteForm).then(data => {
-      console.dir(data);
-      this.alerts.push({
-        type: 'success',
-        msg: '删除成功',
-        timeout: 1000
-      });
-      this.getList();
-      modal.hide();
-    });
+    // this.userService.updateUser(this.deleteForm).then(data => {
+    //   console.dir(data);
+    //   this.alerts.push({
+    //     type: 'success',
+    //     msg: '删除成功',
+    //     timeout: 1000
+    //   });
+    //   this.getList();
+    //   modal.hide();
+    // });
   }
   resetPwd(valid, modal) {
     if (valid) {
@@ -207,18 +207,19 @@ export class UserListComponent implements OnInit {
       currentPage: this.currentPage
     };
     console.log('查询后台--getList:' + JSON.stringify(params));
-    this.userService.getUserList(params).then(data => {
-      console.log(data);
-      this.userList = data;
-      this.totalItems = data.length;
-    });
+    this.orderList = OrderList;
+    // this.userService.getOrderList(params).then(data => {
+    //   console.log(data);
+    //   this.orderList = data;
+    //   this.totalItems = data.length;
+    // });
   }
 
   //获取选中的第一个对象
   getChecked() {
-    for (let i = 0; i < this.userList.length; i++) {
-      if (this.userList[i].checked) {
-        return this.userList[i];
+    for (let i = 0; i < this.orderList.length; i++) {
+      if (this.orderList[i].checked) {
+        return this.orderList[i];
       }
     }
     return null;
@@ -288,7 +289,7 @@ export class UserListComponent implements OnInit {
     this.currentPage = 1;
     this.pageSize = 20;
 
-    this.departList = DepartList;
+    // this.departList = DepartList;
     this.roleList = [
       { id: 1, name: '员工' },
       { id: 2, name: '项目经理' },
@@ -299,17 +300,17 @@ export class UserListComponent implements OnInit {
     this.operand = {};
 
     this.theads = [
-      '用户名',
-      '工号',
-      '真名',
-      '邮箱',
-      '手机',
-      '固定电话',
-      '创建时间',
-      '登录次数',
-      '部门',
-      '角色',
-      '备注',
+      '订单编号',
+      '生成时间',
+      '接单时间',
+      '数量',
+      '气瓶编号',
+      '地址',
+      '价格',
+      '用户姓名',
+      '用户电话',
+      '订单状态',
+      '订单来源',
       '操作'
     ];
 

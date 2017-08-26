@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: 'dashboard.component.html',
-  styleUrls: ['dashboard.component.css']
+  templateUrl: 'map.component.html',
+  styleUrls: ['map.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class MapComponent implements OnInit {
   gasList: Array<{
     position: Array<number>,
     prodDate: string,

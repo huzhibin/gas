@@ -6,7 +6,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { GasCommonModule } from '../component/gas-common.module';
 
 import { HomeComponent } from './home.component';
@@ -34,7 +33,6 @@ import { InMemoryResourceService } from './service/in-memory-resource.service';
     ModalModule,
     AlertModule,
     TabsModule,
-    NgxDatatableModule,
     GasCommonModule,
     InMemoryWebApiModule.forRoot(InMemoryUserService)
   ],

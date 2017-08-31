@@ -1,0 +1,21 @@
+.topLogo,.status,.eventStatus{
+  line-height: 30px;
+  text-align: center;
+  font-size:16px;
+}
+.geoList{
+  list-style: none;
+  line-height: 30px;
+  font-size:14px;
+  padding-top:30px;
+}
+.geoList li{
+  margin:10px 0;
+}
+.geoList li>span{
+   cursor:pointer;
+}
+.geoList li>i:last-child{
+  text-indent:2em;
+  color:red;
+}

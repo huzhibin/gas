@@ -11,18 +11,13 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
-import { AsideToggleDirective } from './shared/aside.directive';
-import { BreadcrumbsComponent } from './shared/breadcrumb.component';
-import { NAV_DROPDOWN_DIRECTIVES } from './shared/nav-dropdown.directive';
-
 // Routing Module
 import { AppRoutingModule } from './app.routing';
 
 // pages
-import { FullLayoutComponent } from './pages/full-layout.component';
-import { P404Component } from './pages/404.component';
+import { HomeComponent } from './home/home.component';
+import { BigDataComponent } from './big-data/big-data.component';
+import { BasicLayoutComponent } from './pages/basic-layout.component';
 
 import { AuthGuard } from './service/auth-guard.service';
 
@@ -37,16 +32,12 @@ import { AuthGuard } from './service/auth-guard.service';
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
-    ChartsModule,
   ],
   declarations: [
     AppComponent,
-    FullLayoutComponent,
-    P404Component,
-    NAV_DROPDOWN_DIRECTIVES,
-    BreadcrumbsComponent,
-    SIDEBAR_TOGGLE_DIRECTIVES,
-    AsideToggleDirective,
+    HomeComponent,
+    BigDataComponent,
+    BasicLayoutComponent,
   ],
   providers: [
     {

@@ -1,0 +1,131 @@
+<div class="container basic">
+
+  <header>
+    <div class="row clearfix">
+      <div class="col-md-3 column">
+        <div class="row">
+          <div class="col-md-12 column logo">
+            <img src="/assets/img/home/logo.png" alt="">
+            <span>智慧燃气安全大数据统一监管平台</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 column">
+        <div class="row">
+          <div class="col-md-12 column home-top-mid">
+            <img src="/assets/img/home/visualization-top.png" alt="">
+            <span class="header-time">上午11:23:12</span>
+            <span class="header-date">2017/8/30</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 column">
+        <div class="row">
+          <div class="col-md-12 column alarm">
+            <div class="col-md-6" style="padding:0;color:white;font-size:1.2rem;text-align:center;line-height:3rem;">
+              灾难事件 0
+            </div>
+            <div class="col-md-6" style="padding:0;color:#f3b400;font-size:1.2rem;text-align:center;line-height:3rem;">
+              灾难事件 3
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content row clearfix">
+    <div class="col-md-3 column">
+      <div class="row">
+        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:600px;margin:0.5rem;">
+          <ul class="sider-item">
+            <li>
+              <a href="javascript:;">企业档案信息</a>
+            </li>
+            <li>
+              <a href="javascript:;">气瓶及分布</a>
+            </li>
+            <li>
+              <a href="javascript:;">车辆及分布</a>
+            </li>
+            <li>
+              <a href="javascript:;">人员信息</a>
+            </li>
+            <li>
+              <a href="javascript:;">视频图像</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 column">
+      <div class="row">
+        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:600px; margin:0.5rem;">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="row clearfix" style="position: absolute;bottom: 2rem;width: 100%;">
+      <div class="col-md-2 column">
+      </div>
+      <div class="col-md-8 column">
+        <ul class="home-list">
+          <li>
+            <a href="javascript:;" [routerLink]="['/home']">
+                <img src="/assets/img/home/home-icon.png" alt="">
+                <span>首页</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/information']">
+                <img src="/assets/img/home/information-icon.png" alt="">
+                <span>基础信息监管</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/delivery']">
+                <img src="/assets/img/home/deliver-icon.png" alt="">
+                <span>配送业务监管</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/standard']">
+                <img src="/assets/img/home/standard-icon.png" alt="">
+                <span>数据规范标准</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/flow']">
+                <img src="/assets/img/home/regulation-icon.png" alt="">
+                <span>政府监管事务</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/report']">
+                <img src="/assets/img/home/statistic-icon.png" alt="">
+                <span>统计查询</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/system']">
+                <img src="/assets/img/home/power-icon.png" alt="">
+                <span>系统权限配置</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/big-data']">
+                <img src="/assets/img/home/visualization-icon.png" alt="">
+                <span>大数据可视化</span>
+              </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-2 column">
+      </div>
+    </div>
+  </footer>
+</div>

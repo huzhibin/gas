@@ -3,8 +3,6 @@ import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 // import { DepartList } from "../data/depart";
 // import { UserService } from './user-list.service';
 
-import { OrderList } from '../../home/data/order'
-
 @Component({
   templateUrl: 'order.component.html',
   // providers: [UserService]
@@ -207,7 +205,7 @@ export class OrderComponent implements OnInit {
       currentPage: this.currentPage
     };
     console.log('查询后台--getList:' + JSON.stringify(params));
-    this.orderList = OrderList;
+    // this.orderList = OrderList;
     // this.userService.getOrderList(params).then(data => {
     //   console.log(data);
     //   this.orderList = data;

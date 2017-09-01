@@ -1,0 +1,54 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12 mb-4">
+      <!-- Nav tabs -->
+      <tabset>
+        <!-- top  -->
+        <ng-template ngFor let-toppower [ngForOf]="resourceList">
+          <tab *ngIf="toppower.parentNumber==''">
+            <ng-template tabHeading><i class="icon-calculator"></i> {{ toppower.resourceName }}</ng-template>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-block">
+
+                    <ng-template ngFor let-secondpower [ngForOf]="resourceList">
+                      <div class="row" *ngIf="secondpower.parentNumber==toppower.resourceNumber">
+                        <div class="col-md-1 col-sm-2">
+                          <strong>{{ secondpower.resourceName }}</strong>
+                        </div>
+                        <div class="col-md-11 col-sm-10">
+                          <div class="row">
+
+                            <ng-template ngFor let-thirdpower [ngForOf]="resourceList">
+                              <div class="col-md-2 col-sm-3" *ngIf="thirdpower.parentNumber==secondpower.resourceNumber || thirdpower.resourceNumber==secondpower.resourceNumber">
+                                <label for="power" (click)="thirdpower.checked = !thirdpower.checked">
+                                <input type="checkbox" [(ngModel)]="thirdpower.checked" name="thirdpower" [value]="thirdpower.resourceNumber" (click)="$event.stopPropagation();"> {{ thirdpower.resourceName }}
+                              </label>
+                              </div>
+                            </ng-template>
+
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+
+                  </div>
+                  <div class="card-footer">
+                    <button class="btn btn-sm btn-primary" type="button" (click)="setPrivileges()"><i class="fa fa-check"></i>&nbsp; 保存</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tab>
+        </ng-template>
+      </tabset>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>
+
+<div class="alert" [class.hide]="alerts<1">
+  <alert *ngFor="let alert of alerts" [dismissOnTimeout]="alert.timeout" [type]="alert.type" (onClosed)="alertShift()"><span [innerHtml]="alert.msg"></span></alert>
+</div>

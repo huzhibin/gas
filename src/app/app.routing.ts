@@ -52,10 +52,10 @@ export const routes: Routes = [
       //   path: 'report',
       //   loadChildren: './report/report.module#ReportModule'
       // },
-      // {
-      //   path: 'system',
-      //   loadChildren: './system/system.module#SystemModule'
-      // },
+      {
+        path: 'system',
+        loadChildren: './system/system.module#SystemModule'
+      },
       // {
       //   path: 'big-data',
       //   loadChildren: './big-data/big-data.module#BigDataModule'

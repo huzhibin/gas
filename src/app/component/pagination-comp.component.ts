@@ -24,11 +24,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class PaginationComponent {
   @Input() currentPage;//当前页号
   @Input() totalItems;//总行数
+  @Input() itemsPerPage;//默认分页大小
   @Output() changePage: EventEmitter<number> = new EventEmitter<number>();//当前页号变化
   @Output() changeSize: EventEmitter<number> = new EventEmitter<number>();//分页大小改变
-  private pageSizes = [5, 10, 20, 30, 50];
+  private pageSizes = [1,5, 10, 20, 30, 50];
   private maxSize = 5;//显示的分页链接数目
-  private itemsPerPage = 10;//默认分页大小
 
   pageChanged(event: any) {
     console.log('页号改变，当前页号:' + JSON.stringify(event));

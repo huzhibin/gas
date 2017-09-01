@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 
 @Component({
   // template: '<router-outlet></router-outlet>'
-  templateUrl:'information.component.html',
-  styleUrls:['information.component.css']
+  templateUrl:'delivery.component.html',
+  styleUrls:[]
 })
-export class InformationComponent implements OnInit {
+export class DeliveryComponent implements OnInit {
 
   ngOnInit(): void {
 

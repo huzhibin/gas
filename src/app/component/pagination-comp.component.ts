@@ -11,14 +11,17 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
               </label>
               <div class="col-md-9">
                 <pagination [boundaryLinks]="true" (pageChanged)=pageChanged($event) [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" class="pagination-md pull-right" [maxSize]="maxSize"
-                  [rotate]="false" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+                  [rotate]="false" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [pageBtnClass]="pagination-btn"></pagination>
               </div>
             </div>`,
   styles: [
     `select.pagination {
       width: 4rem;
       display: inline-block;
-    }`
+      background-color:#263238;
+      color:white;
+    }
+    `
   ]
 })
 export class PaginationComponent {

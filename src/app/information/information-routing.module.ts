@@ -20,7 +20,7 @@ const routes: Routes = [
     path: '',
     component: InformationComponent,
     data: {
-      title: '信息管理'
+      title: '基础信息监管管理'
     },
     children: [
       {

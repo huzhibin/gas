@@ -216,3 +216,51 @@ ul.sider-item li:hover {
   border: 2px solid #17518b;
   // border-style: groove;
 }
+
+
+.card div.card-block {
+  background-color: #0a223a;
+  color: white;
+  font-size: 0.875rem;
+}
+.table-bordered th, .table-bordered td {
+  border: 1px solid #1792ab;
+}
+.page-item.disabled .page-link {
+  color: #b0bec5;
+  pointer-events: none;
+  background-color: #263238;
+  border-color: #ddd;
+}
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #20a8d8;
+  background-color: #263238;
+  border: 1px solid #ddd;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  }
+   
+  ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:horizontal {
+  border-radius: 6px;
+  background: #1792ab;
+  }
+   
+  ::-webkit-scrollbar-button {
+  display: none;
+  }
+   
+  ::-webkit-scrollbar-track, ::-webkit-scrollbar-track-piece {
+  background: -webkit-gradient(linear,left);
+  }
+   
+  ::-webkit-scrollbar-track-piece {
+  background: #0c2745;
+  }

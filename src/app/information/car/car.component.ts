@@ -16,39 +16,25 @@ export class CarComponent implements OnInit {
     // departList: any;//部门列表
 
     operand: any;//操作对象
-    searchParams: {
-        deliverCarId: string,
-        gpsId: string,
-        deliverId: string,
-    } = {
-        deliverCarId: '',
-        gpsId: '',
-        deliverId: '',
-    };//查询参数
+    // searchParams: {
+    //     deliverCarId: string,
+    //     gpsId: string,
+    //     deliverId: string,
+    // } = {
+    //     deliverCarId: '',
+    //     gpsId: '',
+    //     deliverId: '',
+    // };//查询参数
     theads: Array<string>;//表头字段
     deliverCarList: Array<{
         id: number,
-        deliverCarId: string,
-        gpsId: string,
-        deliverId:string;
+        task_id	:string,
+        timestamp:string,
+        latitud: string,
+        longitude:string,
         checked?: Boolean
     }>;//用户列表
 
-    addForm: {
-        deliverCarId: string,
-        gpsId: string,
-        deliverId: string;
-    };//添加用户表单
-    editForm: {
-        id: number,
-        deliverCarId: string,
-        gpsId: string,
-        deliverId: string;
-    };//编辑用户表单
-    deleteForm: {
-        id: number,
-        deliverCarId: string,
-    }
 
    
     // // TODO:在提示消失的时候，将它从数组中清除
@@ -118,9 +104,7 @@ export class CarComponent implements OnInit {
     }
     getList(deliverCarId?: string, gpsId?: string, deliverId?: string, pageSize?: number, currentPage?: number) {
         let params = {
-            deliverCarId: this.searchParams.deliverCarId,
-            gpsId: this.searchParams.gpsId,
-            deliverId: this.searchParams.deliverId,
+            
             pageSize: this.pageSize,
             currentPage: this.currentPage
         };
@@ -167,9 +151,10 @@ export class CarComponent implements OnInit {
         this.operand = {};
 
         this.theads = [
-            '配送车编号',
-            '配送车GPS终端ID',
-            '配送员编号',
+            '公司编码',
+           '时间戳',
+            '经度',
+            '纬度',
             
         ];
 

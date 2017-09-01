@@ -20,7 +20,7 @@ import { BigDataComponent } from './big-data/big-data.component';
 import { BasicLayoutComponent } from './pages/basic-layout.component';
 
 import { AuthGuard } from './service/auth-guard.service';
-
+import { HttpService } from './service/http.service';
 @NgModule({
   imports: [
     BrowserModule,
@@ -44,7 +44,8 @@ import { AuthGuard } from './service/auth-guard.service';
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    AuthGuard
+    AuthGuard,
+    HttpService
   ],
   bootstrap: [AppComponent]
 })

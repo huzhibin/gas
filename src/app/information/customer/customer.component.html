@@ -1,36 +1,36 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
-                <i class="fa fa-align-justify"></i> 用户管理
+            <!-- <div class="card-header">
+                <i class="fa fa-align-justify"></i> 客户信息管理
                 <span class="card-btn-group">
-          <!-- <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+          <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
           <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
-          <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button> -->
+          <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
           <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
-          <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show()"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
+          <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show();currentStep=1;"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
           <button class="btn btn-sm btn-secondary" type="button" (click)="exportModal.show()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
         </span>
 
-            </div>
-             <div class="card-block">
-                <div class="form-group row search-table">
-                    <label class="form-control-label" style="margin-top:0.2em;" for="text-input">编号：</label>
+            </div> -->
+            <div class="card-block">
+                <!-- <div class="form-group row search-table">
+                    <label class="form-control-label" style="margin-top:0.2em;" for="text-input">客户名：</label>
                     <div class="">
-                        <input type="text" [(ngModel)]="searchParams.cusId"  name="cusId" class="form-control form-control-sm" placeholder="请输入编号">
+                        <input type="text" [(ngModel)]="searchParams.clientName" name="clientName" class="form-control form-control-sm" placeholder="请输入客户名">
                     </div>
-                    <label class=" form-control-label" for="username">姓名：</label>
+                    <label class=" form-control-label" for="gas">所属气站：</label>
                     <div class="">
-                        <input type="text" [(ngModel)]="searchParams.username" name="username" class="form-control form-control-sm" placeholder="请输姓名">
+                        <input type="text" [(ngModel)]="searchParams.gas" name="gas" class="form-control form-control-sm" placeholder="请输入所属气站">
                     </div>
-                    <label class=" form-control-label" for="mobile">电话：</label>
-                   <div class="">
-                        <input type="text" [(ngModel)]="searchParams.mobile" name="mobile" class="form-control form-control-sm" placeholder="请输电话号码">
+                    <label class=" form-control-label" for="onSite">站点：</label>
+                    <div class="">
+                        <input type="text" [(ngModel)]="searchParams.onSite" name="onSite" class="form-control form-control-sm" placeholder="请输入站点">
                     </div>
                     <button class="btn btn-sm btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i>&nbsp; 查询</button>
-                </div>
+                </div> -->
 
-                <table class="table table-bordered table-striped table-sm">
+                <table class="table table-bordered table-sm">
                     <thead>
                         <tr>
                             <th><input #checkedAll type="checkbox" name="customerbox" (change)="selectAll(checkedAll.checked)"></th>
@@ -38,14 +38,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let customer of customerList" (click)="customer.checked = !customer.checked" [class.active]="customer.checked">
+                        <tr *ngFor="let customer of CustomerList" (click)="customer.checked = !customer.checked" [class.active]="customer.checked">
                             <td><input type="checkbox" name="customerbox" [(ngModel)]="customer.checked" (click)="$event.stopPropagation();"></td>
-                            <td>{{ customer.cusId }}</td>
-                            <td>{{ customer.username }}</td>
-                            <td>{{ customer.mobile }}</td>
-                            <td>{{ customer.identity }}</td>
-                            <td>{{ customer.source }}</td>
-                            <td>{{ customer.createTime }}</td>
+                            <td>{{ customer.gas}}</td>
+                            <td>{{ customer.onSite}}</td>
+                            <td>{{ customer.customerCode }}</td>
+                            <td>{{ customer.clientName}}</td>
+                            <td>{{ customer.gender }}</td>
+                            <td>{{ customer.customerType}}</td>
+                            <td>{{ customer.contactNumber}}</td>
+                            <td>{{ customer.contactAddress }}</td>
+                            <td>{{ customer.contactPerson}}</td>
+                            <td>{{ customer.businessLicenseNumber}}</td>
+                            <td>{{ customer.manager }}</td>
+                            <td>{{ customer.main}}</td>
+                            <td>{{ customer.itsAdministrativeArea}}</td>
+                            <td>{{ customer.idNumber }}</td>
+                            <td>{{ customer.contactTelephone2}}</td>
+                            <td>{{ customer.contactTelephone3}}</td>
+
                             <!-- <td>
                                 <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(customer)?editModal.show():null">编辑</button>
                                 <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(customer)?deleteModal.show():null">删除</button>
@@ -54,14 +65,15 @@
                     </tbody>
                 </table>
 
-                <pagination-comp [totalItems]="totalItems" [currentPage]="currentPage" (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
-            </div> 
+                <pagination-comp [totalItems]="totalItems" [currentPage]="searchParams.pageNumber" [itemsPerPage]="searchParams.pageSize"
+                    (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
+            </div>
         </div>
     </div>
     <!--/.col-->
 </div>
 <!--/.row-->
-<div class="modal" bsModal #importModal="bs-modal" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
+<div class="modal" bsModal #importModal="bs-modal" (onshow)="initCurrentStep()" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
     tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
         <div class="modal-content">
@@ -72,83 +84,87 @@
         </button>
             </div>
             <div class="modal-body">
-                <div id="step1" (onshow)="importModal.currentStep==1" >
-                        <div class="row modal-row">
-                                    <div >
-                                        <h6 >点击下载按钮，下载模板表格</h6>
-                                    </div>
-                                    <div style="margin-top:30px;">
-                                        <a class="btn btn-primary" href="data/test.XLSls" target="_blank" download="test.xls">
+                <div id="step1" *ngIf="currentStep==1">
+                    <div class="row ta-c">
+                        <div style="margin-left:25%;">
+                            <h6 class="ta-c">点击下载按钮，下载模板表格</h6>
+                        </div>
+                        <div style="margin-top:30px;margin-left:-25%;">
+                            <a class="btn btn-primary" href="./../assets/test.xlsx" target="_blank" download="test.xlsx">
                                             <span class="glyphicon glyphicon-download" style="color:#fff;"></span>
                                             <span style=" color:#fff;">下载</span>
                                         </a>
-                                    </div>
                         </div>
+                    </div>
                 </div>
-                <!-- <div id="step2" (onshow)="importModal.currentStep==2" >
-                        <div class="row modal-row">
-                                    <div >
-                                        <h6 >请按照下载的模板表格中指定的格式填写</h6>
-                                        <p>请添加的一条或多条资产信息</p>
-                                    </div>
-                                    <div style="margin-top:30px;">
-                                            <div class="alert alert-info" style="margin: 30px 0">
-                                                    <p>注意：表格中各个列均不能为空，若存在未填写的项，则该条信息可能会导入失败</p>
-                                                </div>
-                                    </div>
+                <div id="step2" *ngIf="currentStep==2">
+                    <div class="row ">
+                        <div class="ta-c" style="margin-left:25%;">
+                            <h6>请按照下载的模板表格中指定的格式填写</h6>
+                            <p>请添加的一条或多条资产信息</p>
                         </div>
+                        <div>
+                            <div class="ta-c" style="margin: 30px 0">
+                                <p>注意：表格中各个列均不能为空，若存在未填写的项，则该条信息可能会导入失败</p>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div id="step3" (onshow)="importModal.currentStep==3" >
-                        <div class="row modal-row">
-                                    <div >
-                                            <h5>请点击下面上传文件按钮，上传填写好的资产信息电子表格</h5>
-                                            <p style="color:red">只能上传一个以xls或xlsx结尾的文件</p>
-                                       
-                                    </div>
-                                    <div style="margin-top:30px;">
-                                            <div style="margin: 30px 0">
-                                                    <span class="btn btn-primary btn-file">
+                <div id="step3" *ngIf="currentStep==3">
+                    <div class="row ">
+                        <div style="">
+                            <h5 style="color:#20a8d8;">请点击下面上传文件按钮，上传填写好的资产信息电子表格</h5>
+                            <p style="color:red;margin-left:25%;">只能上传一个以xls或xlsx结尾的文件</p>
+
+                        </div>
+                        <div>
+                            <div style="margin: 30px 200px">
+                                <span class="btn btn-primary btn-file">
                                                     上传文件
-                                                    <input id="file" type="file" name="file" accept=".xls,.xlsx"  multiple />
+                                                    <input id="file" type="file" name="file" nv-file-select=""  accept=".xls,.xlsx"  multiple />
                                                 </span>
-                                            </div>
-                                    </div>
+                            </div>
+                            <div class="file-info" *ngIf="false">
+                                <span>已添加文件：</span>
+                                <span class="file-name" style="color:"></span>
+                            </div>
                         </div>
-                </div> -->
-                
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="importModal.hide()">取消</button>
-                <button type="button" class="btn btn-primary" (click)="import(importModal)">确认</button>
-                
+                <button class="btn btn-secondary" type="button" (click)="importModal.hide()"><span>取消</span></button>
+                <button class="btn btn-primary" type="button" *ngIf="this.currentStep!==1" (click)="stepChange(-1)"><span>上一步</span></button>
+                <button class="btn btn-primary" type="button" *ngIf="this.currentStep<3" (click)="stepChange(1)"><span>下一步</span></button>
+                <button class="btn btn-primary" type="button" *ngIf="this.currentStep===3" (click)="import(importModal)"><span>&nbsp;&nbsp;&nbsp;上传&nbsp;&nbsp;&nbsp;</span></button>
             </div>
         </div>
     </div>
 </div>
 
 <div class="modal" bsModal #exportModal="bs-modal" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
-tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-primary modal-sm" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">导出客户信息</h4>
-            <button type="button" class="close" (click)="exportModal.hide()" aria-label="Close">
+    tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">导出客户信息</h4>
+                <button type="button" class="close" (click)="exportModal.hide()" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-        </div>
-        <div class="modal-body">
-            <p>确认导出客户信息？</p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="exportModal.hide()">取消</button>
-            <a class="" target="_blank" >
+            </div>
+            <div class="modal-body ta-c">
+                <h5>确定导出客户信息？</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="exportModal.hide()">取消</button>
+                <a class="" target="_blank">
                     <button type="button" class="btn btn-primary" (click)="export(exportModal)">确认下载</button>
                 </a>
-           
-            
+            </div>
         </div>
     </div>
-</div>
 </div>
 <!-- <div bsModal #addModal="bs-modal" [config]="{ignoreBackdropClick: true, keyboard: false}" (onShow)="initAddForm()" class="modal fade"
     tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -283,6 +299,8 @@ tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         </div>
     </div>
 </div> -->
+
+
 
 
 <div class="alert" [class.hide]="alerts<1">

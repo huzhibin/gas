@@ -11,16 +11,16 @@ import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 import { CarComponent } from './car/car.component';
 import { GasWorksComponent } from './gas-works/gas-works.component';
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'order',
-    pathMatch: 'full',
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'order',
+  //   pathMatch: 'full',
+  // },
   {
     path: '',
     component: InformationComponent,
     data: {
-      title: '信息管理'
+      title: '基础信息监管管理'
     },
     children: [
       {

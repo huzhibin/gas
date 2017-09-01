@@ -36,10 +36,10 @@ export const routes: Routes = [
         path: 'information',
         loadChildren: './information/information.module#InformationModule'
       },
-      // {
-      //   path: 'delivery',
-      //   loadChildren: './delivery/delivery.module#DeliveryModule'
-      // },
+      {
+        path: 'delivery',
+        loadChildren: './delivery/delivery.module#DeliveryModule'
+      },
       // {
       //   path: 'standard',
       //   loadChildren: './standard/standard.module#StandardModule'

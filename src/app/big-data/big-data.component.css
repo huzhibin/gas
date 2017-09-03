@@ -4,16 +4,20 @@ html,body{
   height: 100%;
   position: absolute;
 }
-
-#main{
+.fullScreenBtn{
+    position:relative;
+    left:70%;
+    top:20px;
+}
+/*#main{
 position: absolute;
 top:0;bottom: 0;
 left: 0;
 right:0;
-height:100%;
-width:100%;
-border:1px solid red;
-}
+height:100%;*/
+
+/*border:1px solid red;
+}*/
 .topLogo,.status,.eventStatus{
   line-height: 30px;
   text-align: center;

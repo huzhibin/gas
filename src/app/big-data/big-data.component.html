@@ -1,4 +1,4 @@
-<div class="container big-data">
+<div class="container big-data" >
 
   <header>
     <div class="row clearfix">
@@ -38,17 +38,14 @@
   <div class="content row clearfix">
     <div class="col-md-3 column">
       <div class="row">
-        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:600px;margin:0.5rem;background:rgb(16,40,63)">
+        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:600px;overflow:auto;margin:0.5rem;background:rgb(16,40,63)">
           <div class="col-xs-3">
             <section class="left">
               <h3>各监管节点</h3>
-              <h4 (click)="areaClick('总预览')"><img src="/assets/img/bigData/position.png" alt="">温州市</h4>
+              <h4 (click)="areaClick('总预览')"><img src="/assets/img/bigData/placename.png" alt="">温州市</h4>
               <ul class="geoList">
-                <!--<li>
-                  <i class="glyphicon glyphicon-map-marker"></i><span (click)="areaClick('总预览')">总预览</span><b>●</b>
-                </li>-->
-                <li *ngFor="let area of areaList" (click)="areaClick(area)">
-                  <img src="/assets/img/bigData/position.png"><span >{{ area }}</span><b>●</b>
+                <li *ngFor="let area of alarmData" (click)="areaClick(area.name)">
+                  <img src="/assets/img/bigData/position.png"><span >{{ area.name }}</span><b>●</b>
                 </li>
               </ul>
             </section>
@@ -58,18 +55,9 @@
     </div>
     <div class="col-md-6 column">
       <div class="row">
-        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:600px; margin:0.5rem;">
-          <!--<div class="container">
-            <div class="row">
-
-              <div class="col-xs-7">-->
-                <section class="main" style="display:block;position:relative;width:100%;height:100%;">
-                  <div id="main"></div>
-                </section>
-              <!--</div>
-
-            </div>
-          </div>-->
+        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:600px; margin:0.5rem;overflow:hidden">
+          <button (click)="fullScreen()" class="btn btn-info fullScreenBtn">点击全屏</button>
+          <div id="main" style="height: 100%" (window:resize)="chartsResize()"></div>
         </div>
       </div>
     </div>

@@ -23,7 +23,6 @@ export class BigDataComponent implements OnInit {
     '瑞安市',
     '乐清市'
   ];
-
   geoCoordMap = {
     '鹿城区': [120.661851, 28.020502],
     '龙湾区': [120.818508, 27.939041],
@@ -61,6 +60,29 @@ export class BigDataComponent implements OnInit {
     { name: '乐清市', value: 5 },
   ];
 
+  chartsResize() {
+    this.myChart.resize();
+  }
+  fullScreen() {
+    var docElm:any = document.querySelector(".big-data");
+    if (docElm.requestFullscreen) {
+      docElm.requestFullscreen();
+    }
+    //FireFox  
+    else if (typeof docElm.mozRequestFullScreen==="function") {
+      docElm.mozRequestFullScreen();
+    }
+    //Chrome等  
+    else if (docElm.webkitRequestFullScreen) {
+      docElm.webkitRequestFullScreen();
+    }
+    //IE11
+    
+    // else if (docElm.msRequestFullscreen) {
+    //   docElm.msRequestFullscreen();
+    // }
+  }
+  
   convertData(data) {
     var res = [];
     for (var i = 0; i < data.length; i++) {
@@ -208,12 +230,8 @@ export class BigDataComponent implements OnInit {
           min: 2,
           max: 2,
         },
-        layoutCenter: ['50%', '50%'],
-        layoutSize: 600,
-        // left: "1%",
-        // right: "1%",
-        // top: "1%",
-        // bottom: "1%",
+        // layoutCenter: ['50%', '50%'],
+        // layoutSize: 600,
         roam: true,
         itemStyle: {
           normal: {

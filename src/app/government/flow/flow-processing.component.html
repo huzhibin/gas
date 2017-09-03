@@ -1,0 +1,301 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12 mb-4">
+      <tabset>
+
+        <tab>
+          <ng-template tabHeading><i class="icon-calculator"></i> 发起流程</ng-template>
+          <div class="form-group row">
+            <label class="col-md-2 form-control-label" for="textarea-input">问题描述：</label>
+            <div class="col-md-6">
+              <textarea [(ngModel)]="start.details" name="problem" rows="9" class="form-control" placeholder="请输入问题详情"></textarea>
+            </div>
+          </div>
+          <button class="btn btn-sm btn-primary" type="button" (click)="startProcess()"><i class="fa fa-search"></i>&nbsp; 发起</button>
+        </tab>
+
+        <tab (select)="getStartProcessList()">
+          <ng-template tabHeading><i class="icon-basket-loaded"></i> 方案制定<span class="badge badge-pill badge-danger">{{ plan.startList.length?plan.startList.length:'' }}</span></ng-template>
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>id </th>
+                <th>发起人 </th>
+                <th>提交的问题 </th>
+                <th>方案 </th>
+                <th>结果 </th>
+                <th>创建时间 </th>
+                <th>任务id </th>
+                <th>任务名称 </th>
+                <th>流程实例id </th>
+                <th>任务创建时间 </th>
+                <th>操作 </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let start of plan.startList">
+                <td>{{ start.id }}</td>
+                <td>{{ start.user_id }}</td>
+                <td>{{ start.details }}</td>
+                <td>{{ start.plan }}</td>
+                <td>{{ start.result }}</td>
+                <td>{{ start.createTime }}</td>
+                <td>{{ start.taskid }}</td>
+                <td>{{ start.taskname }}</td>
+                <td>{{ start.processinstanceid }}</td>
+                <td>{{ start.taskcreatetime }}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="plan.taskid=start.id">处理</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="form-group row" [class.hide]="plan.taskid == ''">
+            <label class="col-md-2 form-control-label" for="textarea-input">方案</label>
+            <div class="col-md-6">
+              <textarea [(ngModel)]="plan.plan" name="problem" rows="9" class="form-control" placeholder="方案"></textarea>
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+          <div class="form-group row" [class.hide]="plan.taskid == ''">
+            <div class="col-md-2">
+              <button class="btn btn-sm btn-primary" type="button" (click)="submitPlan()"><i class="fa fa-search"></i>&nbsp; 确认</button>
+            </div>
+          </div>
+
+          <pagination-comp [totalItems]="plan.totalItems" [currentPage]="plan.pageNumber" [itemsPerPage]="plan.pageSize" (changePage)="plan.pageNumber=$event.itemsPerPage;plan.pageSize=$event.page;getStartProcessList()"
+            (changeSize)="plan.pageNumber=1;plan.pageSize=$event.page;getStartProcessList()"></pagination-comp>
+        </tab>
+
+        <tab (select)="getPlanList()">
+          <ng-template tabHeading><i class="icon-pie-chart"></i>方案审核<span class="badge badge-pill badge-danger">{{ verify.planList.length?verify.planList.length:'' }}</span></ng-template>
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>id </th>
+                <th>发起人 </th>
+                <th>提交的问题 </th>
+                <th>方案 </th>
+                <th>结果 </th>
+                <th>创建时间 </th>
+                <th>任务id </th>
+                <th>任务名称 </th>
+                <th>流程实例id </th>
+                <th>任务创建时间 </th>
+                <th>操作 </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let plan of verify.planList">
+                <td>{{ plan.id }}</td>
+                <td>{{ plan.user_id }}</td>
+                <td>{{ plan.details }}</td>
+                <td>{{ plan.plan }}</td>
+                <td>{{ plan.result }}</td>
+                <td>{{ plan.createTime }}</td>
+                <td>{{ plan.taskid }}</td>
+                <td>{{ plan.taskname }}</td>
+                <td>{{ plan.processinstanceid }}</td>
+                <td>{{ plan.taskcreatetime }}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="verify.taskid=plan.id;verify.checkok='false';submitVerifyResult()">通过</button>
+                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="verify.taskid=plan.id;verify.checkok='false';submitVerifyResult()">驳回</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <pagination-comp [totalItems]="plan.totalItems" [currentPage]="plan.pageNumber" [itemsPerPage]="plan.pageSize" (changePage)="plan.pageNumber=$event.itemsPerPage;plan.pageSize=$event.page;getStartProcessList()"
+            (changeSize)="plan.pageNumber=1;plan.pageSize=$event.page;getStartProcessList()"></pagination-comp>
+        </tab>
+
+        <tab (select)="getVerifyList()">
+          <ng-template tabHeading><i class="icon-pie-chart"></i> 方案实施<span class="badge badge-pill badge-danger">{{ action.verifyList.length?action.verifyList.length:'' }}</span></ng-template>
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>id </th>
+                <th>发起人 </th>
+                <th>提交的问题 </th>
+                <th>方案 </th>
+                <th>结果 </th>
+                <th>创建时间 </th>
+                <th>任务id </th>
+                <th>任务名称 </th>
+                <th>流程实例id </th>
+                <th>任务创建时间 </th>
+                <th>操作 </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let verify of action.verifyList">
+                <td>{{ verify.id }}</td>
+                <td>{{ verify.user_id }}</td>
+                <td>{{ verify.details }}</td>
+                <td>{{ verify.plan }}</td>
+                <td>{{ verify.result }}</td>
+                <td>{{ verify.createTime }}</td>
+                <td>{{ verify.taskid }}</td>
+                <td>{{ verify.taskname }}</td>
+                <td>{{ verify.processinstanceid }}</td>
+                <td>{{ verify.taskcreatetime }}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="action.taskid=verify.id">处理</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="form-group row" [class.hide]="action.taskid == ''">
+            <label class="col-md-2 form-control-label" for="textarea-input">实施结果</label>
+            <div class="col-md-6">
+              <textarea [(ngModel)]="action.result" name="problem" rows="9" class="form-control" placeholder="实施结果"></textarea>
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+          <div class="form-group row" [class.hide]="action.taskid == ''">
+            <div class="col-md-2">
+              <button class="btn btn-sm btn-primary" type="button" (click)="submitActionResult()"><i class="fa fa-search"></i>&nbsp; 确认</button>
+            </div>
+          </div>
+
+          <pagination-comp [totalItems]="start.totalItems" [currentPage]="start.pageNumber" [itemsPerPage]="start.pageSize" (changePage)="start.pageNumber=$event.itemsPerPage;start.pageSize=$event.page;getVerifyList()"
+            (changeSize)="start.pageNumber=1;start.pageSize=$event.page;getVerifyList()"></pagination-comp>
+        </tab>
+
+        <tab (select)="getActionList()">
+          <ng-template tabHeading><i class="icon-pie-chart"></i> 实施审核<span class="badge badge-pill badge-danger">{{ finish.actionList.length?finish.actionList.length:'' }}</span></ng-template>
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>id </th>
+                <th>发起人 </th>
+                <th>提交的问题 </th>
+                <th>方案 </th>
+                <th>结果 </th>
+                <th>创建时间 </th>
+                <th>任务id </th>
+                <th>任务名称 </th>
+                <th>流程实例id </th>
+                <th>任务创建时间 </th>
+                <th>操作 </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let action of finish.actionList">
+                <td>{{ action.id }}</td>
+                <td>{{ action.user_id }}</td>
+                <td>{{ action.details }}</td>
+                <td>{{ action.plan }}</td>
+                <td>{{ action.result }}</td>
+                <td>{{ action.createTime }}</td>
+                <td>{{ action.taskid }}</td>
+                <td>{{ action.taskname }}</td>
+                <td>{{ action.processinstanceid }}</td>
+                <td>{{ action.taskcreatetime }}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="finish.taskid=action.id;finish.chuliok='false';submitFinishResult()">通过</button>
+                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="finish.taskid=action.id;finish.chuliok='false';submitFinishResult()">驳回</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <pagination-comp [totalItems]="finish.totalItems" [currentPage]="finish.pageNumber" [itemsPerPage]="finish.pageSize" (changePage)="finish.pageNumber=$event.itemsPerPage;finish.pageSize=$event.page;getActionList()"
+            (changeSize)="finish.pageNumber=1;finish.pageSize=$event.page;getActionList()"></pagination-comp>
+        </tab>
+
+        <tab (select)="getMyStartProcess()">
+          <ng-template tabHeading><i class="icon-pie-chart"></i> 我的流程历史</ng-template>
+
+          <span class="card-btn-group" style="float:left;margin:5px;">
+              <button class="btn btn-sm btn-primary" [class.btn-outline-primary]="!history.selectStart" type="button" (click)="history.selectStart=true;history.selectParticipate=false;history.selectFinish=false;getMyStartProcess();">&nbsp; 我发起的流程</button>
+              <button class="btn btn-sm btn-primary" [class.btn-outline-primary]="!history.selectParticipate" type="button" (click)="history.selectStart=false;history.selectParticipate=true;history.selectFinish=false;getMyParticipateProcess();">&nbsp; 我参与的流程</button>
+              <button class="btn btn-sm btn-primary" [class.btn-outline-primary]="!history.selectFinish" type="button" (click)="history.selectStart=false;history.selectParticipate=false;history.selectFinish=true;getMyFinishProcess();">&nbsp; 已结束的流程</button>
+          </span>
+          <img [src]="history.imageSrc" alt="">
+          <table class="table table-bordered table-sm" *ngIf="history.selectStart">
+            <thead>
+              <tr>
+                <th>执行id </th>
+                <th>流程实例id </th>
+                <th>业务号 </th>
+                <th>当前节点 </th>
+                <th>操作 </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let process of history.myStartList">
+                <td>{{ process.executionid }}</td>
+                <td>{{ process.processInstanceid }}</td>
+                <td>{{ process.businesskey }}</td>
+                <td>{{ process.activityid }}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="getProcessStateDiagram(process.executionid)">流程状态</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-bordered table-sm" *ngIf="history.selectParticipate">
+            <thead>
+              <tr>
+                <th>执行id </th>
+                <th>流程实例id </th>
+                <th>业务号 </th>
+                <th>当前节点 </th>
+                <th>操作 </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let process of history.myParticipateList">
+                <td>{{ process.executionid }}</td>
+                <td>{{ process.processInstanceid }}</td>
+                <td>{{ process.businesskey }}</td>
+                <td>{{ process.activityid }}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="getProcessStateDiagram(process.executionid)">流程状态</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered table-sm" *ngIf="history.selectFinish">
+            <thead>
+              <tr>
+                <th>执行id </th>
+                <th>流程实例id </th>
+                <th>业务号 </th>
+                <th>当前节点 </th>
+                <th>操作 </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let process of history.myFinishList">
+                <td>{{ process.executionid }}</td>
+                <td>{{ process.processInstanceid }}</td>
+                <td>{{ process.businesskey }}</td>
+                <td>{{ process.activityid }}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="getFinishProcessDetail(process.processInstanceid)">流程详情</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <pagination-comp [totalItems]="history.totalItems" [currentPage]="history.pageNumber" [itemsPerPage]="history.pageSize" (changePage)="history.pageNumber=$event.itemsPerPage;history.pageSize=$event.page;getStartProcessList()"
+            (changeSize)="history.pageNumber=1;history.pageSize=$event.page;getStartProcessList()"></pagination-comp>
+        </tab>
+      </tabset>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>
+
+<div class="alert" [class.hide]="alerts<1">
+  <alert *ngFor="let alert of alerts" [dismissOnTimeout]="alert.timeout" [type]="alert.type" (onClosed)="alertShift()"><span [innerHtml]="alert.msg"></span></alert>
+</div>

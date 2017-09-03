@@ -10,46 +10,33 @@ import { DeliverCarList } from '../data/deliver-car';
 })
 export class CarComponent implements OnInit {
     totalItems: number;//总记录数
-    currentPage: number;//当前页号
-    pageSize: number;//分页大小
+  
 
     // departList: any;//部门列表
 
     operand: any;//操作对象
     searchParams: {
-        deliverCarId: string,
-        gpsId: string,
-        deliverId: string,
-    } = {
-        deliverCarId: '',
-        gpsId: '',
-        deliverId: '',
+        task_id:string,
+        timestamp:string,
+        pageNumber:number,
+       pageSize:number,
     };//查询参数
     theads: Array<string>;//表头字段
     deliverCarList: Array<{
         id: number,
-        deliverCarId: string,
-        gpsId: string,
-        deliverId:string;
+        // deliverCarCode:string,
+        timestamp:string,
+        latitud: string,
+        longitude:string,
         checked?: Boolean
     }>;//用户列表
 
-    addForm: {
-        deliverCarId: string,
-        gpsId: string,
-        deliverId: string;
-    };//添加用户表单
-    editForm: {
-        id: number,
-        deliverCarId: string,
-        gpsId: string,
-        deliverId: string;
-    };//编辑用户表单
-    deleteForm: {
-        id: number,
-        deliverCarId: string,
-    }
+addForm:{
+    task_id:string,
+    timestamp:string,
+    latitud: string,
 
+}
    
     // // TODO:在提示消失的时候，将它从数组中清除
     alerts: any = [
@@ -64,14 +51,14 @@ export class CarComponent implements OnInit {
     // // }
 
     changePage(event) {
-        this.pageSize = event.itemsPerPage;
-        this.currentPage = event.page;
+        this.searchParams.pageSize = event.itemsPerPage;
+        this.searchParams.pageNumber = event.page;
         this.getList();
     }
 
     changeSize(event) {
-        this.pageSize = event;
-        this.currentPage = 1;
+        this.searchParams.pageSize = event;
+        this.searchParams.pageNumber = 1;
         this.getList();
     }
 
@@ -95,7 +82,9 @@ export class CarComponent implements OnInit {
         this.getList();
     }
     
-
+    add( modal) {
+        this.getList();
+    }
 
 
     export(modal) {
@@ -116,13 +105,12 @@ export class CarComponent implements OnInit {
     search() {
         this.getList();
     }
+
     getList(deliverCarId?: string, gpsId?: string, deliverId?: string, pageSize?: number, currentPage?: number) {
         let params = {
-            deliverCarId: this.searchParams.deliverCarId,
-            gpsId: this.searchParams.gpsId,
-            deliverId: this.searchParams.deliverId,
-            pageSize: this.pageSize,
-            currentPage: this.currentPage
+            
+            pageSize:this.searchParams.pageSize,
+            pageNumber: this.searchParams.pageNumber
         };
         console.log('查询后台--getList:' + JSON.stringify(params));
         // this.userService.getCustomerList(params).then(data => {
@@ -130,7 +118,7 @@ export class CarComponent implements OnInit {
         //   this.totalItems = data.data.totalItems
         // });
 
-        this.deliverCarList = DeliverCarList.slice(params.pageSize * (params.currentPage - 1), params.pageSize * params.currentPage);
+        this.deliverCarList = DeliverCarList.slice(params.pageSize * (params.pageNumber - 1), params.pageSize * params.pageNumber);
         this.totalItems = DeliverCarList.length;
     }
 
@@ -158,22 +146,37 @@ export class CarComponent implements OnInit {
         }
     }
 
+    intiSearchParams(){
+        this.searchParams={
+            task_id:'',
+            timestamp:'',
+            pageNumber:1,
+            pageSize:10,
+        }
+    }
+
+    initAddForm(){
+        this.addForm={
+            task_id:'',
+            timestamp:'',
+            latitud:'',
+        }
+    }
     ngOnInit(): void {
         this.totalItems = 0;
-        this.currentPage = 1;
-        this.pageSize = 20;
-
 
         this.operand = {};
 
         this.theads = [
-            '配送车编号',
-            '配送车GPS终端ID',
-            '配送员编号',
-            
+            '配送车辆唯一编码',
+            '归属公司编号',
+            '配送车辆牌照',
+            '责任人电话',
+            // '责任人编号'	,
+            // '归属站点编号',	    
         ];
 
-        
+        this.intiSearchParams();
 
         this.getList();
     }

@@ -1,0 +1,30 @@
+<div class="content row clearfix">
+    <div class="col-md-2 column">
+      <div class="row">
+        <div class="col-md-12 column" style="border:0px solid #1792ab;width:100%;height:600px;margin:0.5rem;">
+          <ul class="sider-item">
+            <li>
+              <a href="javascript:;">公告发布</a>
+            </li>
+            <li>
+              <a href="javascript:;">事务管理</a>
+            </li>
+            <li>
+              <a href="javascript:;" [routerLink]="['/government/flow']">自定义流程</a>
+            </li>
+            <li>
+              <a href="javascript:;">对外服务</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-10 column">
+      <div class="row">
+        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:600px; margin:0.5rem;overflow-y: scroll;">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -14,21 +14,20 @@
         <div class="row">
           <div class="col-md-12 column home-top-mid">
             <img src="/assets/img/home/visualization-top.png" alt="">
-            <span class="header-time">上午11:23:12</span>
-            <span class="header-date">2017/8/30</span>
+            <span class="header-time">{{curTime}}</span>
+            <span class="header-date">{{DateTime}} </span>
           </div>
         </div>
       </div>
-      <div class="col-md-3 column">
-        <div class="row">
+      <div class="col-md-3 column" >
+        <div class="row" style="margin-right:20px">
           <div class="col-md-12 column alarm">
-            <div class="col-md-6" style="padding:0;color:white;font-size:1.2rem;text-align:center;line-height:3rem;">
-              灾难事件 0
+            <div class="col-md-6" style="padding:0;color:white;font-size:1.3rem;font-weight:500;text-align:center;line-height:3rem;">
+              监管信息 1
             </div>
-            <div class="col-md-6" style="padding:0;color:#f3b400;font-size:1.2rem;text-align:center;line-height:3rem;">
-              灾难事件 3
+            <div class="col-md-6" style="padding:0;color:red;font-size:1.3rem;font-weight:500;text-align:center;line-height:3rem;">
+              严重事件 3
             </div>
-
           </div>
         </div>
       </div> -->
@@ -36,8 +35,7 @@
   </header>
 
   <router-outlet></router-outlet>
-
-
+  
   <footer>
     <div class="row clearfix" style="position: absolute;bottom: 2rem;width: 100%;">
       <div class="col-md-2 column">
@@ -69,7 +67,7 @@
               </a>
           </li>
           <li>
-            <a href="javascript:;" [routerLink]="['/flow']">
+            <a href="javascript:;" [routerLink]="['/government']">
                 <img src="/assets/img/home/regulation-icon.png" alt="">
                 <span>政府监管事务</span>
               </a>

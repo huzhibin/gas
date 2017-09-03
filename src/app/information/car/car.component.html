@@ -4,17 +4,55 @@
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> 配送车管理
                 <span class="card-btn-group">
-          <!-- <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
-          <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
-          <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button> -->
-          <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
-          <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show()"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
-          <button class="btn btn-sm btn-secondary" type="button" (click)="exportModal.show()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
-        </span>
+                      <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+                      <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+                      <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
+                      <button class="btn btn-sm btn-secondary" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
+                      <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show()"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
+                      <button class="btn btn-sm btn-secondary" type="button" (click)="exportModal.show()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
+                    </span>
 
             </div>
             <div class="card-block">
                 <div class="form-group row search-table">
+                    <label class="form-control-label " for="text-input">配送车编号：</label>
+                    <div class="">
+                        <input type="text" [(ngModel)]="searchParams.timestamp" name="deliverCarId" class="form-control form-control-sm" placeholder="请输入配送车编号">
+                    </div>
+                    <label class=" form-control-label" for="text-input">配送车GPS终端ID：</label>
+                    <div class="">
+                        <input type="text" [(ngModel)]="searchParams.timestamp" name="gspId" class="form-control form-control-sm" placeholder="请输入配送车GPS终端ID">
+                    </div>
+                    <label class=" form-control-label" for="text-input">配送员编号：</label>
+                    <div class="">
+                        <input type="text" [(ngModel)]="searchParams.timestamp" name="deliverId" class="form-control form-control-sm" placeholder="请输入配送员编号">
+                    </div>
+                    <button class="btn btn-sm btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i>&nbsp; 查询</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row" >
+    <div class="col-lg-12">
+        <div class="card">
+            <!-- <div class="card-header">
+                <i class="fa fa-align-justify"></i> 配送车管理
+                <span class="card-btn-group">
+          <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+          <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+          <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
+          <button class="btn btn-sm btn-secondary" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
+          <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show()"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
+          <button class="btn btn-sm btn-secondary" type="button" (click)="exportModal.show()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
+        </span>
+
+            </div> -->
+            <div class="card-block" >
+                <!-- <div class="form-group row search-table">
                     <label class="form-control-label " for="text-input">配送车编号：</label>
                     <div class="">
                         <input type="text" [(ngModel)]="searchParams.deliverCarId" name="deliverCarId" class="form-control form-control-sm" placeholder="请输入配送车编号">
@@ -28,62 +66,88 @@
                         <input type="text" [(ngModel)]="searchParams.deliverId" name="deliverId" class="form-control form-control-sm" placeholder="请输入配送员编号">
                     </div>
                     <button class="btn btn-sm btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i>&nbsp; 查询</button>
-                </div>
-
-                <table class="table table-bordered table-striped table-sm">
-                    <thead>
+                </div> -->
+               
+                    <!-- <table class="table table-bordered  table-sm">
+                        <thead>
+                            <tr>
+                                <th><input #checkedAll type="checkbox" name="deliverCarbox" (change)="selectAll(checkedAll.checked)"></th>
+                                <th *ngFor="let th of theads">{{ th }}</th>
+                            </tr>
+                        </thead>
+                    </table> -->
+             
+                <div class="tab-h">
+                    <table class="table table-bordered  table-sm ">
+                      
+                        <thead>
                         <tr>
                             <th><input #checkedAll type="checkbox" name="deliverCarbox" (change)="selectAll(checkedAll.checked)"></th>
                             <th *ngFor="let th of theads">{{ th }}</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let deliverCar of deliverCarList" (click)="deliverCar.checked = !deliverCar.checked" [class.active]="deliverCar.checked">
-                            <td><input type="checkbox" name="deliverCarbox" [(ngModel)]="deliverCar.checked" (click)="$event.stopPropagation();"></td>
-                            <td>{{ deliverCar.deliverCarId }}</td>
-                            <td>{{ deliverCar.gpsId }}</td>
-                            <td>{{ deliverCar.deliverId }}</td>
+                      
+                     
+                        <tbody >
+                            <tr *ngFor="let deliverCar of deliverCarList" (click)="deliverCar.checked = !deliverCar.checked" [class.active]="deliverCar.checked">
+                                <td><input type="checkbox" name="deliverCarbox" [(ngModel)]="deliverCar.checked" (click)="$event.stopPropagation();"></td>
+                                <td>{{ deliverCar.task_id }}</td>
+                                <td>{{ deliverCar.timestamp }}</td>
+                                <td>{{ deliverCar.latitud }}</td>
+                                <td>{{ deliverCar.longitude }}</td>
 
-                            <!-- <td>
+                                <!-- <td>
                                 <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(deliverCar)?editModal.show():null">编辑</button>
                                 <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(deliverCar)?deleteModal.show():null">删除</button>
                             </td> -->
-                        </tr>
-                    </tbody>
-                </table>
-
-                <pagination-comp [totalItems]="totalItems" [currentPage]="currentPage" (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
+                            </tr>
+                        </tbody>
+                      
+                    </table>
+                </div>
+                <!-- <pagination-comp [totalItems]="totalItems" [currentPage]="searchParams.pageNumber" [itemsPerPage]="searchParams.pageSize" (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp> -->
             </div>
         </div>
     </div>
-    <!--/.col-->
 </div>
-<!--/.row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <pagination-comp [totalItems]="totalItems" [currentPage]="searchParams.pageNumber" [itemsPerPage]="searchParams.pageSize"
+                    (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框 -->
 <div class="modal" bsModal #importModal="bs-modal" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
-tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">导入客户信息</h4>
-            <button type="button" class="close" (click)="importModal.hide()" aria-label="Close">
+    tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">导入客户信息</h4>
+                <button type="button" class="close" (click)="importModal.hide()" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-        </div>
-        <div class="modal-body">
-            <div id="step1" (onshow)="importModal.currentStep==1" >
+            </div>
+            <div class="modal-body">
+                <div id="step1" (onshow)="importModal.currentStep==1">
                     <div class="row modal-row">
-                                <div >
-                                    <h6 >点击下载按钮，下载模板表格</h6>
-                                </div>
-                                <div style="margin-top:30px;">
-                                    <a class="btn btn-primary" href="data/test.XLSls" target="_blank" download="test.xls">
+                        <div>
+                            <h6>点击下载按钮，下载模板表格</h6>
+                        </div>
+                        <div style="margin-top:30px;">
+                            <a class="btn btn-primary" href="data/test.XLSls" target="_blank" download="test.xls">
                                         <span class="glyphicon glyphicon-download" style="color:#fff;"></span>
                                         <span style=" color:#fff;">下载</span>
                                     </a>
-                                </div>
+                        </div>
                     </div>
-            </div>
-            <!-- <div id="step2" (onshow)="importModal.currentStep==2" >
+                </div>
+                <!-- <div id="step2" (onshow)="importModal.currentStep==2" >
                     <div class="row modal-row">
                                 <div >
                                     <h6 >请按照下载的模板表格中指定的格式填写</h6>
@@ -113,40 +177,40 @@ tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 </div>
                     </div>
             </div> -->
-            
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="importModal.hide()">取消</button>
-            <button type="button" class="btn btn-primary" (click)="import(importModal)">确认</button>
-            
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="importModal.hide()">取消</button>
+                <button type="button" class="btn btn-primary" (click)="import(importModal)">确认</button>
+
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <div class="modal" bsModal #exportModal="bs-modal" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
-tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-primary modal-sm" role="document">
-<div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title">导出车辆信息</h4>
-        <button type="button" class="close" (click)="exportModal.hide()" aria-label="Close">
+    tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">导出车辆信息</h4>
+                <button type="button" class="close" (click)="exportModal.hide()" aria-label="Close">
   <span aria-hidden="true">&times;</span>
 </button>
-    </div>
-    <div class="modal-body">
-        <p>确认导出车辆信息？</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="exportModal.hide()">取消</button>
-        <a class="" target="_blank" >
+            </div>
+            <div class="modal-body">
+                <p>确认导出车辆信息？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="exportModal.hide()">取消</button>
+                <a class="" target="_blank">
                 <button type="button" class="btn btn-primary" (click)="export(exportModal)">确认下载</button>
             </a>
-       
-        
+
+
+            </div>
+        </div>
     </div>
-</div>
-</div>
 </div>
 <!-- <div bsModal #addModal="bs-modal" [config]="{ignoreBackdropClick: true, keyboard: false}" (onShow)="initAddForm()" class="modal fade"
     tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -163,21 +227,21 @@ tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="text-input">配送车编号</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.deliverCarId" name="deliverId" maxlength="20" class="form-control form-control-sm" placeholder="请输入配送车编号"
+                            <input type="text" [(ngModel)]="addForm.task_id" name="task_id" maxlength="20" class="form-control form-control-sm" placeholder="请输入配送车编号"
                                 required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="text-input">配送车GPS终端ID</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.gspId" name="gspId" maxlength="20" class="form-control form-control-sm" placeholder="请输入配送车GPS终端ID"
+                            <input type="text" [(ngModel)]="addForm.timestamp" name="timestamp" maxlength="20" class="form-control form-control-sm" placeholder="请输入配送车GPS终端ID"
                                 required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="text-input">配送员编号</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.deliverId" name="deliverId" maxlength="20" class="form-control form-control-sm" placeholder="请输入配送员编号"
+                            <input type="text" [(ngModel)]="addForm.latitud" name="latitud" maxlength="20" class="form-control form-control-sm" placeholder="请输入配送员编号"
                                 required>
                         </div>
                     </div>
@@ -189,8 +253,8 @@ tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             </div>
         </div>
     </div>
-</div>
-<div bsModal #editModal="bs-modal" (onShow)="initEditForm()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+</div> -->
+<!-- <div bsModal #editModal="bs-modal" (onShow)="initEditForm()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-warning modal-primary" role="document">
         <div class="modal-content">

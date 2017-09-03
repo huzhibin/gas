@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, ResponseContentType } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -11,7 +11,7 @@ export class HttpService {
   constructor(private http: Http) { }
   // 重封装get请求
   getRequest(url, data) {
-    return this.http.get(url)
+    return this.http.get(url + '?' + this.transformRequest(data))
       .toPromise()
       .then(res => res.json());
   }
@@ -38,6 +38,14 @@ export class HttpService {
       .post(url, this.transformRequest(data), { headers: this.formHeaders, withCredentials: true })
       .toPromise()
       .then(res => res.json());
+  }
+
+  // 重封装post请求，允许cookie，参数序列化
+  withCredentialsPost(url, data) {
+    return this.http
+      .post(url, this.transformRequest(data), { headers: this.formHeaders, responseType: ResponseContentType.Blob, withCredentials: true })
+      .toPromise()
+      .then(res => res);
   }
 
   transformRequest(obj) {

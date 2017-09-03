@@ -10,6 +10,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // Routing Module
 import { AppRoutingModule } from './app.routing';
@@ -34,6 +35,7 @@ import { BarAlertChartsComponent } from './bar-alert-charts/bar-alert-charts.com
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
+    DatepickerModule.forRoot()
   ],
   declarations: [
     AppComponent,

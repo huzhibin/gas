@@ -1,0 +1,32 @@
+#step3 .btn-file {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+
+      
+    }
+    #step3 #file {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+    #step3 .file-info {
+        margin: 15px 0;
+
+        
+    }
+    #step3 .file-name {
+        color: #31b0d5;
+    }
+.ta-c{
+    text-align: center;
+    color: #20a8d8;
+}
+label{
+    margin-top: 0.25rem;
+}
+

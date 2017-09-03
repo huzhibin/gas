@@ -1,32 +1,61 @@
 <div class="content row clearfix">
-  <div class="col-md-3 column">
+  <div class="col-md-2 column">
     <div class="row">
-      <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:600px;margin:0.5rem;">
+      <div class="col-md-12 column" style="border:0px solid #1792ab;width:100%;height:600px;margin:0.5rem;">
         <ul class="sider-item">
           <li>
-            <a href="javascript:;">企业档案信息</a>
+            <a href="javascript:;" routerLinkActive="active" [routerLink]="['/information/company']">企业档案信息</a>
           </li>
           <li>
-            <a href="javascript:;">气瓶及分布</a>
+            <a href="javascript:;" routerLinkActive="active" [routerLink]="['/information/gas-cylinder']">气瓶及分布</a>
           </li>
           <li>
-            <a href="javascript:;">车辆及分布</a>
+            <a href="javascript:;" routerLinkActive="active" [routerLink]="['/information/car']">车辆及分布</a>
           </li>
           <li>
-            <a href="javascript:;">人员信息</a>
+            <a href="javascript:;" routerLinkActive="active" [routerLink]="['/information/customer']">人员信息</a>
           </li>
           <li>
-            <a href="javascript:;">视频图像</a>
+            <a href="javascript:;" routerLinkActive="active">视频图像</a>
           </li>
         </ul>
       </div>
     </div>
   </div>
-  <div class="col-md-9 column">
+  <div class="col-md-10 column">
+    <!-- <div class="row">
+          <div class="col-md-12 column" style="border:0px solid #1792ab;width:100%; margin-left:0.5rem; margin-right:1.2rem;color:white">
+      <div class="row">
+          <div class="col-lg-12">
+            <div class="card-header">
+              <i class="fa fa-align-justify"></i> 客户信息管理
+              <span class="card-btn-group">
+                    <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+                    <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+                    <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
+                    <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
+                    <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show();currentStep=1;"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
+                    <button class="btn btn-sm btn-secondary" type="button" (click)="exportModal.show()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
+                    </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
     <div class="row">
-      <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:600px; margin:0.5rem;">
+      <div class="col-md-12 column" style="border:0px solid #1792ab;width:100%;height:600px; margin:0.5rem;font-size:1rem;">
         <router-outlet></router-outlet>
       </div>
     </div>
   </div>
+  <!-- <div class="row">
+      <div class="col-md-12 column" style="border:0px solid #1792ab;width:100%; margin-left:0.5rem; margin-right:1.2rem;color:white">
+  <div class="row">
+      <div class="col-lg-12">
+          <pagination-comp [totalItems]="totalItems" [currentPage]="searchParams.pageNumber" [itemsPerPage]="searchParams.pageSize"
+          (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
+      </div>
+    </div>
+  </div>
+</div> -->
 </div>

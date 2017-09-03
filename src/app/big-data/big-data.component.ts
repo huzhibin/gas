@@ -11,7 +11,6 @@ export class BigDataComponent implements OnInit {
   myChart: any;
   option: any;
   areaList = [
-    '总预览',
     '鹿城区',
     '龙湾区',
     '瓯海区',
@@ -24,7 +23,6 @@ export class BigDataComponent implements OnInit {
     '瑞安市',
     '乐清市'
   ];
-
   geoCoordMap = {
     '鹿城区': [120.661851, 28.020502],
     '龙湾区': [120.818508, 27.939041],
@@ -48,13 +46,47 @@ export class BigDataComponent implements OnInit {
     "rgb(133,133,133)",
   ];
 
-  alarmData: any = [];
+  alarmData: any = [
+    { name: '鹿城区', value: 5 },
+    { name: '龙湾区', value: 4 },
+    { name: '瓯海区', value: 1 },
+    { name: '洞头区', value: 2 },
+    { name: '永嘉县', value: 3 },
+    { name: '平阳县', value: 2 },
+    { name: '文成县', value: 1 },
+    { name: '苍南县', value: 2 },
+    { name: '泰顺县', value: 4 },
+    { name: '瑞安市', value: 5 },
+    { name: '乐清市', value: 5 },
+  ];
 
+  chartsResize() {
+    this.myChart.resize();
+  }
+  fullScreen() {
+    var docElm:any = document.querySelector(".big-data");
+    if (docElm.requestFullscreen) {
+      docElm.requestFullscreen();
+    }
+    //FireFox  
+    else if (typeof docElm.mozRequestFullScreen==="function") {
+      docElm.mozRequestFullScreen();
+    }
+    //Chrome等  
+    else if (docElm.webkitRequestFullScreen) {
+      docElm.webkitRequestFullScreen();
+    }
+    //IE11
+    
+    // else if (docElm.msRequestFullscreen) {
+    //   docElm.msRequestFullscreen();
+    // }
+  }
+  
   convertData(data) {
     var res = [];
     for (var i = 0; i < data.length; i++) {
       var geoCoord = this.geoCoordMap[data[i].name];
-      console.dir(this);
       if (geoCoord) {
         res.push({
           name: data[i].name,
@@ -108,8 +140,12 @@ export class BigDataComponent implements OnInit {
     if (area == "总预览") {
       this.option.geo.center = [120.702542, 28.004152];
       this.option.geo.zoom = 2;
+      this.option.geo.scaleLimit.max = 2;
+      this.option.geo.scaleLimit.min = 2;
     } else {
       this.option.geo.zoom = 8;
+      this.option.geo.scaleLimit.max = 8;
+      this.option.geo.scaleLimit.min = 8;
     }
     this.myChart.setOption(this.option);
   }
@@ -117,8 +153,6 @@ export class BigDataComponent implements OnInit {
   getAlarmList(params?) {
     this.bigDataService.getAlarmList({}).then(getData => {
       if (getData.status == 0) {
-
-        console.log(getData.data);
         for (var key in getData.data) {
           var item: any = {};
           item.name = key.replace("温州市-", "");
@@ -131,7 +165,7 @@ export class BigDataComponent implements OnInit {
           }
           this.alarmData.push(item);
         }
-        console.dir(this.alarmData);
+        console.dir(this);
         this.myChart.setOption(this.option);
       } else {
         alert();
@@ -147,8 +181,8 @@ export class BigDataComponent implements OnInit {
     let self = this;
     this.option = {
       title: {
-        text: '标题。',
-        subtext: '副标题。',
+        text: '',
+        subtext: '',
         left: 'center',
         textStyle: {
           color: '#fff'
@@ -190,11 +224,14 @@ export class BigDataComponent implements OnInit {
           // 定位右下角经纬度
           [120.909511, 25.502892]
         ],
+        silent: true,
         zoom: 2,
         scaleLimit: {
-          min: 1,
-          max: 15,
+          min: 2,
+          max: 2,
         },
+        // layoutCenter: ['50%', '50%'],
+        // layoutSize: 600,
         roam: true,
         itemStyle: {
           normal: {

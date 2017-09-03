@@ -1,23 +1,50 @@
 <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> 配送员信息管理
+                    <span class="card-btn-group">
+              <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+              <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+              <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
+              <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
+              <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show();currentStep=1;"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
+              <button class="btn btn-sm btn-secondary" type="button" (click)="exportModal.show()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
+            </span>
+    
+                </div>
+                <div class="card-block">
+                        <div class="form-group row search-table">
+                                <label class=" form-control-label" for="text-input">配送车辆编号：</label>
+                                <div class="">
+                                     <input type="text" [(ngModel)]="searchParams.id" name="id" class="form-control form-control-sm" placeholder="请输入编号">
+                                </div> 
+                            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
+            <!-- <div class="card-header">
                 <i class="fa fa-align-justify"></i> 配送员管理
                 <span class="card-btn-group">
-          <!-- <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+          <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
           <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
-          <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button> -->
+          <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
           <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
           <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show()"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
           <button class="btn btn-sm btn-secondary" type="button" (click)="exportModal.show()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
         </span>
 
-            </div>
+            </div> -->
             <div class="card-block">
-                <div class="form-group row search-table">
+                <!-- <div class="form-group row search-table">
                     <label class="form-control-label " for="text-input">编号：</label>
                     <div class="">
-                        <input type="text" [(ngModel)]="searchParams.deliverId" name="deliverId" class="form-control form-control-sm" placeholder="请输入编号">
+                        <input type="text" [(ngModel)]="searchParams.DeliverId" name="DeliverId" class="form-control form-control-sm" placeholder="请输入编号">
                     </div>
                     <label class=" form-control-label" for="username">姓名：</label>
                     <div class="">
@@ -28,43 +55,55 @@
                         <input type="text" [(ngModel)]="searchParams.identity" name="identity" class="form-control form-control-sm" placeholder="请输入身份证">
                     </div>
                     <button class="btn btn-sm btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i>&nbsp; 查询</button>
-                </div>
+                </div> -->
+                <div class="tab-h">
 
-                <table class="table table-bordered table-striped table-sm">
+                <table class="table table-bordered  table-sm">
                     <thead>
                         <tr>
-                            <th><input #checkedAll type="checkbox" name="deliverbox" (change)="selectAll(checkedAll.checked)"></th>
+                            <th><input #checkedAll type="checkbox" name="Deliverbox" (change)="selectAll(checkedAll.checked)"></th>
                             <th *ngFor="let th of theads">{{ th }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let deliver of deliverList" (click)="deliver.checked = !deliver.checked" [class.active]="deliver.checked">
-                            <td><input type="checkbox" name="deliverbox" [(ngModel)]="deliver.checked" (click)="$event.stopPropagation();"></td>
-                            <td>{{ deliver.deliverId }}</td>
-                            <td>{{ deliver.mobile }}</td>
-                            <td>{{ deliver.username }}</td>
-                            <td>{{ deliver.identity }}</td>
-                            <td>{{ deliver.comment }}</td>
-                            <td>{{ deliver.statement }}</td>
-                            <td>{{ deliver.createTime }}</td>
-                            
+                        <tr *ngFor="let Deliver of DeliverList" (click)="Deliver.checked = !Deliver.checked" [class.active]="Deliver.checked">
+                            <td><input type="checkbox" name="Deliverbox" [(ngModel)]="Deliver.checked" (click)="$event.stopPropagation();"></td>
+                            <td>{{ Deliver.id }}</td>
+                            <td>{{ Deliver.phone }}</td>
+                            <td>{{ Deliver.name }}</td>
+                            <td>{{ Deliver.company }}</td>
+                            <td>{{ Deliver.address }}</td>
+                            <td>{{ Deliver.station }}</td>
+                            <td>{{ Deliver.photoAddress }}</td>
+                           
                             <!-- <td>
-                                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(deliver)?editModal.show():null">编辑</button>
-                                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(deliver)?deleteModal.show():null">删除</button>
+                                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(Deliver)?editModal.show():null">编辑</button>
+                                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(Deliver)?deleteModal.show():null">删除</button>
                                 
-                                <button type="button" class="btn btn-sm btn-outline-primary" (click)="$event.stopPropagation();checkOperand(deliver)?stateModal.show():null">禁用</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary" (click)="$event.stopPropagation();checkOperand(Deliver)?stateModal.show():null">禁用</button>
                             </td> -->
                         </tr>
                     </tbody>
                 </table>
-
-                <pagination-comp [totalItems]="totalItems" [currentPage]="currentPage" (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
+                </div>
+                <!-- <pagination-comp [totalItems]="totalItems" [currentPage]="currentPage" (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp> -->
             </div>
         </div>
     </div>
-    <!--/.col-->
+ 
 </div>
-<!--/.row-->
+<div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <pagination-comp [totalItems]="totalItems" [currentPage]="searchParams.pageNumber" [itemsPerPage]="searchParams.pageSize"
+                        (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <div class="modal" bsModal #importModal="bs-modal" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
 tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-primary" role="document">
@@ -132,7 +171,7 @@ tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 <div class="modal" bsModal #exportModal="bs-modal" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
 tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-primary modal-sm" role="document">
+<div class="modal-dialog modal-primary " role="document">
 <div class="modal-content">
     <div class="modal-header">
         <h4 class="modal-title">导出配送员信息</h4>
@@ -169,7 +208,7 @@ tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="text-input">编号</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.deliverId" name="deliverId" maxlength="20" class="form-control form-control-sm" placeholder="编号"
+                            <input type="text" [(ngModel)]="addForm.DeliverId" name="DeliverId" maxlength="20" class="form-control form-control-sm" placeholder="编号"
                                 required>
                         </div>
                     </div>
@@ -232,7 +271,7 @@ tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="text-input">编号</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="editForm.deliverId" name="deliverId" maxlength="20" class="form-control form-control-sm" placeholder="编号"
+                            <input type="text" [(ngModel)]="editForm.DeliverId" name="DeliverId" maxlength="20" class="form-control form-control-sm" placeholder="编号"
                                 disabled required>
                         </div>
                     </div>

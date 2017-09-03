@@ -9,8 +9,8 @@ import { GasCommonModule } from '../component/gas-common.module';
 
 import { DeliveryRoutingModule } from './delivery-routing.module';
 import { DeliveryComponent} from './delivery.component';
-
-
+import { StoreCylinderComponent} from './store-cylinder/store-cylinder.component';
+import { DeliverymanComponent } from './deliveryman/deliveryman.component';
 
 @NgModule({
   imports: [
@@ -26,6 +26,8 @@ import { DeliveryComponent} from './delivery.component';
   ],
   declarations: [
     DeliveryComponent,
+    StoreCylinderComponent,
+    DeliverymanComponent
 //     OrderComponent,
 //     MapComponent,
 //     CustomerComponent ,

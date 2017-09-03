@@ -227,10 +227,10 @@ ul.sider-item li:hover {
   border: 1px solid #1792ab;
 }
 .page-item.disabled .page-link {
-  color: #b0bec5;
+  color: #20a8d8;
   pointer-events: none;
   background-color: #263238;
-  border-color: #ddd;
+  border-color: #263238;
 }
 .page-link {
   position: relative;
@@ -240,11 +240,11 @@ ul.sider-item li:hover {
   line-height: 1.25;
   color: #20a8d8;
   background-color: #263238;
-  border: 1px solid #ddd;
+  border: 1px solid #263238;
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 0px;
   height: 12px;
   }
    
@@ -264,3 +264,74 @@ ul.sider-item li:hover {
   ::-webkit-scrollbar-track-piece {
   background: #0c2745;
   }
+  table tr.active {
+    background-color: #31708f !important;
+}
+.card {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: #fff;
+   border: 0px solid #cfd8dc; 
+}
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 1px solid #1792ab;
+}
+.table{
+  margin-bottom: 0px;
+}
+.card{
+  color: white;
+}
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: #263238;
+  border-bottom: 1px solid #263238;
+}
+.btn-secondary {
+  color: #060505;
+  background-color: #F3F9F9;
+  border-color: #263238;
+ 
+}
+.modal-content{
+  background-color: #263238;
+  color: white;
+}
+// .form-group {
+//   margin-bottom: 0rem;
+// }
+.form-control{
+  background-color: #263238;
+  border-radius: 5px;
+}
+.close{
+  color: white;
+}
+.card div.card-block .form-group{
+  margin-bottom: 0rem;
+}
+.tab-h{
+ height:370px;overflow:auto;
+}
+.modal-header {
+ 
+  border-bottom: 1px solid #1985ac;
+}
+.modal-footer {
+
+  border-top: 1px solid #1985ac;
+}
+.g {
+  background-image: -webkit-gradient(linear, left,  right, color-stop(0.33, rgb(14,173,173)), color-stop(0.67, rgb(0,255,255)));
+  padding: 1px;
+  }
+  
+  .g > div { background: #fff; }

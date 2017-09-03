@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> 唯一编码
+                <!-- <span class="card-btn-group">
+                  <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+                  <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+                  <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
+                  <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
+                  <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show();currentStep=1;"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
+                  <button class="btn btn-sm btn-secondary" type="button" (click)="exportModal.show()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
+                  </span> -->
+            </div>
+          
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-block">
+                <div class="tab-h">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <!-- <th><input #checkedAll type="checkbox" name="customerbox" (change)="selectAll(checkedAll.checked)"></th>
+                            <th *ngFor="let th of theads">{{ th }}</th> -->
+                            <th>
+                                编码名
+                            </th>
+                            <th>
+                                编码显示
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr *ngFor="let customer of CodeList" (click)="customer.checked = !customer.checked" [class.active]="customer.checked"> -->
+                        <tr>
+                            <td>完整编码示例</td>
+                            <td>{{CodeList.example}}</td>
+                        </tr>
+                        <tr>
+                            <td>类型编码</td>
+                            <td>{{CodeList.type}}</td>
+                        </tr>
+                        <tr>
+                            <td>行政区域编码</td>
+                            <td>{{CodeList.administrativeRegion}}</td>
+                        </tr>
+                        <tr>
+                            <td>公司编码</td>
+                            <td>{{CodeList.company}}</td>
+                        </tr>
+                        <tr>
+                            <td>CRC16校验码</td>
+                            <td>{{CodeList.crc16}}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                <!-- <pagination-comp [totalItems]="totalItems" [currentPage]="searchParams.pageNumber" [itemsPerPage]="searchParams.pageSize"
+                    (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp> -->
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="alert" [class.hide]="alerts<1">
+    <alert *ngFor="let alert of alerts" [dismissOnTimeout]="alert.timeout" [type]="alert.type" (onClosed)="alertShift()"><span [innerHtml]="alert.msg"></span></alert>
+</div>

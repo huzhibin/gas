@@ -1,14 +1,16 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
+// import { DepartList } from "../data/depart";
 
-import { DeliverCarList } from '../data/deliver-car';
+import { DeliverService } from './deliveryman.service';
+// import { DeliverList } from '../data/deliver'
 
 @Component({
-    templateUrl: 'car.component.html',
+    templateUrl: 'deliveryman.component.html',
     styleUrls: [],
-    providers: []
+    providers: [DeliverService]
 })
-export class CarComponent implements OnInit {
+export class DeliverymanComponent implements OnInit {
     totalItems: number;//总记录数
   
 
@@ -16,28 +18,21 @@ export class CarComponent implements OnInit {
 
     operand: any;//操作对象
     searchParams: {
-        task_id:string,
-        timestamp:string,
+        id:number,
         pageNumber:number,
-       pageSize:number,
+        pageSize:number,
     };//查询参数
     theads: Array<string>;//表头字段
-    deliverCarList: Array<{
+    DeliverList: Array<{
         id: number,
-        // deliverCarCode:string,
-        timestamp:string,
-        latitud: string,
-        longitude:string,
+        company: string,
+        name: string,
+        phone: string,
+        address: string,
+        station: string,
+        photoAddress:string,
         checked?: Boolean
     }>;//用户列表
-
-addForm:{
-    task_id:string,
-    timestamp:string,
-    latitud: string,
-
-}
-   
     // // TODO:在提示消失的时候，将它从数组中清除
     alerts: any = [
     ];
@@ -46,13 +41,13 @@ addForm:{
         this.alerts.shift();
     }
 
-    // // constructor(private userService: UserService) {
+    constructor(private DeliverService: DeliverService) {
 
-    // // }
+    }
 
     changePage(event) {
         this.searchParams.pageSize = event.itemsPerPage;
-        this.searchParams.pageNumber = event.page;
+        this.searchParams.pageNumber= event.page;
         this.getList();
     }
 
@@ -63,8 +58,8 @@ addForm:{
     }
 
     selectAll(checkedAll) {
-        for (let index = 0; index < this.deliverCarList.length; index++) {
-            this.deliverCarList[index].checked = checkedAll ? true : false;
+        for (let index = 0; index < this.DeliverList.length; index++) {
+            this.DeliverList[index].checked = checkedAll ? true : false;
         }
     }
 
@@ -72,6 +67,7 @@ addForm:{
         console.log('Page changed to: ' + event.page);
         console.log('number items per page: ' + event.itemsPerPage);
     }
+
     import(modal) {
         this.alerts.push({
             type: 'success',
@@ -82,11 +78,6 @@ addForm:{
         this.getList();
     }
     
-    add( modal) {
-        this.getList();
-    }
-
-
     export(modal) {
         this.alerts.push({
             type: 'success',
@@ -97,6 +88,7 @@ addForm:{
         this.getList();
     }
    
+    
 
     refresh() {
         this.getList();
@@ -105,28 +97,25 @@ addForm:{
     search() {
         this.getList();
     }
-
-    getList(deliverCarId?: string, gpsId?: string, deliverId?: string, pageSize?: number, currentPage?: number) {
+    getList() {
         let params = {
-            
-            pageSize:this.searchParams.pageSize,
+           id:this.searchParams.id,
+            pageSize: this.searchParams.pageSize,
             pageNumber: this.searchParams.pageNumber
         };
         console.log('查询后台--getList:' + JSON.stringify(params));
-        // this.userService.getCustomerList(params).then(data => {
-        //   this.CustomerList = data.data.list;
-        //   this.totalItems = data.data.totalItems
-        // });
+        this.DeliverService.getDeliverList(params).then(data => {
+          this.DeliverList = data.data.list;
+          this.totalItems = data.data.total;
+        });
 
-        this.deliverCarList = DeliverCarList.slice(params.pageSize * (params.pageNumber - 1), params.pageSize * params.pageNumber);
-        this.totalItems = DeliverCarList.length;
     }
 
     // //获取选中的第一个对象
     getChecked() {
-        for (let i = 0; i < this.deliverCarList.length; i++) {
-            if (this.deliverCarList[i].checked) {
-                return this.deliverCarList[i];
+        for (let i = 0; i < this.DeliverList.length; i++) {
+            if (this.DeliverList[i].checked) {
+                return this.DeliverList[i];
             }
         }
         return null;
@@ -146,41 +135,37 @@ addForm:{
         }
     }
 
-    intiSearchParams(){
+    initSearchParams(){
         this.searchParams={
-            task_id:'',
-            timestamp:'',
+            id:null,
             pageNumber:1,
             pageSize:10,
         }
     }
-
-    initAddForm(){
-        this.addForm={
-            task_id:'',
-            timestamp:'',
-            latitud:'',
-        }
-    }
+   
     ngOnInit(): void {
         this.totalItems = 0;
+        
 
+       
         this.operand = {};
 
         this.theads = [
-            '配送车辆唯一编码',
-            '归属公司编号',
-            '配送车辆牌照',
-            '责任人电话',
-            // '责任人编号'	,
-            // '归属站点编号',	    
+            '配送员编号',
+            '电话',
+            '配送员姓名',
+            '归属公司编号	',
+            '归属站点编号	',
+            '住址',
+            '照片存放地址	',
+            
         ];
 
-        this.intiSearchParams();
+        this.initSearchParams();
+     
 
         this.getList();
     }
 }
-
 
 

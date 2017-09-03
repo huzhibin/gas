@@ -13,6 +13,7 @@ import { UserComponent } from './user/user.component';
 import { PowerComponent } from './power/power.component';
 import { ResourceComponent } from './resource/resource.component';
 import { DepartmentComponent } from './department/department.component';
+import { LogComponent } from './log/log.component';
 
 import { UserService } from "./user/user.service";
 import { PowerService } from "./power/power.service";
@@ -34,7 +35,8 @@ import { RoleService } from "./role/role.service";
     UserComponent,
     PowerComponent,
     DepartmentComponent,
-    ResourceComponent
+    ResourceComponent,
+    LogComponent
   ],
   providers: [
     UserService,

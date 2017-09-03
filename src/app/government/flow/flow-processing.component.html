@@ -213,10 +213,10 @@
 
           <span class="card-btn-group" style="float:left;margin:5px;">
               <button class="btn btn-sm btn-primary" [class.btn-outline-primary]="!history.selectStart" type="button" (click)="history.selectStart=true;history.selectParticipate=false;history.selectFinish=false;getMyStartProcess();">&nbsp; 我发起的流程</button>
-              <button class="btn btn-sm btn-primary" [class.btn-outline-primary]="!history.selectParticipate" type="button" (click)="history.selectStart=false;history.selectParticipate=true;history.selectFinish=false;getMyParticipateProcess();">&nbsp; 新增</button>
-              <button class="btn btn-sm btn-primary" [class.btn-outline-primary]="!history.selectFinish" type="button" (click)="history.selectStart=false;history.selectParticipate=false;history.selectFinish=true;getMyFinishProcess();">&nbsp; 新增</button>
+              <button class="btn btn-sm btn-primary" [class.btn-outline-primary]="!history.selectParticipate" type="button" (click)="history.selectStart=false;history.selectParticipate=true;history.selectFinish=false;getMyParticipateProcess();">&nbsp; 我参与的流程</button>
+              <button class="btn btn-sm btn-primary" [class.btn-outline-primary]="!history.selectFinish" type="button" (click)="history.selectStart=false;history.selectParticipate=false;history.selectFinish=true;getMyFinishProcess();">&nbsp; 已结束的流程</button>
           </span>
-
+          <img [src]="history.imageSrc" alt="">
           <table class="table table-bordered table-sm" *ngIf="history.selectStart">
             <thead>
               <tr>

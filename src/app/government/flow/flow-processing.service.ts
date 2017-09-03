@@ -82,7 +82,7 @@ export class FlowProcessingService {
   }
   getProcessStateDiagram(params: any): Promise<any> {
     return this.httpService
-      .withCredentialsPostRequest(API.getProcessStateDiagram, params)
+      .withCredentialsPost(API.getProcessStateDiagram, params)
       .catch(this.handleError);
   }
 

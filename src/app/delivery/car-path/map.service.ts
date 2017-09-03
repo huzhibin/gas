@@ -25,6 +25,18 @@ export class MapService {
     .catch(this.handleError);
   }
 
+  getDeliveryManPosition(params: any): Promise<any> {
+    return this.httpService
+      .withCredentialsPostRequest(API.getDelieveryManPosition, params)
+      .catch(this.handleError);
+  }
+
+  getDeliveryManPath(params: any): Promise<any> {
+    return this.httpService
+    .withCredentialsPostRequest(API.getDelieveryManPath, params)
+    .catch(this.handleError);
+  }
+
   getGasPosition(params: any): Promise<any> {
     return this.httpService
       .withCredentialsPostRequest(API.getCarPosition, params)

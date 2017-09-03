@@ -66,10 +66,10 @@ export const routes: Routes = [
     path: '',
     loadChildren: './passport/passport.module#PassportModule'
   },
-  // {
-  //   path: '**',
-  //   redirectTo: 'login'
-  // }
+  {
+    path: '**',
+    redirectTo: 'login'
+  }
 ];
 
 @NgModule({

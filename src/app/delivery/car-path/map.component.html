@@ -1,8 +1,8 @@
 <div class="button-group">
 
-  <label for="power" class="car">起始时间</label>
+  <label for="power" class="delivery-man">起始时间</label>
   <input type="text" [(ngModel)]="searchParams.beginTime" name="beginTime" placeholder="yyyy-MM-dd hh:mm:ss"/>
-  <label for="power" class="car">结束时间</label>
+  <label for="power" class="delivery-man">结束时间</label>
   <input type="text" [(ngModel)]="searchParams.endTime" name="endTime" placeholder="yyyy-MM-dd hh:mm:ss"/>
   <!-- <label for="power" class="car">车辆id</label>
   <input type="text" [(ngModel)]="searchParams.carID" name="carID" /> -->
@@ -24,6 +24,9 @@
   </label>
   <label for="power" class="car" (click)="carVisible=!carVisible;carToggle();">
     <input type="checkbox" [(ngModel)]="carVisible" name="car" checked="true" />车辆
+  </label>
+  <label for="power" class="delivery-man" (click)="deliveryManVisible=!deliveryManVisible;deliveryManToggle();">
+    <input type="checkbox" [(ngModel)]="deliveryManVisible" name="deliveryMan" checked="true" />配送员
   </label>
 
 </div>

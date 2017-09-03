@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FindPwdComponent } from './find-pwd/find-pwd.component';
 
+import { PassportService } from "./passport.service";
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +22,7 @@ import { FindPwdComponent } from './find-pwd/find-pwd.component';
     FindPwdComponent
   ],
   providers: [
-
+    PassportService
   ]
 })
 export class PassportModule { }

@@ -7,6 +7,7 @@ import { UserComponent } from './user/user.component';
 import { PowerComponent } from './power/power.component';
 import { ResourceComponent } from './resource/resource.component';
 import { DepartmentComponent } from './department/department.component';
+import { LogComponent } from './log/log.component';
 
 const routes: Routes = [
   {
@@ -44,13 +45,13 @@ const routes: Routes = [
           title: '组织架构'
         },
       },
-      // {
-      //   path: 'log',
-      //   component: DeliverymanComponent,
-      //   data: {
-      //     title: '系统日志'
-      //   },
-      // }
+      {
+        path: 'log',
+        component: LogComponent,
+        data: {
+          title: '系统日志'
+        },
+      }
     ]
   }
 ];

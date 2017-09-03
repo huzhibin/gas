@@ -16,7 +16,8 @@ import { StandardComponent } from './standard.component';
 // import { DeliverymanComponent } from './deliveryman/deliveryman.component';
 // import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 // import { CarComponent } from './car/car.component';
-// import { GasWorksComponent } from './gas-works/gas-works.component';
+import { VideoComponent } from './video/video.component';
+import { CodeComponent } from './company-code/code.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,9 @@ import { StandardComponent } from './standard.component';
     GasCommonModule
   ],
   declarations: [
-    StandardComponent
+    StandardComponent,
+    VideoComponent,
+    CodeComponent
   ]
 })
 export class StandardModule { }

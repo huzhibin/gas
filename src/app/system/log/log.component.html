@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <!-- <div class="card-header">
+        <i class="fa fa-align-justify"></i> 部门管理
+        <span class="card-btn-group">
+          <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+          <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+          <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
+          <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
+          <button class="btn btn-sm btn-secondary" type="button" (click)="export()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
+        </span>
+
+      </div> -->
+      <div class="card-block">
+        <div class="form-group row search-table" style="margin: 5px;">
+          <label class=" form-control-label" for="text-input">类型</label>
+          <div class="">
+            <select name="searchType" [(ngModel)]="searchParams.searchType" class="form-control form-control-sm">
+                <option *ngFor="let searchType of searchTypeList" [value]="searchType.type">{{ searchType.name }}</option>
+              </select>
+          </div>
+          <label class="form-control-label" for="text-input">关键字</label>
+          <div class="">
+            <input type="text" [(ngModel)]="searchParams.keyWord" name="keyWord" class="form-control form-control-sm" placeholder="请输入要查询的关键字">
+          </div>
+          <button class="btn btn-sm btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i>&nbsp; 查询</button>
+        </div>
+
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>用户名</th>
+              <th>方法名称</th>
+              <th>访问ip</th>
+              <th>请求时间</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let log of logList">
+              <td>{{ log.id }}</td>
+              <td>{{ log.user }}</td>
+              <td>{{ log.methodName }}</td>
+              <td>{{ log.requestIp }}</td>
+              <td>{{ log.accessTime | date: 'y-MM-dd HH:mm:ss' }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <pagination-comp [totalItems]="totalItems" [currentPage]="currentPage" [itemsPerPage]="pageSize" (changePage)="changePage($event)"
+          (changeSize)="changeSize($event)"></pagination-comp>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+<!--/.row-->
+
+<div class="alert" [class.hide]="alerts<1">
+  <alert *ngFor="let alert of alerts" [dismissOnTimeout]="alert.timeout" [type]="alert.type" (onClosed)="alertShift()"><span [innerHtml]="alert.msg"></span></alert>
+</div>

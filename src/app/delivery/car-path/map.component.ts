@@ -20,19 +20,36 @@ export class MapComponent implements OnInit {
     responsible: string,//责任人编号
     phoneResponsible: string//责任人电话
   }>;//车辆列表
+  deliveryManList: Array<{
+    id: number,
+    locationId: number,
+    name: string,
+    company:string,
+    station: string,
+    phone: string,
+    address: string,
+    photoAddress: string,
+    taskId:number,
+    timestamp: string,
+    latitude: number,
+    longitude: number
+  }>;//配送员
   gasVisible: boolean = true;//气瓶是否可见
   carVisible: boolean = true;//气瓶是否可见
+  deliveryManVisible: boolean = true;//气瓶是否可见
   searchParams: {
     beginTime: any,
     endTime: any,
-    carID: string;
+    carID?: string;
   }
 
   map: any;
   gasMarkers: any;//气瓶点标记
   carMarkers: any;//车辆点标记
+  deliveryManMarkers: any;//配送员点标记
   gasCluster: any;//气瓶点聚合
   carCluster: any;//车辆点聚合
+  deliveryManCluster: any;//配送员点聚合
   infoWindow: any;//消息窗体
   line: any;//路径线
 
@@ -56,6 +73,16 @@ export class MapComponent implements OnInit {
       this.infoWindow.close();
     } else {
       this.carCluster.setMap(this.map);
+    }
+  }
+  //配送员显隐切换
+  deliveryManToggle() {
+    if (!this.deliveryManVisible) {
+      this.deliveryManCluster.setMap(null);
+      this.setLine(null);
+      this.infoWindow.close();
+    } else {
+      this.deliveryManCluster.setMap(this.map);
     }
   }
 
@@ -99,6 +126,23 @@ export class MapComponent implements OnInit {
     //   this.setLine(null, e.target.getPosition());
     // }
   }
+  deliveryManMarkerClick = (e) => {
+    let extData = e.target.getExtData();
+    this.infoWindow.setContent(`
+      id：${extData.id}<br>
+      配送员姓名:${extData.name}<br>
+      电话:${extData.phone}<br>
+      归属公司编号:${extData.company}<br>
+      归属站点编号:${extData.station}<br>
+      任务编号:${extData.taskId}<br>
+      地址:${extData.address}
+      `);
+    this.infoWindow.open(this.map, e.target.getPosition());
+    this.getDeliveryManPath(extData.id);
+    // if (e.target) {
+    //   this.setLine(null, e.target.getPosition());
+    // }
+  }
   //设置车辆点标记
   setCarMarkers() {
     for (let index = 0; index < this.carList.length; index++) {
@@ -113,6 +157,22 @@ export class MapComponent implements OnInit {
           extData: this.carList[index]
         }));
       this.carMarkers[index].on('click', this.carMarkerClick);
+    }
+  }
+  //设置配送员点标记
+  setDeliveryManMarkers() {
+    for (let index = 0; index < this.deliveryManList.length; index++) {
+      this.deliveryManMarkers.push(
+        new this.AMap.Marker({
+          map: this.map,
+          position: [this.deliveryManList[index].longitude, this.deliveryManList[index].latitude],
+          icon: "/assets/img/delivery-man.png",
+          offset: new this.AMap.Pixel(-16, -16),
+          autoRotation: true,
+          // animation: 'AMAP_ANIMATION_BOUNCE',
+          extData: this.deliveryManList[index]
+        }));
+      this.deliveryManMarkers[index].on('click', this.deliveryManMarkerClick);
     }
   }
   //设置气瓶点标记
@@ -134,7 +194,7 @@ export class MapComponent implements OnInit {
   //获取气瓶位置
   getGasPosition() {
 
-    for (let index = 0; index < 100; index++) {
+    for (let index = 0; index < 50; index++) {
       this.gasList.push(
         {
           position: [120.4 + 0.4 * Math.random(), 27.8 + 0.4 * Math.random()]
@@ -175,11 +235,46 @@ export class MapComponent implements OnInit {
       }
     })
   }
+  //获取配送员位置
+  getDeliveryManPosition() {
+    this.mapService.getDeliveryManPosition({
+      id: '',
+      // beginTime: this.searchParams.beginTime,
+      // endTime: this.searchParams.endTime
+    }).then(data => {
+      if (data.status == 0) {
+        console.dir(data);
+        this.deliveryManList = data.data;
+        this.setDeliveryManMarkers();
+        this.deliveryManCluster.setMarkers(this.deliveryManMarkers);
+      } else {
+
+      }
+    })
+  }
 
   //获取车辆路径
   getCarPath(id) {
     this.mapService.getCarPath({
       deliverCarId: id || '',
+      beginTime: this.searchParams.beginTime,
+      endTime: this.searchParams.endTime
+    }).then(data => {
+      if (data.status == 0) {
+        let temp = new Array();
+        for (let index = 0; index < data.data.length; index++) {
+          temp.push([data.data[index].longitude, data.data[index].latitude]);
+        }
+        this.setLine(temp);
+      } else {
+
+      }
+    })
+  }
+  //获取配送员路径
+  getDeliveryManPath(id) {
+    this.mapService.getDeliveryManPath({
+      deliverId: id || '',
       beginTime: this.searchParams.beginTime,
       endTime: this.searchParams.endTime
     }).then(data => {
@@ -240,8 +335,10 @@ export class MapComponent implements OnInit {
     });
     this.gasList = new Array();
     this.carList = new Array();
+    this.deliveryManList = new Array();
     this.gasMarkers = new Array();
     this.carMarkers = new Array();
+    this.deliveryManMarkers = new Array();
     this.infoWindow = new this.AMap.InfoWindow();
     this.line = new this.AMap.Polyline();
 
@@ -402,10 +499,34 @@ export class MapComponent implements OnInit {
             offset: new self.AMap.Pixel(-32, -32)
           }]
         });
+        /**
+         * 配送员点聚合
+         */
+        self.deliveryManCluster = new self.AMap.MarkerClusterer(self.map, self.deliveryManMarkers, {
+          gridSize: 20, //聚合计算时网格的像素大小，默认60
+          minClusterSize: 10, //聚合的最小数量。默认值为2，即小于2个点则不能成为一个聚合
+          maxZoom: 18,  //最大的聚合级别，大于该级别就不进行相应的聚合。默认值为18，即小于18级的级别均进行聚合，18及以上级别不进行聚合
+          averageCenter: false,//聚合点的图标位置是否是所有聚合内点的中心点。默认为否，即聚合点的图标位置位于聚合内的第一个点处
+          zoomOnClick: true, //点击聚合点时，是否散开，默认值为：true
+          styles: [{
+            url: "/assets/img/delivery-man-clusterer-32.png",
+            size: new self.AMap.Size(32, 32),
+            offset: new self.AMap.Pixel(-16, -16)
+          }, {
+            url: "/assets/img/delivery-man-clusterer-48.png",
+            size: new self.AMap.Size(48, 48),
+            offset: new self.AMap.Pixel(-24, -24)
+          }, {
+            url: "/assets/img/delivery-man-clusterer-64.png",
+            size: new self.AMap.Size(64, 64),
+            offset: new self.AMap.Pixel(-32, -32)
+          }]
+        });
       }
     );
 
     this.getCarPosition();
+    this.getDeliveryManPosition();
     this.getGasPosition();
     // map.setFitView();
   }

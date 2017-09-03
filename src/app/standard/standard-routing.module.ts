@@ -9,7 +9,9 @@ import { StandardComponent } from './standard.component';
 // import { DeliverymanComponent } from './deliveryman/deliveryman.component';
 // import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 // import { CarComponent } from './car/car.component';
-// import { GasWorksComponent } from './gas-works/gas-works.component';
+import { VideoComponent } from './video/video.component';
+import { CodeComponent } from './company-code/code.component';
+
 const routes: Routes = [
   // {
   //   path: '',
@@ -23,13 +25,13 @@ const routes: Routes = [
       title: '数据标准规范'
     },
     children: [
-      // {
-      //   path: 'order',
-      //   component: OrderComponent,
-      //   data: {
-      //     title: '订单管理'
-      //   },
-      // },
+      {
+        path: 'company-code',
+        component: CodeComponent,
+        data: {
+          title: '企业编码'
+        },
+      },
       // {
       //   path: 'map',
       //   component: MapComponent,
@@ -65,13 +67,13 @@ const routes: Routes = [
       //     title: '客户管理'
       //   },
       // },
-      // {
-      //   path: 'car',
-      //   component: CarComponent,
-      //   data: {
-      //     title: '车辆管理'
-      //   },
-      // },
+      {
+        path: 'video',
+        component: VideoComponent,
+        data: {
+          title: '车辆管理'
+        },
+      },
      
     ]
   }

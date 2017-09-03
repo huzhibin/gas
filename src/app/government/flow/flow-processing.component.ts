@@ -53,7 +53,8 @@ export class FlowProcessingComponent implements OnInit {
     myFinishList: any,
     selectStart: boolean,
     selectParticipate: boolean,
-    selectFinish: boolean
+    selectFinish: boolean,
+    imageSrc: any
   }
 
   alerts: any = [
@@ -293,15 +294,16 @@ export class FlowProcessingComponent implements OnInit {
     this.flowProcessingService.getProcessStateDiagram({
       executionid: executionid
     }).then(data => {
-      if (data.status == 0) {
-        
-      } else {
-        this.alerts.push({
-          type: 'danger',
-          msg: data.msg,
-          timeout: 1000
-        });
-      }
+      console.dir(data);
+      this.history.imageSrc = data.text();
+      // if (data.status == 0) {
+      // } else {
+      //   this.alerts.push({
+      //     type: 'danger',
+      //     msg: data.msg,
+      //     timeout: 1000
+      //   });
+      // }
     })
   }
   getFinishProcessDetail(processInstanceid) {
@@ -370,7 +372,8 @@ export class FlowProcessingComponent implements OnInit {
       myFinishList: [],
       selectStart: true,
       selectParticipate: false,
-      selectFinish: false
+      selectFinish: false,
+      imageSrc: ''
     }
     this.getStartProcessList();
     this.getPlanList();

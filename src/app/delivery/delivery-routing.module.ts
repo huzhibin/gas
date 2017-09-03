@@ -6,7 +6,8 @@ import { DeliveryComponent } from './delivery.component';
 import { MapComponent } from './car-path/map.component';
 import { OrderComponent } from './order/order.component';
 // import { CustomerComponent } from './customer/customer.component';
-// import { DeliverymanComponent } from './deliveryman/deliveryman.component';
+import { StoreCylinderComponent } from './store-cylinder/store-cylinder.component';
+import { DeliverymanComponent } from './deliveryman/deliveryman.component';
 
 const routes: Routes = [
   // {
@@ -35,21 +36,21 @@ const routes: Routes = [
           title: '配送轨迹'
         },
       },
-      // {
-      //   path: 'gas-works',
-      //   component: GasWorksComponent,
-      //   data: {
-      //     title: '气站管理'
-      //   },
-      // },
+      {
+        path: 'store-cylinder',
+        component: StoreCylinderComponent,
+        data: {
+          title: '气站管理'
+        },
+      },
      
-      // {
-      //   path: 'diliveryman',
-      //   component: DeliveryComponent,
-      //   data: {
-      //     title: '配送员管理'
-      //   },
-      // },
+      {
+        path: 'deliveryman',
+        component: DeliverymanComponent,
+        data: {
+          title: '人员管理'
+        },
+      },
      
      
     ]

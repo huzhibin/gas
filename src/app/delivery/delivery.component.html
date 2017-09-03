@@ -4,16 +4,16 @@
       <div class="col-md-12 column" style="border:0px solid #1792ab;width:100%;height:600px;margin:0.5rem;">
         <ul class="sider-item">
           <li>
-            <a href="javascript:;" [routerLink]="['/delivery/order']">订单信息</a>
+            <a href="javascript:;" routerLinkActive="active" [routerLink]="['/delivery/order']">订单信息</a>
           </li>
           <li>
-              <a href="javascript:;" [routerLink]="['/delivery/car-path']">配送轨迹</a>
+              <a href="javascript:;" routerLinkActive="active" [routerLink]="['/delivery/car-path']">配送轨迹</a>
           </li>
           <li>
-            <a href="javascript:;" [routerLink]="['/delivery']">站点信息</a>
+            <a href="javascript:;" routerLinkActive="active" [routerLink]="['/delivery/store-cylinder']">站点信息</a>
           </li>
           <li>
-            <a href="javascript:;" [routerLink]="['/delivery']">员工信息</a>
+            <a href="javascript:;" routerLinkActive="active" [routerLink]="['/delivery/deliveryman']">员工信息</a>
           </li>
         </ul>
       </div>
@@ -21,7 +21,7 @@
   </div>
   <div class="col-md-10 column">
     <div class="row">
-      <div class="col-md-12 column" style="width:100%;height:600px; margin:0.5rem;overflow-y: auto;">
+      <div class="col-md-12 column" style="border:0px solid #1792ab;width:100%;height:600px; margin:0.5rem;overflow-y: scroll;">
         <router-outlet></router-outlet>
       </div>
     </div>

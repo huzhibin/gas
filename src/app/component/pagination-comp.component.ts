@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: "pagination-comp",
-  template: `<div class="form-group row">
+  template: `<div class=" row">
               <label class="col-md-3 form-control-label" for="select">              
                 共{{ totalItems }}行,每页
                 <select #pageSize [ngModel]="itemsPerPage" (ngModelChange)="sizeChanged(pageSize.value)" class="form-control form-control-sm pagination">

@@ -201,7 +201,7 @@ export class CustomerComponent implements OnInit {
             gas: '',
             onSite: '',
             pageNumber: 1,//当前显示页
-            pageSize: 10,
+            pageSize: 20,
         }
     }
     initExportParams(){

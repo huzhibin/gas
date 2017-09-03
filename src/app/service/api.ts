@@ -72,6 +72,9 @@ export const API = {
   'getFillingRecordUrl': tiejun + 'basicInformation/queryFillingRecord.do',//获取灌装记录明细列表
   'getGasTransportUrl': tiejun + 'basicInformation/queryGasStationTransportCylinderSendAndReceive.do',//获取气站运输气瓶列表
   'getGasSaleUrl': tiejun + 'basicInformation/queryGasStationDirectSaleCylinderSendAndReceive.do',//获取气站直销气瓶列表
+
+  'getCompanyUrl': tiejun + 'basicInformation/queryCompany.do', //获取公司列表信息
+  'getDeliverUrl': nina + 'positionManagement/track/searchInformationById.do', //获取公司列表信息
   /**
   * 导出列表
   */
@@ -90,4 +93,11 @@ export const API = {
 
   'getGasPosition': nina + '',//气瓶位置
 
+  /**
+  * 编码原则
+  */
+
+  'getCompanyCodingUrl': guotao + 'codingStandard/getCompanyCodingStandard.do',//公司编码
+  'getCylinderCodingUrl': guotao + 'codingStandard/getCylinderCodingStandard.do',//气瓶编码
+  'getStationCodingUrl': guotao + 'codingStandard/getStationCodingStandard.do',//气站编码
 }

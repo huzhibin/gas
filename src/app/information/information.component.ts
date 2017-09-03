@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class InformationComponent implements OnInit {
 
-  ngOnInit(): void {
+   
 
+  ngOnInit(): void {
+    
   }
 }

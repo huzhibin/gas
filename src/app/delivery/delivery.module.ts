@@ -12,7 +12,8 @@ import { DeliveryRoutingModule } from './delivery-routing.module';
 import { DeliveryComponent} from './delivery.component';
 import { OrderComponent } from './order/order.component';
 import { MapComponent } from './car-path/map.component';
-
+import { StoreCylinderComponent} from './store-cylinder/store-cylinder.component';
+import { DeliverymanComponent } from './deliveryman/deliveryman.component';
 
 @NgModule({
   imports: [
@@ -31,13 +32,8 @@ import { MapComponent } from './car-path/map.component';
     DeliveryComponent,
     OrderComponent,
     MapComponent,
-//     OrderComponent,
-//     MapComponent,
-//     CustomerComponent ,
-//     DeliverymanComponent,
-//     GasCylinderComponent,
-//     CarComponent ,
-//     GasWorksComponent
+    StoreCylinderComponent,
+    DeliverymanComponent
   ]
 })
 export class DeliveryModule { }

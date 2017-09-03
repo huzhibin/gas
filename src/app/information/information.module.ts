@@ -13,10 +13,13 @@ import { OrderComponent } from './order/order.component';
 import { MapComponent } from './map/map.component';
 
 import { CustomerComponent } from './customer/customer.component';
-import { DeliverymanComponent } from './deliveryman/deliveryman.component';
+
 import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 import { CarComponent } from './car/car.component';
 import { GasWorksComponent } from './gas-works/gas-works.component';
+import { CompanyComponent } from './company/company.component';
+
+import { CodeComponent} from './Code/code.component';
 
 @NgModule({
   imports: [
@@ -35,10 +38,11 @@ import { GasWorksComponent } from './gas-works/gas-works.component';
     OrderComponent,
     MapComponent,
     CustomerComponent ,
-    DeliverymanComponent,
+    CodeComponent,
     GasCylinderComponent,
     CarComponent ,
-    GasWorksComponent
+    GasWorksComponent,
+    CompanyComponent
   ]
 })
 export class InformationModule { }

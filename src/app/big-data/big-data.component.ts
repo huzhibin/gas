@@ -47,42 +47,54 @@ export class BigDataComponent implements OnInit {
   ];
 
   alarmData: any = [
-    { name: '鹿城区', value: 5 },
-    { name: '龙湾区', value: 4 },
-    { name: '瓯海区', value: 1 },
-    { name: '洞头区', value: 2 },
-    { name: '永嘉县', value: 3 },
-    { name: '平阳县', value: 2 },
-    { name: '文成县', value: 1 },
-    { name: '苍南县', value: 2 },
-    { name: '泰顺县', value: 4 },
-    { name: '瑞安市', value: 5 },
-    { name: '乐清市', value: 5 },
+    // { name: '鹿城区', value: 4 },
+    // { name: '龙湾区', value: 4 },
+    // { name: '瓯海区', value: 1 },
+    // { name: '洞头区', value: 2 },
+    // { name: '永嘉县', value: 3 },
+    // { name: '平阳县', value: 2 },
+    // { name: '文成县', value: 1 },
+    // { name: '苍南县', value: 2 },
+    // { name: '泰顺县', value: 4 },
+    // { name: '瑞安市', value: 2 },
+    // { name: '乐清市', value: 2 },
   ];
 
   chartsResize() {
     this.myChart.resize();
   }
+  document:any = document;
+  //点击全屏
   fullScreen() {
-    var docElm:any = document.querySelector(".big-data");
-    if (docElm.requestFullscreen) {
-      docElm.requestFullscreen();
+    if (!this.isFullScreen) {
+      var exitMethod: any  = document.exitFullscreen || //W3C
+        this.document.mozCancelFullScreen || //Chrome等
+        document.webkitExitFullscreen || //FireFox
+        document.webkitExitFullscreen; //IE11
+      if (exitMethod) {
+        exitMethod.call(document);
+      }
+    } else {
+      var el: any = document.querySelector(".big-data");
+      var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;//定义不同浏览器的全屏API
+      //执行全屏
+      if (typeof rfs != "undefined" && rfs) {
+        rfs.call(el);
+      }
     }
-    //FireFox  
-    else if (typeof docElm.mozRequestFullScreen==="function") {
-      docElm.mozRequestFullScreen();
-    }
-    //Chrome等  
-    else if (docElm.webkitRequestFullScreen) {
-      docElm.webkitRequestFullScreen();
-    }
-    //IE11
-    
-    // else if (docElm.msRequestFullscreen) {
-    //   docElm.msRequestFullscreen();
-    // }
   }
-  
+  //监听全屏变化
+  listenFullScreen() {
+    document.addEventListener("webkitfullscreenchange", function () {//
+      if (document.webkitIsFullScreen) {
+        //全屏后要执行的代码
+      } else {
+        //退出全屏后执行的代码
+      }
+    }, false);
+  }
+  isFullScreen: boolean = true;
+
   convertData(data) {
     var res = [];
     for (var i = 0; i < data.length; i++) {
@@ -96,7 +108,7 @@ export class BigDataComponent implements OnInit {
     }
     return res;
   };
-
+  
   constructor(private bigDataService: BigDataService) { };
 
   areaClick(area) {
@@ -174,6 +186,7 @@ export class BigDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     let echarts = window['echarts'];
     this.myChart = echarts.init(document.getElementById('main'));
 
@@ -190,7 +203,7 @@ export class BigDataComponent implements OnInit {
       },
       visualMap: {
         min: 0,
-        max: 5,
+        max: 4,
         calculable: true,
         inRange: {
           color: ['#f00', '#660', '#0f0']
@@ -198,7 +211,7 @@ export class BigDataComponent implements OnInit {
         textStyle: {
           color: '#fff'
         },
-        text: ['较好', '较差']
+        text: ['等级', '等级']
       },
       tooltip: {
         trigger: 'item'
@@ -304,8 +317,5 @@ export class BigDataComponent implements OnInit {
     // }
     // myChart.setOption(option);
     // }
-
-
-
   }
 }

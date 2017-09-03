@@ -8,6 +8,7 @@ html,body{
     position:relative;
     left:70%;
     top:20px;
+    z-index: 5;
 }
 /*#main{
 position: absolute;

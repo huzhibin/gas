@@ -1,0 +1,33 @@
+<div class="button-group">
+
+  <label for="power" class="car">起始时间</label>
+  <input type="text" [(ngModel)]="searchParams.beginTime" name="beginTime" placeholder="yyyy-MM-dd hh:mm:ss"/>
+  <label for="power" class="car">结束时间</label>
+  <input type="text" [(ngModel)]="searchParams.endTime" name="endTime" placeholder="yyyy-MM-dd hh:mm:ss"/>
+  <!-- <label for="power" class="car">车辆id</label>
+  <input type="text" [(ngModel)]="searchParams.carID" name="carID" /> -->
+  <!-- <label for="" (click)="search()" class="car" style="background-color:darkgreen;margin-right:2rem;">查询</label> -->
+  
+  <!-- <label for="power" class="car">起始时间{{ searchParams.beginTime }}</label>
+  <input type="datetime-local" [(ngModel)]="searchParams.beginTime" name="beginTime"/>
+  <label for="power" class="car">结束时间{{ searchParams.endTime }}</label>
+  <input type="datetime-local" [(ngModel)]="searchParams.endTime" name="endTime" />
+  <label for="power" class="car">车辆id{{ searchParams.carID }}</label>
+  <input type="text" [(ngModel)]="searchParams.carID" name="carID" />
+  <label for="" class="car" style="background-color:chartreuse;margin-right:2rem;">查询</label> -->
+
+  <!-- <input (focus)="beginTimeVisiable=true;" (blur)="beginTimeVisiable=false;" type="text" name="" id="">
+  <datepicker style="display:absolute;" [style.display]="beginTimeVisiable?'initial':'none'" [(ngModel)]="dt" [minDate]="minDate" [showWeeks]="true" [dateDisabled]="dateDisabled"></datepicker> -->
+
+  <label for="power" class="gas-cylinder" (click)="gasVisible=!gasVisible;gasToggle();">
+    <input type="checkbox" [(ngModel)]="gasVisible" name="gas-cylinder" checked="true"/>气瓶
+  </label>
+  <label for="power" class="car" (click)="carVisible=!carVisible;carToggle();">
+    <input type="checkbox" [(ngModel)]="carVisible" name="car" checked="true" />车辆
+  </label>
+
+</div>
+<div class="animated fadeIn map-container">
+  <div id="container">
+  </div>
+</div>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: 'data-screen.component.html',
+  templateUrl: 'gas-cylinder.component.html',
   // styleUrls: ['data-screen.component.css']
 })
-export class DataScreenComponent implements OnInit {
+export class GasCylinderComponent implements OnInit {
   ngOnInit() { }
 }

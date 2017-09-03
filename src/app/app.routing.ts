@@ -17,12 +17,12 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
     path: 'big-data',
     component: BigDataComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: '',
@@ -40,18 +40,18 @@ export const routes: Routes = [
         path: 'delivery',
         loadChildren: './delivery/delivery.module#DeliveryModule'
       },
-      // {
-      //   path: 'standard',
-      //   loadChildren: './standard/standard.module#StandardModule'
-      // },
-      // {
-      //   path: 'flow',
-      //   loadChildren: './flow/flow.module#FlowModule'
-      // },
-      // {
-      //   path: 'report',
-      //   loadChildren: './report/report.module#ReportModule'
-      // },
+      {
+        path: 'standard',
+        loadChildren: './standard/standard.module#StandardModule'
+      },
+      {
+        path: 'government',
+        loadChildren: './government/government.module#GovernmentModule'
+      },
+      {
+        path: 'report',
+        loadChildren: './report/report.module#ReportModule'
+      },
       {
         path: 'system',
         loadChildren: './system/system.module#SystemModule'
@@ -66,10 +66,10 @@ export const routes: Routes = [
     path: '',
     loadChildren: './passport/passport.module#PassportModule'
   },
-  {
-    path: '**',
-    redirectTo: 'login'
-  }
+  // {
+  //   path: '**',
+  //   redirectTo: 'login'
+  // }
 ];
 
 @NgModule({

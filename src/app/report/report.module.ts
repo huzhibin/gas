@@ -4,7 +4,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { ReportRoutingModule } from './report-routing.module';
 import { ReportComponent } from './report.component';
-import { DataScreenComponent } from './data-screen/data-screen.component';
+import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
+import { AlarmComponent } from './alarm/alarm.component';
+import { DeliveryComponent } from './delivery/delivery.component';
 
 @NgModule({
   imports: [
@@ -14,7 +16,9 @@ import { DataScreenComponent } from './data-screen/data-screen.component';
   ],
   declarations: [
     ReportComponent,
-    DataScreenComponent
+    GasCylinderComponent,
+    AlarmComponent,
+    DeliveryComponent,
   ]
 })
 export class ReportModule { }

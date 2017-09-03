@@ -2,49 +2,53 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ReportComponent } from './report.component';
-import { DataScreenComponent } from './data-screen/data-screen.component';
+import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
+import { AlarmComponent } from './alarm/alarm.component';
+import { DeliveryComponent } from './delivery/delivery.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'data-screen',
-    pathMatch: 'full',
-  },
-  {
-    path: '',
     component: ReportComponent,
     data: {
-      title: '报表管理'
+      title: '统计查询'
     },
     children: [
       {
         path: 'gas-cylinder',
-        component: DataScreenComponent,
+        component: GasCylinderComponent,
         data: {
-          title: '气瓶报表'
+          title: '气瓶数据统计'
         },
       },
       {
-        path: 'diliveryman',
-        component: DataScreenComponent,
+        path: 'delivery',
+        component: DeliveryComponent,
         data: {
-          title: '配送员报表'
+          title: '配送数据统计'
         },
       },
       {
-        path: 'data-screen',
-        component: DataScreenComponent,
+        path: 'alarm',
+        component: AlarmComponent,
         data: {
-          title: '数据大屏'
+          title: '预警数据统计'
         },
       },
-      {
-        path: 'car',
-        component: DataScreenComponent,
-        data: {
-          title: '车辆报表'
-        },
-      }
+      // {
+      //   path: 'car',
+      //   component: DataScreenComponent,
+      //   data: {
+      //     title: '执法数据统计'
+      //   },
+      // },
+      // {
+      //   path: 'customer',
+      //   component: DataScreenComponent,
+      //   data: {
+      //     title: '用户数据统计'
+      //   },
+      // }
     ]
   }
 ];

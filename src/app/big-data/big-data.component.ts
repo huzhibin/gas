@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
 import { BigDataService } from "./big-data.service";
 @Component({
@@ -38,62 +38,68 @@ export class BigDataComponent implements OnInit {
   };
 
   colorList = [
-    "rgb(216,15,19)",
-    "rgb(182,51,19)",
-    "rgb(129,87,19)",
-    "rgb(48,132,19)",
-    "rgb(45,170,19)",
-    "rgb(133,133,133)",
+    'rgb(216,15,19)',
+    'rgb(182,51,19)',
+    'rgb(129,87,19)',
+    'rgb(48,132,19)',
+    'rgb(45,170,19)',
+    'rgb(133,133,133)',
   ];
 
   alarmData: any = [
-    // { name: '鹿城区', value: 4 },
-    // { name: '龙湾区', value: 4 },
-    // { name: '瓯海区', value: 1 },
-    // { name: '洞头区', value: 2 },
-    // { name: '永嘉县', value: 3 },
-    // { name: '平阳县', value: 2 },
-    // { name: '文成县', value: 1 },
-    // { name: '苍南县', value: 2 },
-    // { name: '泰顺县', value: 4 },
-    // { name: '瑞安市', value: 2 },
-    // { name: '乐清市', value: 2 },
+    { name: '鹿城区', value: 4 },
+    { name: '龙湾区', value: 4 },
+    { name: '瓯海区', value: 1 },
+    { name: '洞头区', value: 2 },
+    { name: '永嘉县', value: 3 },
+    { name: '平阳县', value: 2 },
+    { name: '文成县', value: 1 },
+    { name: '苍南县', value: 2 },
+    { name: '泰顺县', value: 4 },
+    { name: '瑞安市', value: 2 },
+    { name: '乐清市', value: 2 },
   ];
 
-  chartsResize() {
-    this.myChart.resize();
-  }
   document:any = document;
   //点击全屏
   fullScreen() {
-    if (!this.isFullScreen) {
-      var exitMethod: any  = document.exitFullscreen || //W3C
-        this.document.mozCancelFullScreen || //Chrome等
-        document.webkitExitFullscreen || //FireFox
-        document.webkitExitFullscreen; //IE11
-      if (exitMethod) {
-        exitMethod.call(document);
-      }
-    } else {
-      var el: any = document.querySelector(".big-data");
+    if (!this.isFullScreen) {//如果不是全屏就全屏显示
+      var el:any = document.querySelector(".big-data");
       var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;//定义不同浏览器的全屏API
-      //执行全屏
-      if (typeof rfs != "undefined" && rfs) {
+      if (typeof rfs != "undefined" && rfs) {//执行全屏
         rfs.call(el);
+        this.isFullScreen = true;
+      }
+    } else {//如果是全屏显示，就取消全屏显示
+      if (this.document.exitFullscreen) {
+        this.document.exitFullscreen();
+        this.isFullScreen = false;
+      } else if (this.document.msExitFullscreen) {
+        this.document.msExitFullscreen();
+        this.isFullScreen = false;
+      } else if (this.document.mozCancelFullScreen) {
+        this.document.mozCancelFullScreen();
+        this.isFullScreen = false;
+      } else if (this.document.oRequestFullscreen) {
+        this.document.oCancelFullScreen();
+        this.isFullScreen = false;
+      } else if (this.document.webkitExitFullscreen) {
+        this.document.webkitExitFullscreen();
+        this.isFullScreen = false;
       }
     }
   }
   //监听全屏变化
   listenFullScreen() {
-    document.addEventListener("webkitfullscreenchange", function () {//
-      if (document.webkitIsFullScreen) {
-        //全屏后要执行的代码
-      } else {
-        //退出全屏后执行的代码
+    document.addEventListener("keydown", function (e) {
+      if (e.keyCode === 122) {
+        e.preventDefault();  //阻止F11默认动作
+        this.fullScreen();
+        this.changeDetector.markForCheck();
       }
-    }, false);
+    }.bind(this),false)
   }
-  isFullScreen: boolean = true;
+  isFullScreen: boolean = false;
 
   convertData(data) {
     var res = [];
@@ -109,7 +115,7 @@ export class BigDataComponent implements OnInit {
     return res;
   };
   
-  constructor(private bigDataService: BigDataService) { };
+  constructor(private bigDataService: BigDataService, private changeDetector: ChangeDetectorRef) { };
 
   areaClick(area) {
     switch (area) {
@@ -150,7 +156,7 @@ export class BigDataComponent implements OnInit {
         break;
     }
     if (area == "总预览") {
-      this.option.geo.center = [120.702542, 28.004152];
+      this.option.geo.center = [120.702542, 27.804152];
       this.option.geo.zoom = 2;
       this.option.geo.scaleLimit.max = 2;
       this.option.geo.scaleLimit.min = 2;
@@ -175,18 +181,21 @@ export class BigDataComponent implements OnInit {
               break;
             }
           }
-          this.alarmData.push(item);
+          //暂时使用死数据展示，
+          // this.alarmData.push(item);
         }
         console.dir(this);
         this.myChart.setOption(this.option);
       } else {
         alert();
       }
+      this.myChart.hideLoading();
+      this.myChart.setOption(this.option);
     })
   }
 
   ngOnInit(): void {
-    
+    this.listenFullScreen();
     let echarts = window['echarts'];
     this.myChart = echarts.init(document.getElementById('main'));
 
@@ -230,7 +239,7 @@ export class BigDataComponent implements OnInit {
         type: "map",
         map: 'china',
         show: true,
-        center: [120.702542, 28.004152],
+        center: [120.702542, 27.804152],
         boundingCoords: [
           // 定位左上角经纬度
           [120.251808, 28.389237],
@@ -248,7 +257,7 @@ export class BigDataComponent implements OnInit {
         roam: true,
         itemStyle: {
           normal: {
-            areaColor: 'rgba(12,34,56,.8)',
+            areaColor: 'rgba(255,255,255,.8)',
             borderColor: 'rgb(8,135,195)',
             borderWidth: 1,
           },
@@ -297,6 +306,8 @@ export class BigDataComponent implements OnInit {
         }
       ]
     };
+    //数据加载之前显示loading图
+    this.myChart.showLoading();
 
     // function draw() {
 

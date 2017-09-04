@@ -22,7 +22,6 @@ import { BasicLayoutComponent } from './pages/basic-layout.component';
 
 import { AuthGuard } from './service/auth-guard.service';
 import { HttpService } from './service/http.service';
-import { BarAlertChartsComponent } from './bar-alert-charts/bar-alert-charts.component';
 
 @NgModule({
   imports: [
@@ -42,7 +41,6 @@ import { BarAlertChartsComponent } from './bar-alert-charts/bar-alert-charts.com
     HomeComponent,
     BigDataComponent,
     BasicLayoutComponent,
-    BarAlertChartsComponent,
   ],
   providers: [
     {

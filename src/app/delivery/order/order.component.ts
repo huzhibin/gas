@@ -284,7 +284,7 @@ export class OrderComponent implements OnInit {
     };
   }
   ngOnInit(): void {
-    this.totalItems = 0;
+    this.totalItems = 5;
     this.currentPage = 1;
     this.pageSize = 20;
 
@@ -301,15 +301,15 @@ export class OrderComponent implements OnInit {
 
     this.theads = [
       '订单编号',
-      '生成时间',
-      '接单时间',
-      '数量',
       '气瓶编号',
+      '数量',
       '地址',
-      '价格',
       '用户姓名',
       '用户电话',
+      '生成时间',
+      '接单时间',
       '订单状态',
+      '价格',
       '订单来源',
       '操作'
     ];
@@ -320,5 +320,84 @@ export class OrderComponent implements OnInit {
     this.initResetPwdForm();
 
     this.getList();
+
+
+    this.orderList = [
+      {
+      id: 1,
+      gasCylinderSN: 'gn134235sn',
+      amount: 23,
+      addr: "温州市鹿城区**街道",
+      userName: '王一',
+      mobilePhone: '13577658809',
+      userTel: '753434',
+      createTime: "2017-1-23 11:23:34",
+      receiveTime: '2017-1-23 11:23:34',
+      orderStatus: '已完成',
+      price: 99,
+      orderSource: '微信',
+      remark: '备注',
+    },
+      {
+      id: 2,
+      gasCylinderSN: 'gn134235sn',
+      amount: 23,
+      addr: "温州市鹿城区**街道",
+      userName: '王一',
+      mobilePhone: '13577658809',
+      userTel: '753434',
+      createTime: "2017-1-23 11:23:34",
+      receiveTime: '2017-1-23 11:23:34',
+      orderStatus: '已完成',
+      price: 99,
+      orderSource: '微信',
+      remark: '备注',
+    },
+      {
+      id: 3,
+      gasCylinderSN: 'gn134235sn',
+      amount: 23,
+      addr: "温州市鹿城区**街道",
+      userName: '王一',
+      mobilePhone: '13577658809',
+      userTel: '753434',
+      createTime: "2017-1-23 11:23:34",
+      receiveTime: '2017-1-23 11:23:34',
+      orderStatus: '已完成',
+      price: 99,
+      orderSource: '微信',
+      remark: '备注',
+    },
+      {
+      id: 4,
+      gasCylinderSN: 'gn134235sn',
+      amount: 23,
+      addr: "温州市鹿城区**街道",
+      userName: '王一',
+      mobilePhone: '13577658809',
+      userTel: '753434',
+      createTime: "2017-1-23 11:23:34",
+      receiveTime: '2017-1-23 11:23:34',
+      orderStatus: '已完成',
+      price: 99,
+      orderSource: '微信',
+      remark: '备注',
+    },
+      {
+      id: 5,
+      gasCylinderSN: 'gn134235sn',
+      amount: 23,
+      addr: "温州市鹿城区**街道",
+      userName: '王一',
+      mobilePhone: '13577658809',
+      userTel: '753434',
+      createTime: "2017-1-23 11:23:34",
+      receiveTime: '2017-1-23 11:23:34',
+      orderStatus: '已完成',
+      price: 99,
+      orderSource: '微信',
+      remark: '备注',
+    },
+  ]
   }
 }

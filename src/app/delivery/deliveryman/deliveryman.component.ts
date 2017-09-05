@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 // import { DepartList } from "../data/depart";
 
-import { DeliverService } from './deliveryman.service';
-// import { DeliverList } from '../data/deliver'
+// import { DeliverService } from './deliveryman.service';
+import { DeliverList } from '../../information/data/deliver';
 
 @Component({
     templateUrl: 'deliveryman.component.html',
     styleUrls: [],
-    providers: [DeliverService]
+    // providers: [DeliverService]
 })
 export class DeliverymanComponent implements OnInit {
     totalItems: number;//总记录数
@@ -25,12 +25,15 @@ export class DeliverymanComponent implements OnInit {
     theads: Array<string>;//表头字段
     DeliverList: Array<{
         id: number,
+        code:string,
         company: string,
         name: string,
         phone: string,
         address: string,
         station: string,
         photoAddress:string,
+        place:string,
+        identity:string,
         checked?: Boolean
     }>;//用户列表
     // // TODO:在提示消失的时候，将它从数组中清除
@@ -41,9 +44,9 @@ export class DeliverymanComponent implements OnInit {
         this.alerts.shift();
     }
 
-    constructor(private DeliverService: DeliverService) {
+    // constructor(private DeliverService: DeliverService) {
 
-    }
+    // }
 
     changePage(event) {
         this.searchParams.pageSize = event.itemsPerPage;
@@ -103,11 +106,14 @@ export class DeliverymanComponent implements OnInit {
             pageSize: this.searchParams.pageSize,
             pageNumber: this.searchParams.pageNumber
         };
-        console.log('查询后台--getList:' + JSON.stringify(params));
-        this.DeliverService.getDeliverList(params).then(data => {
-          this.DeliverList = data.data.list;
-          this.totalItems = data.data.total;
-        });
+        // console.log('查询后台--getList:' + JSON.stringify(params));
+        // this.DeliverService.getDeliverList(params).then(data => {
+        //   this.DeliverList = data.data.list;
+        //   this.totalItems = data.data.total;
+        // });
+        this.DeliverList = DeliverList.slice(params.pageSize * (params.pageNumber - 1), params.pageSize * params.pageNumber);
+        this.totalItems = DeliverList.length;
+
 
     }
 
@@ -145,20 +151,19 @@ export class DeliverymanComponent implements OnInit {
    
     ngOnInit(): void {
         this.totalItems = 0;
-        
-
-       
         this.operand = {};
 
         this.theads = [
-            '配送员编号',
+            '员工编号',
             '电话',
-            '配送员姓名',
-            '归属公司编号	',
+            '员工姓名',
+            '归属公司',
+            '归属地区',
             '归属站点编号	',
+            '身份证',
             '住址',
-            '照片存放地址	',
-            
+            '照片	', 
+           
         ];
 
         this.initSearchParams();

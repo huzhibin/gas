@@ -9,6 +9,8 @@ import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 import { CarComponent } from './car/car.component';
 import { CompanyComponent } from './company/company.component';
 import { CodeComponent} from './Code/code.component';
+import { CylinderCodeComponent} from './cylinderCode/cylinderCode.component';
+import { StationCodeComponent} from './stationCode/stationCode.component';
 
 const routes: Routes = [
   {
@@ -70,6 +72,20 @@ const routes: Routes = [
         component: CodeComponent,
         data: {
           title: '编码标准'
+        },
+      },
+      {
+        path: 'cylinder-code',
+        component: CylinderCodeComponent,
+        data: {
+          title: '气瓶编码'
+        },
+      },
+      {
+        path: 'station-code',
+        component: StationCodeComponent,
+        data: {
+          title: '车辆编码'
         },
       },
     ]

@@ -109,7 +109,7 @@ export class CustomerComponent implements OnInit {
         }
         this.CustomerService.exportExcelCustomer(params).then(data=>{
             if(data.status==0){
-                this.exportParams.exportUrl="http://192.168.1.113:8080"+data.data;
+                this.exportParams.exportUrl="http://192.168.1.107;28081"+data.data;
                 window.location.href=this.exportParams.exportUrl;
             }
             else{
@@ -226,7 +226,7 @@ export class CustomerComponent implements OnInit {
             '联系电话',
             '联系地址',
             '联系人',
-            '营业执照编号',
+            // '营业执照编号',
             '经办人',
             '负责人',
             '所属行政区域',

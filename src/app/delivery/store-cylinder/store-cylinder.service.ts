@@ -11,7 +11,13 @@ export class StoreCylinderService {
     };
 
     getStoreCylinderList(params:any): Promise<any> {
-        return this.HttpService.formPostRequest(API.getStoreCylinderUrl,params)
+        return this.HttpService.formPostRequest(API.getGasStationleUrl,params)
+            .catch(this.handleError);
+
+    }
+    
+    AddStore(params:any): Promise<any> {
+        return this.HttpService.formPostRequest(API.AddStoreUrl,params)
             .catch(this.handleError);
 
     }

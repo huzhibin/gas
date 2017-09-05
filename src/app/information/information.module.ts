@@ -16,10 +16,12 @@ import { CustomerComponent } from './customer/customer.component';
 
 import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 import { CarComponent } from './car/car.component';
-import { GasWorksComponent } from './gas-works/gas-works.component';
+// import { GasWorksComponent } from './gas-works/gas-works.component';
 import { CompanyComponent } from './company/company.component';
-
+// import { CompanyComponent } from './gas-works/gas-works.component';
 import { CodeComponent} from './Code/code.component';
+import { CylinderCodeComponent} from './cylinderCode/cylinderCode.component';
+import { StationCodeComponent} from './stationCode/stationCode.component';
 
 @NgModule({
   imports: [
@@ -41,8 +43,10 @@ import { CodeComponent} from './Code/code.component';
     CodeComponent,
     GasCylinderComponent,
     CarComponent ,
-    GasWorksComponent,
-    CompanyComponent
+    // GasWorksComponent,
+    CompanyComponent,
+    CylinderCodeComponent,
+    StationCodeComponent
   ]
 })
 export class InformationModule { }

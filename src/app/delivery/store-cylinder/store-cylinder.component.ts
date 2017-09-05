@@ -15,33 +15,31 @@ export class StoreCylinderComponent implements OnInit {
 
     // public bsValue: any ;
     searchParams: {
-        beginDate: string,
-        cylinderBarcode: string,
-        endDate: string,
+        
         pageNumber: number,
         pageSize: number,
     };//查询参数
     theads: Array<string>;//表头字段
     StoreCylinderList: Array<{
         id: number,
-        storeDate: string,
-        processName: string,
-        emptyType: string,
-        cylinderBarcode: string,
-        cylinderSpecifications: string,
-        unit: string,
-        carNumber: string,
-        operator: string,
-        manufacturingUnit: string,
-        propertyUnit: string,
+        name: string,
+        code: string,
+        administrativeRegion: string,
+        parentCompany: string,
+        address: string,
         serialNumber: string,
-        useTheRegistrationCode: string,
-        fillingMedia: string,
-        lastInspectionDate: string,
-        nextInspectionDate: string,
+        
         checked?: Boolean
     }>;//用户列表
-
+addForm:{
+    name: string,
+    code: string,
+    administrativeRegion: string,
+    parentCompany: string,
+    address: string,
+    serialNumber: string,
+    
+}
 
     constructor(
         private StoreCylinderService: StoreCylinderService) { };
@@ -72,6 +70,27 @@ export class StoreCylinderComponent implements OnInit {
         console.log('Page changed to: ' + event.page);
         console.log('number items per page: ' + event.itemsPerPage);
     }
+    add(valid, modal) {
+        if (valid) {
+          this.StoreCylinderService.AddStore(this.addForm).then(data => {
+            console.dir(data);
+            this.alerts.push({
+              type: 'success',
+              msg: '添加成功',
+              timeout: 1000
+            });
+            this.getList();
+            modal.hide();
+          });
+        } else {
+          this.alerts.push({
+            type: 'danger',
+            msg: '表单填写不正确',
+            timeout: 1000
+          });
+        }
+      }
+
     refresh() {
         this.getList();
     }
@@ -79,29 +98,26 @@ export class StoreCylinderComponent implements OnInit {
         this.getList();
     };
 
-    trim(string) {
-        return string.replace(/\s+/g, "");
-    }
-    TypeDate(date) {
-        if (!date) {
-            return null;
-        }
-        else {
-            date = new Date(date);
-            var y = date.getFullYear();
-            var m = date.getMonth() + 1;
-            var s = date.getDate();
-            return y + '-' + (m < 10 ? '0' + m : m) + '-' + (s < 10 ? ('0' + s) : s);
-        }
+    // trim(string) {
+    //     return string.replace(/\s+/g, "");
+    // }
+    // TypeDate(date) {
+    //     if (!date) {
+    //         return null;
+    //     }
+    //     else {
+    //         date = new Date(date);
+    //         var y = date.getFullYear();
+    //         var m = date.getMonth() + 1;
+    //         var s = date.getDate();
+    //         return y + '-' + (m < 10 ? '0' + m : m) + '-' + (s < 10 ? ('0' + s) : s);
+    //     }
 
-    }
+    // }
     getList() {
 
         let params = {
-            beginDate: this.TypeDate(this.searchParams.beginDate) ? this.TypeDate(this.searchParams.beginDate) : '',
-            cylinderBarcode: this.trim(this.searchParams.cylinderBarcode),
-            endDate: this.TypeDate(this.searchParams.endDate) ? this.TypeDate(this.searchParams.endDate) : '',
-            pageNumber: this.searchParams.pageNumber,
+            pageNumber:this.searchParams.pageNumber,
             pageSize: this.searchParams.pageSize,
         };
         // console.log('查询后台--getList:' + JSON.stringify(params));
@@ -109,8 +125,7 @@ export class StoreCylinderComponent implements OnInit {
             if (data.status == 0) {
                 this.StoreCylinderList = data.data.list;
                 this.totalItems = data.data.total;
-                this.searchParams.beginDate = '';
-                this.searchParams.endDate = '';
+             
             }
             else {
                 this.alerts.push({
@@ -158,11 +173,20 @@ export class StoreCylinderComponent implements OnInit {
     
     initSearchParams() {
         this.searchParams = {
-            beginDate: '',
-            cylinderBarcode: '',
-            endDate: '',
+            
             pageNumber: 1,
-            pageSize: 20,
+            pageSize: 10,
+        }
+    }
+    initAddForm(){
+        this.addForm={
+            name: '',
+            code: '',
+            administrativeRegion: '',
+            parentCompany: '',
+            address: '',
+            serialNumber: '',
+            
         }
     }
 
@@ -175,25 +199,26 @@ export class StoreCylinderComponent implements OnInit {
         this.operand = {};
 
         this.theads = [
-            '日期',
-            '工序名称',
-            '空满类型',
-            '气瓶条码',
-            '气瓶规格',
-            '单位',
-            '车号',
-            '操作工',
-            '制造单位',
-            '产权单位',
-            '出厂编号',
-            '使用登记代码',
-            '充装介质',
-            '末次检验年月',
-            '下次检验年月',
+            '名称',
+            '基本编码',
+            '行政区域编号',
+            '归属公司编号',
+            '地址',
+            '唯一编号',
+            // '车号',
+            // '操作工',
+            // '制造单位',
+            // '产权单位',
+            // '出厂编号',
+            // '使用登记代码',
+            // '充装介质',
+            // '末次检验年月',
+            // '下次检验年月',
 
 
         ];
-        this.initSearchParams()
+        this.initSearchParams();
+        this.initAddForm();
         this.getList();
     }
 }

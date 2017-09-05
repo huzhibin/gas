@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class DeliveryComponent implements OnInit {
-  delivery: any = {} //员工状态图
+  delivery: any = {} //配送状态图
   ngOnInit() {
     let echarts = window['echarts'];
 

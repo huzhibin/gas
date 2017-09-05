@@ -18,6 +18,8 @@ import { StandardComponent } from './standard.component';
 // import { CarComponent } from './car/car.component';
 import { VideoComponent } from './video/video.component';
 import { CodeComponent } from './company-code/code.component';
+import { CylinderCodeComponent } from './cylinderCode/cylinderCode.component';
+import { StationCodeComponent } from './stationCode/stationCode.component';
 
 @NgModule({
   imports: [
@@ -30,11 +32,14 @@ import { CodeComponent } from './company-code/code.component';
     StandardRoutingModule,
     BsDropdownModule,
     GasCommonModule
+
   ],
   declarations: [
     StandardComponent,
     VideoComponent,
-    CodeComponent
+    CodeComponent,
+    StationCodeComponent,
+    CylinderCodeComponent
   ]
 })
 export class StandardModule { }

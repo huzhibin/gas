@@ -16,6 +16,5 @@ export class HomeComponent implements AfterViewInit {
       this.curTime= new Date().toLocaleTimeString();
       this.DateTime=new Date().toLocaleDateString();
            }, 1000);
-   
   }
 }

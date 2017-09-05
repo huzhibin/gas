@@ -15,11 +15,6 @@ import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 import { CarComponent } from './car/car.component';
 import { CompanyComponent } from './company/company.component';
 import { VideoComponent } from './video/video.component';
-// import { GasWorksComponent } from './gas-works/gas-works.component';
-// import { CompanyComponent } from './gas-works/gas-works.component';
-// import { CodeComponent} from './Code/code.component';
-import { CylinderCodeComponent} from './cylinderCode/cylinderCode.component';
-import { StationCodeComponent} from './stationCode/stationCode.component';
 
 @NgModule({
   imports: [
@@ -40,9 +35,7 @@ import { StationCodeComponent} from './stationCode/stationCode.component';
     CarComponent ,
     CompanyComponent,
     VideoComponent,
-    // GasWorksComponent,
-    CylinderCodeComponent,
-    StationCodeComponent
+
   ]
 })
 export class InformationModule { }

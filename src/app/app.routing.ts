@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { BigDataComponent } from './big-data/big-data.component';
 import { BasicLayoutComponent } from './pages/basic-layout.component';
-import { ShowViewComponent } from './show-view/show-view.component';
 
 
 import { AuthGuard } from './service/auth-guard.service';
@@ -20,15 +19,13 @@ export const routes: Routes = [
   },
   {
     path: 'big-data',
-    component: BigDataComponent
+    component: BigDataComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'test',
-    component: ShowViewComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '',

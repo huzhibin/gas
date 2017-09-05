@@ -8,6 +8,9 @@ import { BigDataService } from "./big-data.service";
   providers: [BigDataService]
 })
 export class BigDataComponent implements OnInit {
+  curTime:any ;
+  DateTime:any ;
+  
   myChart: any;
   option: any;
   areaList = [
@@ -328,5 +331,11 @@ export class BigDataComponent implements OnInit {
     // }
     // myChart.setOption(option);
     // }
+  }
+  ngAfterViewInit(): void {
+    setInterval(() => {
+      this.curTime= new Date().toLocaleTimeString();
+      this.DateTime=new Date().toLocaleDateString();
+           }, 1000);
   }
 }

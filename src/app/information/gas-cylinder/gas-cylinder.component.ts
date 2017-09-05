@@ -111,16 +111,16 @@ export class GasCylinderComponent implements OnInit {
         manufacturingUnit: string,
         useTheRegistrationCode: string,
     }
-    // editForm:{
-    //     id:string,
-    //     ownNumber: string,
-    //     cylinderBarcode: string,
-    //     propertyRights: string,
+    editForm:{
+        id:string,
+        ownNumber: string,
+        cylinderBarcode: string,
+        propertyRights: string,
 
-    //     propertyUnit: string,
-    //     manufacturingUnit: string,
-    //     useTheRegistrationCode: string,
-    // }
+        propertyUnit: string,
+        manufacturingUnit: string,
+        useTheRegistrationCode: string,
+    }
     constructor(
         private GasCylinderService : GasCylinderService ,) { };
 
@@ -188,25 +188,25 @@ export class GasCylinderComponent implements OnInit {
           this.getList();
       }
 
-    //   export(modal) {
-    //     modal.hide();
+      export(modal) {
+        modal.hide();
 
-    //             this.alerts.push({
-    //                 type: 'danger',
-    //                 msg: '导出失败',
-    //                 timeout: 1000
-    //             });
+                this.alerts.push({
+                    type: 'danger',
+                    msg: '导出失败',
+                    timeout: 1000
+                });
 
-    // }
-    // import(modal) {
-    //     this.alerts.push({
-    //         type: 'success',
-    //         msg: '导入成功',
-    //         timeout: 1000
-    //     });
-    //     modal.hide();
-    //     this.getList();
-    // }
+    }
+    import(modal) {
+        this.alerts.push({
+            type: 'success',
+            msg: '导入成功',
+            timeout: 1000
+        });
+        modal.hide();
+        this.getList();
+    }
 
     refresh() {
         this.getList();
@@ -355,19 +355,19 @@ export class GasCylinderComponent implements OnInit {
             useTheRegistrationCode: '',
         }
     }
-    // initEditForm(){
-    //     this.editForm={
-    //         id: this.operand.id || '',
-    //         ownNumber: this.operand.ownNumber || '',
-    //         cylinderBarcode: this.operand.cylinderBarcode || '',
-    //         propertyRights:this.operand.propertyRights || '', 
+    initEditForm(){
+        this.editForm={
+            id: this.operand.id || '',
+            ownNumber: this.operand.ownNumber || '',
+            cylinderBarcode: this.operand.cylinderBarcode || '',
+            propertyRights:this.operand.propertyRights || '', 
 
-    //         propertyUnit: this.operand.propertyUnit || '',
-    //         manufacturingUnit:this.operand.manufacturingUnit || '' ,
+            propertyUnit: this.operand.propertyUnit || '',
+            manufacturingUnit:this.operand.manufacturingUnit || '' ,
 
-    //         useTheRegistrationCode: this.operand.useTheRegistrationCode || '',
-    //     }
-    // }
+            useTheRegistrationCode: this.operand.useTheRegistrationCode || '',
+        }
+    }
     ngOnInit(): void {
         this.totalItems = 0;
         // this.currentPage = 1;
@@ -433,6 +433,7 @@ export class GasCylinderComponent implements OnInit {
         this.initSearchParams();
         this.initAddForm();
         this.initDetailList();
+        this.initEditForm();
         this.getList();
     }
 }

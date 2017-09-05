@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
       password: this.password
     }).then(data => {
       if(data.status == 0){
-        localStorage.setItem("user", this.userName);
+        sessionStorage.setItem("user", this.userName);
         this.router.navigateByUrl('/home');
       }else{
         alert(data.msg);

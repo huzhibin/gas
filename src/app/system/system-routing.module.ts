@@ -3,7 +3,7 @@ import { Routes,RouterModule } from '@angular/router';
 
 import { SystemComponent } from './system.component';
 import { UserComponent } from './user/user.component';
-// import { RoleComponent } from './role/role.component';
+import { RoleComponent } from './role/role.component';
 import { PowerComponent } from './power/power.component';
 import { ResourceComponent } from './resource/resource.component';
 import { DepartmentComponent } from './department/department.component';
@@ -22,6 +22,13 @@ const routes: Routes = [
         component: UserComponent,
         data: {
           title: '账号分配'
+        },
+      },
+      {
+        path: 'role',
+        component: RoleComponent,
+        data: {
+          title: '角色分配'
         },
       },
       {

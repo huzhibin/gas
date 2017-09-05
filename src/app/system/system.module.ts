@@ -9,7 +9,7 @@ import { GasCommonModule } from '../component/gas-common.module';
 import { SystemRoutingModule } from './system-routing.module';
 import { SystemComponent } from './system.component';
 import { UserComponent } from './user/user.component';
-// import { RoleComponent } from './role/role.component';
+import { RoleComponent } from './role/role.component';
 import { PowerComponent } from './power/power.component';
 import { ResourceComponent } from './resource/resource.component';
 import { DepartmentComponent } from './department/department.component';
@@ -36,7 +36,8 @@ import { RoleService } from "./role/role.service";
     PowerComponent,
     DepartmentComponent,
     ResourceComponent,
-    LogComponent
+    LogComponent,
+    RoleComponent
   ],
   providers: [
     UserService,

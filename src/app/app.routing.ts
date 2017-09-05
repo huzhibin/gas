@@ -15,6 +15,7 @@ export const routes: Routes = [
     path: '',
     // redirectTo: '',
     component: BasicLayoutComponent,
+    canActivate: [AuthGuard],
     pathMatch: 'full',
   },
   {

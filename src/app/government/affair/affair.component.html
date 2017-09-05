@@ -45,7 +45,7 @@
                 <td>{{ start.processinstanceid }}</td>
                 <td>{{ start.taskcreatetime }}</td>
                 <td>
-                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="plan.taskid=start.id">处理</button>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="plan.taskid=start.taskid">处理</button>
                 </td>
               </tr>
             </tbody>
@@ -65,8 +65,8 @@
             </div>
           </div>
 
-          <pagination-comp [totalItems]="plan.totalItems" [currentPage]="plan.pageNumber" [itemsPerPage]="plan.pageSize" (changePage)="plan.pageNumber=$event.itemsPerPage;plan.pageSize=$event.page;getStartProcessList()"
-            (changeSize)="plan.pageNumber=1;plan.pageSize=$event.page;getStartProcessList()"></pagination-comp>
+          <pagination-comp [totalItems]="plan.totalItems" [currentPage]="plan.pageNumber" [itemsPerPage]="plan.pageSize" (changePage)="plan.pageNumber=$event.page;plan.pageSize=$event.itemsPerPage;getStartProcessList()"
+            (changeSize)="plan.pageNumber=1;plan.pageSize=$event;getStartProcessList()"></pagination-comp>
         </tab>
 
         <tab (select)="getPlanList()">
@@ -100,15 +100,15 @@
                 <td>{{ plan.processinstanceid }}</td>
                 <td>{{ plan.taskcreatetime }}</td>
                 <td>
-                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="verify.taskid=plan.id;verify.checkok='false';submitVerifyResult()">通过</button>
-                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="verify.taskid=plan.id;verify.checkok='false';submitVerifyResult()">驳回</button>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="verify.taskid=plan.taskid;verify.checkok='true';submitVerifyResult()">通过</button>
+                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="verify.taskid=plan.taskid;verify.checkok='false';submitVerifyResult()">驳回</button>
                 </td>
               </tr>
             </tbody>
           </table>
 
-          <pagination-comp [totalItems]="plan.totalItems" [currentPage]="plan.pageNumber" [itemsPerPage]="plan.pageSize" (changePage)="plan.pageNumber=$event.itemsPerPage;plan.pageSize=$event.page;getStartProcessList()"
-            (changeSize)="plan.pageNumber=1;plan.pageSize=$event.page;getStartProcessList()"></pagination-comp>
+          <pagination-comp [totalItems]="verify.totalItems" [currentPage]="verify.pageNumber" [itemsPerPage]="verify.pageSize" (changePage)="verify.pageNumber=$event.page;verify.pageSize=$event.itemsPerPage;getPlanList()"
+            (changeSize)="verify.pageNumber=1;verify.pageSize=$event;getPlanList()"></pagination-comp>
         </tab>
 
         <tab (select)="getVerifyList()">
@@ -142,7 +142,7 @@
                 <td>{{ verify.processinstanceid }}</td>
                 <td>{{ verify.taskcreatetime }}</td>
                 <td>
-                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="action.taskid=verify.id">处理</button>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="action.taskid=verify.taskid">处理</button>
                 </td>
               </tr>
             </tbody>
@@ -162,8 +162,8 @@
             </div>
           </div>
 
-          <pagination-comp [totalItems]="start.totalItems" [currentPage]="start.pageNumber" [itemsPerPage]="start.pageSize" (changePage)="start.pageNumber=$event.itemsPerPage;start.pageSize=$event.page;getVerifyList()"
-            (changeSize)="start.pageNumber=1;start.pageSize=$event.page;getVerifyList()"></pagination-comp>
+          <pagination-comp [totalItems]="action.totalItems" [currentPage]="action.pageNumber" [itemsPerPage]="action.pageSize" (changePage)="action.pageNumber=$event.page;action.pageSize=$event.itemsPerPage;getVerifyList()"
+            (changeSize)="action.pageNumber=1;action.pageSize=$event;getVerifyList()"></pagination-comp>
         </tab>
 
         <tab (select)="getActionList()">
@@ -197,15 +197,15 @@
                 <td>{{ action.processinstanceid }}</td>
                 <td>{{ action.taskcreatetime }}</td>
                 <td>
-                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="finish.taskid=action.id;finish.chuliok='false';submitFinishResult()">通过</button>
-                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="finish.taskid=action.id;finish.chuliok='false';submitFinishResult()">驳回</button>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="finish.taskid=action.taskid;finish.chuliok='true';submitFinishResult()">通过</button>
+                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="finish.taskid=action.taskid;finish.chuliok='false';submitFinishResult()">驳回</button>
                 </td>
               </tr>
             </tbody>
           </table>
 
-          <pagination-comp [totalItems]="finish.totalItems" [currentPage]="finish.pageNumber" [itemsPerPage]="finish.pageSize" (changePage)="finish.pageNumber=$event.itemsPerPage;finish.pageSize=$event.page;getActionList()"
-            (changeSize)="finish.pageNumber=1;finish.pageSize=$event.page;getActionList()"></pagination-comp>
+          <pagination-comp [totalItems]="finish.totalItems" [currentPage]="finish.pageNumber" [itemsPerPage]="finish.pageSize" (changePage)="finish.pageNumber=$event.page;finish.pageSize=$event.itemsPerPage;getActionList()"
+            (changeSize)="finish.pageNumber=1;finish.pageSize=$event;getActionList()"></pagination-comp>
         </tab>
 
         <tab (select)="getMyStartProcess()">
@@ -256,7 +256,7 @@
                 <td>{{ process.businesskey }}</td>
                 <td>{{ process.activityid }}</td>
                 <td>
-                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="getProcessStateDiagram(process.executionid)">流程状态</button>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();imageModal.show();getProcessStateDiagram(process.processInstanceid)">流程状态</button>
                 </td>
               </tr>
             </tbody>
@@ -264,29 +264,31 @@
           <table class="table table-bordered table-sm" *ngIf="history.selectFinish">
             <thead>
               <tr>
-                <th>执行id </th>
-                <th>流程实例id </th>
-                <th>业务号 </th>
-                <th>当前节点 </th>
-                <th>操作 </th>
+                <th>id </th>
+                <th>方案 </th>
+                <th>处理结果 </th>
+                <th>详情 </th>
+                <th>创建时间 </th>
+                <!-- <th>操作 </th> -->
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let process of history.myFinishList">
-                <td>{{ process.executionid }}</td>
-                <td>{{ process.processInstanceid }}</td>
-                <td>{{ process.businesskey }}</td>
-                <td>{{ process.activityid }}</td>
-                <td>
-                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="getFinishProcessDetail(process.processInstanceid)">流程详情</button>
-                </td>
+                <td>{{ process.supervision.id }}</td>
+                <td>{{ process.supervision.plan }}</td>
+                <td>{{ process.supervision.result }}</td>
+                <td>{{ process.supervision.details }}</td>
+                <td>{{ process.supervision.createTime }}</td>
+                <!-- <td>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();imageModal.show();getFinishProcessDetail(process.supervision.processInstanceId)">流程详情</button>
+                </td> -->
               </tr>
             </tbody>
           </table>
 
 
-          <pagination-comp [totalItems]="history.totalItems" [currentPage]="history.pageNumber" [itemsPerPage]="history.pageSize" (changePage)="history.pageNumber=$event.itemsPerPage;history.pageSize=$event.page;getStartProcessList()"
-            (changeSize)="history.pageNumber=1;history.pageSize=$event.page;getStartProcessList()"></pagination-comp>
+          <pagination-comp [totalItems]="history.totalItems" [currentPage]="history.pageNumber" [itemsPerPage]="history.pageSize" (changePage)="history.pageNumber=$event.page;history.pageSize=$event.itemsPerPage;"
+            (changeSize)="history.pageNumber=1;history.pageSize=$event;getMyStartProcess();getMyParticipateProcess();getMyFinishProcess()"></pagination-comp>
         </tab>
       </tabset>
     </div>
@@ -297,20 +299,50 @@
 
 <div bsModal #imageModal="bs-modal" [config]="{ignoreBackdropClick: false, keyboard: false}" class="modal fade" tabindex="-1"
   role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-primary modal-lg" role="document" style="background-color:grey;">
+  <div class="modal-dialog modal-primary modal-lg" role="document" style="background-color:grey;padding: 2rem;">
     <!-- <div class="modal-content"> -->
-      <!-- <div class="modal-header">
+    <!-- <div class="modal-header">
         <h4 class="modal-title"> 流程图 </h4>
         <button type="button" class="close" (click)="imageModal.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
       </div> -->
-     
-        <img [src]="history.imageSrc" alt="" width="100%;">
-    
+
+    <img [src]="history.imageSrc" alt="" width="100%;">
+
     <!-- </div> -->
   </div>
 </div>
+
+<!-- <div bsModal #detailModal="bs-modal" [config]="{ignoreBackdropClick: true, keyboard: false}" class="modal fade" tabindex="-1"
+  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> 流程详情 </h4>
+        <button type="button" class="close" (click)="detailModal.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+        <form #ngAddForm="ngForm" class="form-horizontal">
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">角色名</label>
+            <div class="col-md-9">
+              {{  }}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">备注</label>
+            <div class="col-md-9">
+              {{  }}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
 
 
 <div class="alert" [class.hide]="alerts<1">

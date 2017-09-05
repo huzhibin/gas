@@ -33,7 +33,7 @@
               <td><input type="checkbox" name="departbox" [(ngModel)]="depart.checked" (click)="$event.stopPropagation();"></td>
               <td>{{ depart.departmentName }}</td>
               <td>{{ depart.parentName }}</td>
-              <td>{{ depart.createTime }}</td>
+              <td>{{ depart.createTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
 
               <td>
                 <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(depart)?editModal.show():null">编辑</button>

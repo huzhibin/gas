@@ -36,7 +36,7 @@
               <td>{{ resource.resouceType }}</td>
               <td>{{ resource.sort }}</td>
               <td>{{ resource.url }}</td>
-              <td>{{ resource.createTime }}</td>   
+              <td>{{ resource.createTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>   
               <td>{{ resource.remark }}</td>
             </tr>
           </tbody>

@@ -48,7 +48,7 @@
               <td>{{ user.email }}</td>
               <td>{{ user.mobile }}</td>
               <td>{{ user.phone }}</td>
-              <td>{{ user.createTime }}</td>
+              <td>{{ user.createTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
               <td>{{ user.departmentName }}</td>
               <td>{{ user.roleName }}</td>
               <td>{{ user.remark }}</td>

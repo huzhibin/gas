@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AffairService } from "./affair.service";
+import { URL } from "../../service/API";
 @Component({
   templateUrl: 'affair.component.html',
   styleUrls: ['affair.component.css'],
@@ -74,6 +75,7 @@ export class AffairComponent implements OnInit {
           msg: '提交成功',
           timeout: 1000
         });
+        this.getStartProcessList();
       } else {
         this.alerts.push({
           type: 'danger',
@@ -84,6 +86,7 @@ export class AffairComponent implements OnInit {
     })
   }
   getStartProcessList() {
+    console.dir(this.plan);
     this.affairService.getStartProcessList({
       pageNumber: this.plan.pageNumber,
       pageSize: this.plan.pageSize
@@ -112,7 +115,9 @@ export class AffairComponent implements OnInit {
           msg: '提交成功',
           timeout: 1000
         });
+        this.plan.taskid = '';
         this.getStartProcessList();
+        this.getPlanList();
       } else {
         this.alerts.push({
           type: 'danger',
@@ -152,6 +157,7 @@ export class AffairComponent implements OnInit {
           timeout: 1000
         });
         this.getPlanList();
+        this.getVerifyList();
       } else {
         this.alerts.push({
           type: 'danger',
@@ -190,7 +196,9 @@ export class AffairComponent implements OnInit {
           msg: '提交成功',
           timeout: 1000
         });
+        this.action.taskid = '';
         this.getVerifyList();
+        this.getActionList();
       } else {
         this.alerts.push({
           type: 'danger',
@@ -291,7 +299,7 @@ export class AffairComponent implements OnInit {
     })
   }
   getProcessStateDiagram(executionid) {
-    this.history.imageSrc = "http://192.168.1.107:28081/activiti/traceprocess.do?executionid=" + executionid;
+    this.history.imageSrc = URL + "activiti/traceprocess.do?executionid=" + executionid;
     // this.affairService.getProcessStateDiagram({
     //   executionid: executionid
     // }).then(data => {
@@ -308,19 +316,21 @@ export class AffairComponent implements OnInit {
     // })
   }
   getFinishProcessDetail(processInstanceid) {
-    this.affairService.getFinishProcessDetail({
-      processInstanceid: processInstanceid
-    }).then(data => {
-      if (data.status == 0) {
+    console.dir(processInstanceid);
+    this.history.imageSrc = URL + "activiti/processinfo.do?processInstanceid=" + processInstanceid;
+    // this.affairService.getFinishProcessDetail({
+    //   processInstanceid: processInstanceid
+    // }).then(data => {
+    //   if (data.status == 0) {
 
-      } else {
-        this.alerts.push({
-          type: 'danger',
-          msg: data.msg,
-          timeout: 1000
-        });
-      }
-    })
+    //   } else {
+    //     this.alerts.push({
+    //       type: 'danger',
+    //       msg: data.msg,
+    //       timeout: 1000
+    //     });
+    //   }
+    // })
   }
 
 

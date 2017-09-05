@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: 'gas-cylinder.component.html',
+  templateUrl: 'user.component.html',
   // styleUrls: ['data-screen.component.css']
 })
-export class GasCylinderComponent implements OnInit {
-  gas: any = {} //气瓶分布图
+export class UserComponent implements OnInit {
+  user: any = {} //用户分布图
   ngOnInit() {
     let echarts = window['echarts'];
 
-    this.gas.option = {
+    this.user.option = {
       title: {
-        text: '温州各区域钢瓶数量分布图',
+        text: '温州各区域用户数量分布图',
         // subtext: '纯属虚构',
         x: 'center'
       },
       backgroundColor: "rgb(255,255,255)",
       tooltip: {
         trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
       },
       legend: {
         orient: 'vertical',
-        left: 'left',
+        x: 'left',
         data: [
           '鹿城区',
           '龙湾区',
@@ -39,10 +39,28 @@ export class GasCylinderComponent implements OnInit {
       },
       series: [
         {
-          name: '钢瓶数量',
+          name: '用户数量',
           type: 'pie',
-          radius: '55%',
-          center: ['50%', '60%'],
+          radius: ['50%', '70%'],
+          avoidLabelOverlap: false,
+          label: {
+            normal: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              show: true,
+              textStyle: {
+                fontSize: '30',
+                fontWeight: 'bold'
+              }
+            }
+          },
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
           data: [
             { name: '鹿城区', value: 400 },
             { name: '龙湾区', value: 421 },
@@ -56,18 +74,11 @@ export class GasCylinderComponent implements OnInit {
             { name: '瑞安市', value: 522 },
             { name: '乐清市', value: 632 },
           ],
-          itemStyle: {
-            emphasis: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
         }
       ]
     };
-    this.gas.dom = document.getElementById("gas");
-    this.gas.myChart = echarts.init(this.gas.dom);
-    this.gas.myChart.setOption(this.gas.option);
+    this.user.dom = document.getElementById("user");
+    this.user.myChart = echarts.init(this.user.dom);
+    this.user.myChart.setOption(this.user.option);
   }
 }

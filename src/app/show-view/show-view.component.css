@@ -1,0 +1,36 @@
+#gas{
+    float:left;
+    width:400px;
+    height:400px;
+    margin:20px;
+}
+
+#user{
+    float:right;
+    width:400px;
+    height:400px;
+    margin:20px;
+}
+
+#trend{
+    float:left;
+    width:400px;
+    height:400px;
+    margin:20px;
+}
+
+#enforce{
+    float:right;
+    width:400px;
+    height:400px;
+    margin:20px;
+    border:1px solid red;
+}
+
+#feedback{
+    float:left;
+    width:800px;
+    height:600px;
+    margin:20px;
+    border:1px solid red;
+}

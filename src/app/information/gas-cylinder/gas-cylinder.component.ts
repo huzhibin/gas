@@ -36,33 +36,91 @@ export class GasCylinderComponent implements OnInit {
         pageSize: number,
     };//查询参数
     theads: Array<string>;//表头字段
+    detail: Array<string>;
     GasCylinderList: Array<{
+        id: number,
+
+        ownNumber: string,
+        cylinderBarcode: string,
+        propertyRights: string,
+
+        propertyUnit: string,
+        manufacturingUnit: string,
+        landingDate: string,
+
+        useTheRegistrationCode: string,
+        serialNumber: string,
+        yearOfManufacture: string,
+
+        fillingMedia: string,
+        cylinderModel: string,
+        equipmentVariety: string,
+
+        lastInspectionDate: string,
+        nextInspectionDate: string,
+        cylinderStatus: string,
+
+        inspectionNumber: string,
+        originalWeight: string,
+        volume: string,
+
+        designWallThickness: string,
+        pressureTestPressure: string,
+        nominalOperatingPressure: string,
+
+        checked?: Boolean
+    }>;//用户列表
+
+    detailList: {
         id: number,
         ownNumber: string,
         cylinderBarcode: string,
         propertyRights: string,
+
         propertyUnit: string,
         manufacturingUnit: string,
-        landingDate: number,
+        landingDate: string,
         useTheRegistrationCode: string,
+
         serialNumber: string,
-        yearOfManufacture: number,
+        yearOfManufacture: string,
         fillingMedia: string,
+
         cylinderModel: string,
         equipmentVariety: string,
-        lastInspectionDate: number,
-        nextInspectionDate: number,
+        lastInspectionDate: string,
+
+        nextInspectionDate: string,
         cylinderStatus: string,
         inspectionNumber: string,
-        originalWeight: string,
-        volume: number,
-        designWallThickness: number,
-        pressureTestPressure: number,
-        nominalOperatingPressure: number,
-        checked?: Boolean
-    }>;//用户列表
 
-   
+        originalWeight: string,
+        volume: string,
+        designWallThickness: string,
+
+        pressureTestPressure: string,
+        nominalOperatingPressure: string,
+       
+    };//用户列表
+    addForm:{
+        ownNumber: string,
+        cylinderBarcode: string,
+        propertyRights: string,
+
+        propertyUnit: string,
+        manufacturingUnit: string,
+        useTheRegistrationCode: string,
+    }
+    // editForm:{
+    //     id:string,
+    //     ownNumber: string,
+    //     cylinderBarcode: string,
+    //     propertyRights: string,
+
+    //     propertyUnit: string,
+    //     manufacturingUnit: string,
+    //     useTheRegistrationCode: string,
+    // }
     constructor(
         private GasCylinderService : GasCylinderService ,) { };
 
@@ -98,14 +156,62 @@ export class GasCylinderComponent implements OnInit {
         console.log('number items per page: ' + event.itemsPerPage);
     }
 
- 
+    add(valid, modal) {
+        if (valid) {
+            this.alerts.push({
+              type: 'success',
+              msg: '添加成功',
+              timeout: 1000
+            });
+            this.getList();
+            modal.hide();
+        
+        }
+      }
+      edit(modal){
+        this.alerts.push({
+            type: 'success',
+            msg: '编辑成功',
+            timeout: 1000
+          });
+          modal.hide();
+          this.getList();
+          
+      }
+      delete(modal){
+        this.alerts.push({
+            type: 'success',
+            msg: '删除成功',
+            timeout: 1000
+          });
+          modal.hide();
+          this.getList();
+      }
+
+    //   export(modal) {
+    //     modal.hide();
+
+    //             this.alerts.push({
+    //                 type: 'danger',
+    //                 msg: '导出失败',
+    //                 timeout: 1000
+    //             });
+
+    // }
+    // import(modal) {
+    //     this.alerts.push({
+    //         type: 'success',
+    //         msg: '导入成功',
+    //         timeout: 1000
+    //     });
+    //     modal.hide();
+    //     this.getList();
+    // }
 
     refresh() {
         this.getList();
     }
-    export() {
-
-    }
+    
     search() {
         this.getList();
     }
@@ -205,6 +311,63 @@ export class GasCylinderComponent implements OnInit {
         }
     }
    
+    initDetailList(){
+        this.detailList={
+            id: this.operand.id || null,
+            ownNumber: this.operand.ownNumber || '',
+            cylinderBarcode: this.operand.cylinderBarcode || '',
+            propertyRights:this.operand.propertyRights || '', 
+
+            propertyUnit: this.operand.propertyUnit || '',
+            manufacturingUnit:this.operand.manufacturingUnit || '' ,
+            landingDate: this.operand.landingDate || '',
+
+            useTheRegistrationCode: this.operand.useTheRegistrationCode || '',
+            serialNumber: this.operand.serialNumber || '',
+            yearOfManufacture: this.operand.yearOfManufacture || '',
+
+            fillingMedia: this.operand.fillingMedia || '',
+            cylinderModel: this.operand.cylinderModel || '',
+            equipmentVariety: this.operand.equipmentVariety || '',
+
+            lastInspectionDate: this.operand.lastInspectionDate || '',
+            nextInspectionDate:this.operand.nextInspectionDate || '',
+            cylinderStatus: this.operand.cylinderStatus || '',
+
+            inspectionNumber:this.operand.inspectionNumber || '',
+            originalWeight: this.operand.originalWeight || '',
+            volume: this.operand.volume || '',
+
+            designWallThickness: this.operand.designWallThickness || '',
+            pressureTestPressure:this.operand.pressureTestPressure || '',
+            nominalOperatingPressure: this.operand.nominalOperatingPressure || '',
+        }
+    }
+
+    initAddForm(){
+        this.addForm={
+            ownNumber: '',
+            cylinderBarcode:'',
+            propertyRights: '',
+    
+            propertyUnit: '',
+            manufacturingUnit: '',
+            useTheRegistrationCode: '',
+        }
+    }
+    // initEditForm(){
+    //     this.editForm={
+    //         id: this.operand.id || '',
+    //         ownNumber: this.operand.ownNumber || '',
+    //         cylinderBarcode: this.operand.cylinderBarcode || '',
+    //         propertyRights:this.operand.propertyRights || '', 
+
+    //         propertyUnit: this.operand.propertyUnit || '',
+    //         manufacturingUnit:this.operand.manufacturingUnit || '' ,
+
+    //         useTheRegistrationCode: this.operand.useTheRegistrationCode || '',
+    //     }
+    // }
     ngOnInit(): void {
         this.totalItems = 0;
         // this.currentPage = 1;
@@ -221,23 +384,55 @@ export class GasCylinderComponent implements OnInit {
             '制造单位',
             '进站日期',
             '使用登记代码',
+            '所属行政区域',
+            '唯一编码',
+            '制造年月',
+            '充装介质',
+            '详细信息',
+            // '气瓶型号',
+            // '设备品种',
+            // '末次检查年月',
+            // '下次检查年月',
+            // '气瓶状态',
+            // '检验编号',
+            // '原始重量',
+            // '容积',
+            // '设计壁厚',
+            // '水压试验压力',
+            // '公称工作压力',
+        ];
+        this.detail = [
+            '自有编号',
+            '气瓶条码',
+            '产权性质',
+            
+            '产权单位',
+            '制造单位',
+            '进站日期',
+
+            '使用登记代码',
             '出厂编号',
             '制造年月',
+
             '充装介质',
             '气瓶型号',
             '设备品种',
+
             '末次检查年月',
             '下次检查年月',
             '气瓶状态',
+
             '检验编号',
             '原始重量',
             '容积',
+
             '设计壁厚',
             '水压试验压力',
             '公称工作压力',
         ];
         this.initSearchParams();
-
+        this.initAddForm();
+        this.initDetailList();
         this.getList();
     }
 }

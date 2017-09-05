@@ -90,6 +90,7 @@ export const API = {
   'exportExcelGasTransportUrl': guotao + 'basicInformation/toExcelGasStationTransportCylinderSendAndReceive.do',//导出气站运输信息
   'exportExcelFillingRecordUrl': guotao + 'basicInformation/toExcelFillingRecord.do',//导出灌装记录信息
   'exportExcelStoreCylinderUrl': guotao + 'basicInformation/toExcelStoreCylinderSendAndReceive.do',//导出门店气瓶信息
+  'exportExcelCompanyUrl': guotao + 'basicInformation/toExcelCompany.do',//导出门店气瓶信息
 
   'getDelieveryManPosition': guotao + 'positionManagement/person/searchLatestById.do',//配送员位置
   'getDelieveryManPath': guotao + 'positionManagement/person/searchTrack.do',//配送员路径
@@ -106,4 +107,20 @@ export const API = {
   'getCompanyCodingUrl': guotao + 'codingStandard/getCompanyCodingStandard.do',//公司编码
   'getCylinderCodingUrl': guotao + 'codingStandard/getCylinderCodingStandard.do',//气瓶编码
   'getStationCodingUrl': guotao + 'codingStandard/getStationCodingStandard.do',//气站编码
+
+  /**
+* 增加
+*/
+  'AddCompanyUrl': guotao + 'basicInformation/insertCompany.do',//企业信息
+  'AddStoreUrl': guotao + 'basicInformation/insertGasStation.do',//企业信息
+
+  /**
+  * 配送 车辆 员工
+  */
+  'getDeliverymanUrl': guotao + 'positionManagement/person/searchLatestById.do',//配送员信息
+  'getDeliverCarUrl': guotao + 'positionManagement/car/searchTrackLatestById.do',//配送车信息
+
+  'getGasStationleUrl': guotao + 'basicInformation/selectGasStationAll.do',//站点信息
+
 }
+

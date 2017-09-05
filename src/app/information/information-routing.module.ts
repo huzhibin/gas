@@ -7,6 +7,9 @@ import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 import { CarComponent } from './car/car.component';
 import { CompanyComponent } from './company/company.component';
 import { VideoComponent } from './video/video.component';
+// import { CodeComponent} from './Code/code.component';
+import { CylinderCodeComponent} from './cylinderCode/cylinderCode.component';
+import { StationCodeComponent} from './stationCode/stationCode.component';
 
 const routes: Routes = [
   {
@@ -54,6 +57,20 @@ const routes: Routes = [
         component: VideoComponent,
         data: {
           title: '视频图像'
+        },
+      },
+      {
+        path: 'cylinder-code',
+        component: CylinderCodeComponent,
+        data: {
+          title: '气瓶编码'
+        },
+      },
+      {
+        path: 'station-code',
+        component: StationCodeComponent,
+        data: {
+          title: '车辆编码'
         },
       },
     ]

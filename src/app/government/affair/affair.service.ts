@@ -7,7 +7,7 @@ import { API } from '../../service/api';
 import { HttpService } from "../../service/http.service";
 
 @Injectable()
-export class FlowProcessingService {
+export class AffairService {
 
   private headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charser=UTF-8' });
 

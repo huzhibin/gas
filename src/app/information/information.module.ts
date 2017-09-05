@@ -11,10 +11,10 @@ import { InformationRoutingModule } from './information-routing.module';
 import { InformationComponent } from './information.component';
 
 import { CustomerComponent } from './customer/customer.component';
-
 import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 import { CarComponent } from './car/car.component';
 import { CompanyComponent } from './company/company.component';
+import { VideoComponent } from './video/video.component';
 
 @NgModule({
   imports: [
@@ -33,7 +33,8 @@ import { CompanyComponent } from './company/company.component';
     CustomerComponent ,
     GasCylinderComponent,
     CarComponent ,
-    CompanyComponent
+    CompanyComponent,
+    VideoComponent
   ]
 })
 export class InformationModule { }

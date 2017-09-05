@@ -6,6 +6,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 import { CarComponent } from './car/car.component';
 import { CompanyComponent } from './company/company.component';
+import { VideoComponent } from './video/video.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,13 @@ const routes: Routes = [
         component: CarComponent,
         data: {
           title: '车辆管理'
+        },
+      },
+      {
+        path: 'video',
+        component: VideoComponent,
+        data: {
+          title: '视频图像'
         },
       },
     ]

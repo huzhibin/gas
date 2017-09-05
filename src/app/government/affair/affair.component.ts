@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { FlowProcessingService } from "./flow-processing.service";
+import { AffairService } from "./affair.service";
 @Component({
-  templateUrl: 'flow-processing.component.html',
-  styleUrls: ['flow-processing.component.css'],
-  providers: [FlowProcessingService]
+  templateUrl: 'affair.component.html',
+  styleUrls: ['affair.component.css'],
+  providers: [AffairService]
 })
-export class FlowProcessingComponent implements OnInit {
+export class AffairComponent implements OnInit {
 
   start: {
     details: string,//发起流程详情
@@ -61,11 +61,11 @@ export class FlowProcessingComponent implements OnInit {
   ];
 
   constructor(
-    private flowProcessingService: FlowProcessingService
+    private affairService: AffairService
   ) { }
 
   startProcess() {
-    this.flowProcessingService.startProcess({
+    this.affairService.startProcess({
       details: this.start.details
     }).then(data => {
       if (data.status == 0) {
@@ -84,7 +84,7 @@ export class FlowProcessingComponent implements OnInit {
     })
   }
   getStartProcessList() {
-    this.flowProcessingService.getStartProcessList({
+    this.affairService.getStartProcessList({
       pageNumber: this.plan.pageNumber,
       pageSize: this.plan.pageSize
     }).then(data => {
@@ -102,7 +102,7 @@ export class FlowProcessingComponent implements OnInit {
     })
   }
   submitPlan() {
-    this.flowProcessingService.submitPlan({
+    this.affairService.submitPlan({
       taskid: this.plan.taskid,
       plan: this.plan.plan
     }).then(data => {
@@ -123,7 +123,7 @@ export class FlowProcessingComponent implements OnInit {
     })
   }
   getPlanList() {
-    this.flowProcessingService.getPlanList({
+    this.affairService.getPlanList({
       pageNumber: this.verify.pageNumber,
       pageSize: this.verify.pageSize
     }).then(data => {
@@ -141,7 +141,7 @@ export class FlowProcessingComponent implements OnInit {
     })
   }
   submitVerifyResult() {
-    this.flowProcessingService.submitVerifyResult({
+    this.affairService.submitVerifyResult({
       taskid: this.verify.taskid,
       checkok: this.verify.checkok
     }).then(data => {
@@ -162,7 +162,7 @@ export class FlowProcessingComponent implements OnInit {
     })
   }
   getVerifyList() {
-    this.flowProcessingService.getVerifyList({
+    this.affairService.getVerifyList({
       pageNumber: this.action.pageNumber,
       pageSize: this.action.pageSize
     }).then(data => {
@@ -180,7 +180,7 @@ export class FlowProcessingComponent implements OnInit {
 
   }
   submitActionResult() {
-    this.flowProcessingService.submitActionResult({
+    this.affairService.submitActionResult({
       taskid: this.action.taskid,
       result: this.action.result
     }).then(data => {
@@ -201,7 +201,7 @@ export class FlowProcessingComponent implements OnInit {
     })
   }
   getActionList() {
-    this.flowProcessingService.getActionList({
+    this.affairService.getActionList({
       pageNumber: this.action.pageNumber,
       pageSize: this.action.pageSize
     }).then(data => {
@@ -218,7 +218,7 @@ export class FlowProcessingComponent implements OnInit {
     })
   }
   submitFinishResult() {
-    this.flowProcessingService.submitFinishResult({
+    this.affairService.submitFinishResult({
       taskid: this.finish.taskid,
       chuliok: this.finish.chuliok
     }).then(data => {
@@ -240,7 +240,7 @@ export class FlowProcessingComponent implements OnInit {
   }
 
   getMyStartProcess() {
-    this.flowProcessingService.getMyStartProcess({
+    this.affairService.getMyStartProcess({
       pageNumber: this.history.pageNumber,
       pageSize: this.history.pageSize
     }).then(data => {
@@ -257,7 +257,7 @@ export class FlowProcessingComponent implements OnInit {
     })
   }
   getMyParticipateProcess() {
-    this.flowProcessingService.getMyParticipateProcess({
+    this.affairService.getMyParticipateProcess({
       pageNumber: this.history.pageNumber,
       pageSize: this.history.pageSize
     }).then(data => {
@@ -274,7 +274,7 @@ export class FlowProcessingComponent implements OnInit {
     })
   }
   getMyFinishProcess() {
-    this.flowProcessingService.getMyFinishProcess({
+    this.affairService.getMyFinishProcess({
       pageNumber: this.history.pageNumber,
       pageSize: this.history.pageSize
     }).then(data => {
@@ -291,23 +291,24 @@ export class FlowProcessingComponent implements OnInit {
     })
   }
   getProcessStateDiagram(executionid) {
-    this.flowProcessingService.getProcessStateDiagram({
-      executionid: executionid
-    }).then(data => {
-      console.dir(data);
-      this.history.imageSrc = data.text();
-      // if (data.status == 0) {
-      // } else {
-      //   this.alerts.push({
-      //     type: 'danger',
-      //     msg: data.msg,
-      //     timeout: 1000
-      //   });
-      // }
-    })
+    this.history.imageSrc = "http://192.168.1.107:28081/activiti/traceprocess.do?executionid=" + executionid;
+    // this.affairService.getProcessStateDiagram({
+    //   executionid: executionid
+    // }).then(data => {
+    //   console.dir(data);
+    //   this.history.imageSrc = data.text();
+    //   // if (data.status == 0) {
+    //   // } else {
+    //   //   this.alerts.push({
+    //   //     type: 'danger',
+    //   //     msg: data.msg,
+    //   //     timeout: 1000
+    //   //   });
+    //   // }
+    // })
   }
   getFinishProcessDetail(processInstanceid) {
-    this.flowProcessingService.getFinishProcessDetail({
+    this.affairService.getFinishProcessDetail({
       processInstanceid: processInstanceid
     }).then(data => {
       if (data.status == 0) {

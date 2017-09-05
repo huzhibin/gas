@@ -23,7 +23,7 @@ export const API = {
   'addUser': guotao + 'user/add.do',//新增用户
   'updateUser': guotao + 'user/setInformation.do',//编辑用户
   'deleteUser': guotao + 'user/delete.do',//删除用户
-  'getUserList': guotao + 'user/getAdministrators.do',//获取用户列表
+  'getUserList': feifeng + 'user/getAdministrators.do',//获取用户列表
 
   'addRole': guotao + 'systemSettings/roles/add.do',//新增角色
   'updateRole': guotao + 'systemSettings/roles/update.do',//编辑角色
@@ -64,6 +64,10 @@ export const API = {
   'getFinishProcessDetail': guotao + 'activiti/processinfo.do',//获得已结束流程的详情
   'getProcessStateDiagram': guotao + 'activiti/traceprocess.do',//获得流程的状态图
 
+  'addFlow': feifeng + 'process/add.do',
+  'deleteFlow': feifeng + 'process/delete.do',
+  'getFlowList': feifeng + 'process/select.do',
+  'updateFlow': feifeng + 'process/update.do',
 
   /**
   * 列表查询

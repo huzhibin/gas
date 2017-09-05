@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { GovernmentComponent } from './government.component';
-import { FlowProcessingComponent } from './flow/flow-processing.component';
+import { FlowComponent } from './flow/flow.component';
+import { AffairComponent } from './affair/affair.component';
 
 const routes: Routes = [
   {
@@ -14,9 +15,16 @@ const routes: Routes = [
     children: [
       {
         path: 'flow',
-        component: FlowProcessingComponent,
+        component: FlowComponent,
         data: {
           title: '自定义流程'
+        },
+      },
+      {
+        path: 'affair',
+        component: AffairComponent,
+        data: {
+          title: '事务管理'
         },
       },
     ]

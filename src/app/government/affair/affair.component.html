@@ -216,7 +216,6 @@
               <button class="btn btn-sm btn-primary" [class.btn-outline-primary]="!history.selectParticipate" type="button" (click)="history.selectStart=false;history.selectParticipate=true;history.selectFinish=false;getMyParticipateProcess();">&nbsp; 我参与的流程</button>
               <button class="btn btn-sm btn-primary" [class.btn-outline-primary]="!history.selectFinish" type="button" (click)="history.selectStart=false;history.selectParticipate=false;history.selectFinish=true;getMyFinishProcess();">&nbsp; 已结束的流程</button>
           </span>
-          <img [src]="history.imageSrc" alt="">
           <table class="table table-bordered table-sm" *ngIf="history.selectStart">
             <thead>
               <tr>
@@ -234,7 +233,7 @@
                 <td>{{ process.businesskey }}</td>
                 <td>{{ process.activityid }}</td>
                 <td>
-                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="getProcessStateDiagram(process.executionid)">流程状态</button>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();imageModal.show();getProcessStateDiagram(process.executionid)">流程状态</button>
                 </td>
               </tr>
             </tbody>
@@ -295,6 +294,24 @@
   </div>
   <!--/.row-->
 </div>
+
+<div bsModal #imageModal="bs-modal" [config]="{ignoreBackdropClick: false, keyboard: false}" class="modal fade" tabindex="-1"
+  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary modal-lg" role="document" style="background-color:grey;">
+    <!-- <div class="modal-content"> -->
+      <!-- <div class="modal-header">
+        <h4 class="modal-title"> 流程图 </h4>
+        <button type="button" class="close" (click)="imageModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div> -->
+     
+        <img [src]="history.imageSrc" alt="" width="100%;">
+    
+    <!-- </div> -->
+  </div>
+</div>
+
 
 <div class="alert" [class.hide]="alerts<1">
   <alert *ngFor="let alert of alerts" [dismissOnTimeout]="alert.timeout" [type]="alert.type" (onClosed)="alertShift()"><span [innerHtml]="alert.msg"></span></alert>

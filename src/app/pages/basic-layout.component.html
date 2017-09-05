@@ -1,8 +1,8 @@
-<div class="container basic">
+<div class="container basic" style="margin:0;padding:0;">
 
-  <header>
-    <div class="row clearfix">
-      <div class="col-md-3 column">
+  <header style="height:8vh;">
+    
+      <div class="col-md-3 col-sm-3 column">
         <div class="row">
           <div class="col-md-12 column logo">
             <img src="/assets/img/home/logo.png" alt="">
@@ -31,16 +31,18 @@
           </div>
         </div>
       </div> -->
-    </div>
+
   </header>
 
-  <router-outlet></router-outlet>
+  <div class="col-md-12 col-sm-12" style="height:76vh;overflow-x:hidden; overflow-y:hidden;padding-top:0.5vh;">
+    <router-outlet></router-outlet>
+  </div>
   
   <footer>
-    <div class="row clearfix" style="position: absolute;bottom: 2rem;width: 100%;">
-      <div class="col-md-2 column">
+    <div class="row clearfix" style="height:12vh;bottom: 2rem;width: 100%;margin:4vh 0 0 0;">
+      <div class="col-md-1 column">
       </div>
-      <div class="col-md-8 column">
+      <div class="col-md-10 column">
         <ul class="home-list">
           <li>
             <a href="javascript:;" [routerLink]="['/home']">
@@ -92,7 +94,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-2 column">
+      <div class="col-md-1 column">
       </div>
     </div>
   </footer>

@@ -156,10 +156,11 @@ ul.home-list {
   color: white;
   display: block;
   width: 100%;
+  height: 11vh;
   list-style: none;
   margin: 0;
   padding: 0;
-  border-bottom: 4px solid white;
+  border-bottom: 0.5vh solid white;
   display: flex;
 }
 
@@ -184,14 +185,14 @@ ul.home-list li a {
 ul.home-list li a:hover img {
   -webkit-transform: scale(1.3);
   -ms-transform: scale(1.3);
-  transform: scale(1.3) translateY(-0.5rem);
+  transform: scale(1.3) translateY(-0.4rem);
   zoom: 1.3;
 }
 
 ul.home-list li a img {
   margin: 0 auto;
   display: block;
-  height: 3rem;
+  height: 2rem;
   -webkit-transition: -webkit-transform .2s;
   transition: transform .2s;
 }
@@ -262,7 +263,7 @@ ul.sider-item li a:hover {
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 8px;
   height: 12px;
 }
 

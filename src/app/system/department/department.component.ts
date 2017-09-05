@@ -228,7 +228,7 @@ export class DepartmentComponent implements OnInit {
   ngOnInit(): void {
     this.totalItems = 0;
     this.currentPage = 1;
-    this.pageSize = 20;
+    this.pageSize = 10;
 
     this.searchParams = {
       departmentName: ''

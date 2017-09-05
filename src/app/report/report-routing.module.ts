@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReportComponent } from './report.component';
 import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 import { AlarmComponent } from './alarm/alarm.component';
+import { EnforceComponent } from './enforce/enforce.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { UserComponent } from './user/user.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 
 const routes: Routes = [
@@ -35,20 +38,27 @@ const routes: Routes = [
           title: '预警数据统计'
         },
       },
-      // {
-      //   path: 'car',
-      //   component: DataScreenComponent,
-      //   data: {
-      //     title: '执法数据统计'
-      //   },
-      // },
-      // {
-      //   path: 'customer',
-      //   component: DataScreenComponent,
-      //   data: {
-      //     title: '用户数据统计'
-      //   },
-      // }
+      {
+        path: 'enforce',
+        component: EnforceComponent,
+        data: {
+          title: '执法数据统计'
+        },
+      },
+      {
+        path: 'user',
+        component: UserComponent,
+        data: {
+          title: '用户数据统计'
+        },
+      },
+      {
+        path: 'feedback',
+        component: FeedbackComponent,
+        data: {
+          title: '投诉建议和反馈率统计'
+        },
+      }
     ]
   }
 ];

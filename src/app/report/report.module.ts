@@ -7,6 +7,9 @@ import { ReportComponent } from './report.component';
 import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 import { AlarmComponent } from './alarm/alarm.component';
 import { DeliveryComponent } from './delivery/delivery.component';
+import { EnforceComponent } from './enforce/enforce.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   imports: [
@@ -19,6 +22,9 @@ import { DeliveryComponent } from './delivery/delivery.component';
     GasCylinderComponent,
     AlarmComponent,
     DeliveryComponent,
+    EnforceComponent,
+    FeedbackComponent,
+    UserComponent,
   ]
 })
 export class ReportModule { }

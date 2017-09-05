@@ -22,6 +22,7 @@ import { BasicLayoutComponent } from './pages/basic-layout.component';
 
 import { AuthGuard } from './service/auth-guard.service';
 import { HttpService } from './service/http.service';
+import { ShowViewComponent } from './show-view/show-view.component';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { HttpService } from './service/http.service';
     HomeComponent,
     BigDataComponent,
     BasicLayoutComponent,
+    ShowViewComponent,
   ],
   providers: [
     {

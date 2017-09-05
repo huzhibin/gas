@@ -13,7 +13,7 @@ import { VideoComponent } from './video/video.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'gas-cylinder',
+    redirectTo: 'company ',
     pathMatch: 'full',
   },
   {

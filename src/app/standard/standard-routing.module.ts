@@ -3,7 +3,7 @@ import { Routes,
      RouterModule } from '@angular/router';
 
 import { StandardComponent } from './standard.component';
-import { VideoComponent } from './video/video.component';
+// import { VideoComponent } from './video/video.component';
 import { CodeComponent } from './company-code/code.component';
 import { CylinderCodeComponent} from './cylinderCode/cylinderCode.component';
 import { StationCodeComponent} from './stationCode/stationCode.component';
@@ -28,13 +28,13 @@ const routes: Routes = [
           title: '企业编码'
         },
       },
-      {
-        path: 'video',
-        component: VideoComponent,
-        data: {
-          title: '车辆管理'
-        },
-      },
+      // {
+      //   path: 'video',
+      //   component: VideoComponent,
+      //   data: {
+      //     title: '车辆管理'
+      //   },
+      // },
       {
         path: 'cylinder-code',
         component: CylinderCodeComponent,

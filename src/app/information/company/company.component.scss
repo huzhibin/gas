@@ -29,3 +29,11 @@ color: #20a8d8;
 label{
 margin-top: 0.25rem;
 }
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #1792ab;
+    word-break: break-all;
+    min-width: 60px;
+
+}
+

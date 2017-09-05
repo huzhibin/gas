@@ -5,9 +5,9 @@ const guotao = 'http://192.168.1.107:28081/';
 const demo = 'http://localhost:8080/iecloud/'
 const url = guotao;
 
-export const URL = url;
 export const API = {
 
+  'URL': url,
   /**
    * 大数据可视化
    */

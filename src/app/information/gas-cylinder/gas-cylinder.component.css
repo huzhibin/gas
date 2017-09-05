@@ -1,0 +1,5 @@
+.table-bordered th, .table-bordered td {
+    border: 1px solid #1792ab;
+    /* min-width: 80px; */
+    word-break: break-all;
+}

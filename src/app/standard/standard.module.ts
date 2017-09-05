@@ -16,7 +16,7 @@ import { StandardComponent } from './standard.component';
 // import { DeliverymanComponent } from './deliveryman/deliveryman.component';
 // import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
 // import { CarComponent } from './car/car.component';
-import { VideoComponent } from './video/video.component';
+// import { VideoComponent } from './video/video.component';
 import { CodeComponent } from './company-code/code.component';
 import { CylinderCodeComponent } from './cylinderCode/cylinderCode.component';
 import { StationCodeComponent } from './stationCode/stationCode.component';
@@ -36,7 +36,7 @@ import { StationCodeComponent } from './stationCode/stationCode.component';
   ],
   declarations: [
     StandardComponent,
-    VideoComponent,
+    // VideoComponent,
     CodeComponent,
     StationCodeComponent,
     CylinderCodeComponent

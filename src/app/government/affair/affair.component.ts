@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AffairService } from "./affair.service";
-import { URL } from "../../service/API";
+import { API } from "../../service/API";
 @Component({
   templateUrl: 'affair.component.html',
   styleUrls: ['affair.component.css'],
@@ -299,7 +299,7 @@ export class AffairComponent implements OnInit {
     })
   }
   getProcessStateDiagram(executionid) {
-    this.history.imageSrc = URL + "activiti/traceprocess.do?executionid=" + executionid;
+    this.history.imageSrc = API.URL + "activiti/traceprocess.do?executionid=" + executionid;
     // this.affairService.getProcessStateDiagram({
     //   executionid: executionid
     // }).then(data => {
@@ -317,7 +317,7 @@ export class AffairComponent implements OnInit {
   }
   getFinishProcessDetail(processInstanceid) {
     console.dir(processInstanceid);
-    this.history.imageSrc = URL + "activiti/processinfo.do?processInstanceid=" + processInstanceid;
+    this.history.imageSrc = API.URL + "activiti/processinfo.do?processInstanceid=" + processInstanceid;
     // this.affairService.getFinishProcessDetail({
     //   processInstanceid: processInstanceid
     // }).then(data => {

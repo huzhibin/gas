@@ -38,20 +38,21 @@
         <div class="tab-h">
           <table class="table table-bordered  table-sm ">
             <thead>
-              <tr>
+
+              <tr class="mx-0">
                 <th><input #checkedAll type="checkbox" name="Companybox" (change)="selectAll(checkedAll.checked)"></th>
                 <th *ngFor="let th of theads">{{ th }}</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let Company of CompanyList" (click)="Company.checked = !Company.checked" [class.active]="Company.checked">
+              <tr *ngFor="let Company of CompanyList" (click)="Company.checked = !Company.checked">
                 <td><input type="checkbox" name="Companybox" [(ngModel)]="Company.checked" (click)="$event.stopPropagation();"></td>
                 <td>{{ Company.companyNumber}}</td>
                 <td>{{ Company.companyName}}</td>
                 <td>{{ Company.companyType }}</td>
                 <td>{{ Company.createUser}}</td>
                 <td>{{ Company.address }}</td>
-                <td>{{ Company.description}}</td>
+                <td style="min-width:90px">{{ Company.description}}</td>
                 <td>{{ Company.contactName}}</td>
                 <td>{{ Company.phone }}</td>
                 <td>{{ Company.email}}</td>
@@ -134,7 +135,7 @@
               </div>
               <div class="file-info" *ngIf="false">
                 <span>已添加文件：</span>
-                <span class="file-name" style="color:"></span>
+                <span class="file-name"></span>
               </div>
             </div>
           </div>
@@ -197,14 +198,14 @@
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">公司名称</label>
             <div class="col-md-9">
-              <input type="password" [(ngModel)]="addForm.companyName" name="companyName" maxlength="20" class="form-control form-control-sm"
+              <input type="text" [(ngModel)]="addForm.companyName" name="companyName" maxlength="20" class="form-control form-control-sm"
                 placeholder="公司名称" required>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">公司类型</label>
             <div class="col-md-9">
-              <input type="password" [(ngModel)]="addForm.companyType" name="companyType" maxlength="20" class="form-control form-control-sm"
+              <input type="text" [(ngModel)]="addForm.companyType" name="companyType" maxlength="20" class="form-control form-control-sm"
                 placeholder="公司类型" required>
             </div>
           </div>
@@ -279,68 +280,68 @@
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">公司编号</label>
             <div class="col-md-9">
-              <input type="text" [(ngModel)]="addForm.companyNumber" name="companyNumber" maxlength="20" class="form-control form-control-sm"
+              <input type="text" [(ngModel)]="editForm.companyNumber" name="companyNumber" maxlength="20" class="form-control form-control-sm"
                 placeholder="公司编号" required>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">公司名称</label>
             <div class="col-md-9">
-              <input type="password" [(ngModel)]="addForm.companyName" name="companyName" maxlength="20" class="form-control form-control-sm"
+              <input type="text" [(ngModel)]="editForm.companyName" name="companyName" maxlength="20" class="form-control form-control-sm"
                 placeholder="公司名称" required>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">公司类型</label>
             <div class="col-md-9">
-              <input type="password" [(ngModel)]="addForm.companyType" name="companyType" maxlength="20" class="form-control form-control-sm"
+              <input type="text" [(ngModel)]="editForm.companyType" name="companyType" maxlength="20" class="form-control form-control-sm"
                 placeholder="公司类型" required>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">公司类型</label>
             <div class="col-md-9">
-              <input type="text" [(ngModel)]="addForm.createUser" name="createUser" class="form-control form-control-sm" placeholder="公司类型"
+              <input type="text" [(ngModel)]="editForm.createUser" name="createUser" class="form-control form-control-sm" placeholder="公司类型"
                 required>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">地址</label>
             <div class="col-md-9">
-              <input type="text" [(ngModel)]="addForm.address" name="address" class="form-control form-control-sm" placeholder="地址" required>
+              <input type="text" [(ngModel)]="editForm.address" name="address" class="form-control form-control-sm" placeholder="地址" required>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">公司描述</label>
             <div class="col-md-9">
-              <input type="text" [(ngModel)]="addForm.description" name="description" class="form-control form-control-sm" placeholder="公司描述"
+              <input type="text" [(ngModel)]="editForm.description" name="description" class="form-control form-control-sm" placeholder="公司描述"
                 required>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">联系人名称</label>
             <div class="col-md-9">
-              <input type="text" [(ngModel)]="addForm.contactName" name="contactName" class="form-control form-control-sm" placeholder="联系人名称"
+              <input type="text" [(ngModel)]="editForm.contactName" name="contactName" class="form-control form-control-sm" placeholder="联系人名称"
                 required>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">联系电话</label>
             <div class="col-md-9">
-              <input type="text" [(ngModel)]="addForm.phone" name="phone" class="form-control form-control-sm" placeholder="联系电话" required>
+              <input type="text" [(ngModel)]="editForm.phone" name="phone" class="form-control form-control-sm" placeholder="联系电话" required>
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">联系邮件</label>
             <div class="col-md-9">
-              <input type="text" [(ngModel)]="addForm.email" name="email" class="form-control form-control-sm" placeholder="联系邮件">
+              <input type="text" [(ngModel)]="editForm.email" name="email" class="form-control form-control-sm" placeholder="联系邮件">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">传真</label>
             <div class="col-md-9">
-              <input type="text" [(ngModel)]="addForm.fax" name="fax" class="form-control form-control-sm" placeholder="传真">
+              <input type="text" [(ngModel)]="editForm.fax" name="fax" class="form-control form-control-sm" placeholder="传真">
             </div>
           </div>
         </form>
@@ -355,7 +356,7 @@
 
 <div class="modal" bsModal #deleteModal="bs-modal" (onShow)="initDeleteForm()" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
   tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-danger modal-sm" role="document">
+  <div class="modal-dialog modal-danger " role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">删除企业档案信息</h4>

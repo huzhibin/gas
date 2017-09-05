@@ -58,7 +58,7 @@
                                     
                                         <td>{{ deliverCar.taskId}}</td>
                                         <td>{{ deliverCar.timestamp |date:'y-MM-dd' }}</td>
-                                        <td><img src="../../assets/img/zz.jpg" style="width:25px;height:25px"></td>
+                                        <td (click)="uploadModal.show();"><img src="../../assets/img/zz.jpg" style="width:25px;height:25px"></td>
 
 
                                 </tr>
@@ -281,6 +281,33 @@
     </div>
    
 </div> -->
+<div class="modal" bsModal #uploadModal="bs-modal"  [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
+tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-danger " role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">上传</h4>
+            <button type="button" class="close" (click)="uploadModal.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+        </div>
+        <div class="modal-body">
+                <div style="margin: 30px 200px">
+                        <span class="btn btn-primary btn-file">
+                                            上传文件
+                                            <input id="file" type="file" name="file"   multiple />
+                                        </span>
+                    </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="uploadModal.hide()">取消</button>
+            
+        </div>
+    </div>
+    
+</div>
+
+</div> 
     <div class="alert" [class.hide]="alerts<1">
         <alert *ngFor="let alert of alerts" [dismissOnTimeout]="alert.timeout" [type]="alert.type" (onClosed)="alertShift()"><span [innerHtml]="alert.msg"></span></alert>
     </div>

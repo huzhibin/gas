@@ -7,7 +7,7 @@ import { GasCylinderService } from './gas-cylinder.service';
 
 @Component({
     templateUrl: 'gas-cylinder.component.html',
-    styleUrls: [],
+    styleUrls: ['gas-cylinder.component.css'],
     providers: [GasCylinderService]
 })
 export class GasCylinderComponent implements OnInit {
@@ -432,6 +432,7 @@ export class GasCylinderComponent implements OnInit {
         ];
         this.initSearchParams();
         this.initAddForm();
+        this.initEditForm();
         this.initDetailList();
         this.initEditForm();
         this.getList();

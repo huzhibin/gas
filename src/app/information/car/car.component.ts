@@ -5,7 +5,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 import {CarService} from './car.service';
 @Component({
     templateUrl: 'car.component.html',
-    styleUrls: [],
+    styleUrls: ['car.component.scss'],
     providers: [CarService]
 })
 export class CarComponent implements OnInit {

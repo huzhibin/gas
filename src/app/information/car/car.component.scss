@@ -1,0 +1,24 @@
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+  
+}
+ #file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+ .file-info {
+    margin: 15px 0;
+
+    
+}
+.file-name {
+    color: #31b0d5;
+}

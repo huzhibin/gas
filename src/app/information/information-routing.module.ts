@@ -15,7 +15,7 @@ import { StationCodeComponent} from './stationCode/stationCode.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'gas-cylinder',
+    redirectTo: 'company ',
     pathMatch: 'full',
   },
   {

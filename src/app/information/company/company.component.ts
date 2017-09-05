@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 import { CompanyService } from './company.service';
 import 'rxjs/Rx' ;
+// import { API } from '../../service/api';
 
 @Component({
     templateUrl: 'company.component.html',
@@ -153,7 +154,7 @@ exportParams: {
         }
         this.CompanyService.exportExcelCompany(params).then(data=>{
             if(data.status==0){
-                this.exportParams.exportUrl="http://192.168.1.107;28081"+data.data;
+                this.exportParams.exportUrl="http://192.168.1.107:28081"+data.data;
                 window.location.href=this.exportParams.exportUrl;
             }
             else{

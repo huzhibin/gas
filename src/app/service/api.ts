@@ -4,7 +4,7 @@ const feifeng = 'http://192.168.1.26:18080/';
 const guotao = 'http://192.168.1.107:28081/';
 const demo = 'http://localhost:8080/iecloud/';
 const release = 'http://59.110.233.230/iecloud/';
-const url = demo;
+const url = guotao;
 
 export const API = {
 

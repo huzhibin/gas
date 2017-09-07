@@ -1,14 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { EnforceService } from "./enforce.service";
+
 
 @Component({
   templateUrl: 'enforce.component.html',
-  // styleUrls: ['data-screen.component.css']
+  providers: [EnforceService]
 })
 export class EnforceComponent implements OnInit {
   enforce: any = {} //执法状态图
+  statusTitle = [];
+  statusData: any = [];
+  constructor(private enforceService: EnforceService) { }
+  getHttpData() {
+    this.enforceService.getEnforceStatus(null).then(data => {
+      if (data.status === 0) {
+        for (let i = 0; i < data.data.length; i++){
+          let temp: any = {};
+          temp.value = data.data[i]['COUNT(*)'];
+          temp.name = data.data[i]['status'];
+          this.statusTitle.push(temp.name);
+          this.statusData.push(temp);
+        }
+        this.enforce.myChart.setOption(this.enforce.option); 
+        this.enforce.myChart.hideLoading();
+      } else {
+        console.error("数据获取失败！", data);
+      }
+    });
+  };
   ngOnInit() {
     let echarts = window['echarts'];
-
     this.enforce.option = {
       title: {
         text: '执法状态图',
@@ -33,7 +54,7 @@ export class EnforceComponent implements OnInit {
       legend: {
         orient: 'vertical',
         left: 'left',
-        data: ['处理中', '已处理', '未处理', '超期']
+        data: this.statusTitle,
       },
       calculable: true,
       series: [
@@ -50,17 +71,20 @@ export class EnforceComponent implements OnInit {
               position: 'left'
             }
           },
-          data: [
-            { value: 10, name: '处理中' },
-            { value: 50, name: '已处理' },
-            { value: 20, name: '未处理' },
-            { value: 80, name: '超期' }
-          ]
+          data: this.statusData,
+          // [
+          //   { value: 10, name: '处理中' },
+          //   { value: 50, name: '已处理' },
+          //   { value: 20, name: '未处理' },
+          //   { value: 80, name: '超期' }
+          // ]
         }
       ]
     };
     this.enforce.dom = document.getElementById("enforce");
     this.enforce.myChart = echarts.init(this.enforce.dom);
-    this.enforce.myChart.setOption(this.enforce.option);   
+    this.enforce.myChart.setOption(this.enforce.option); 
+    this.enforce.myChart.showLoading();
+    this.getHttpData();
   }
 }

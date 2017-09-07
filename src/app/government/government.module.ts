@@ -5,6 +5,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { GasCommonModule } from '../component/gas-common.module';
+import { UEditorModule } from 'ngx-ueditor';
 
 import { GovernmentRoutingModule } from './government-routing.module';
 import { GovernmentComponent } from './government.component';
@@ -19,7 +20,8 @@ import { AffairComponent } from './affair/affair.component';
     AlertModule,
     TabsModule,
     ModalModule,
-    GasCommonModule
+    GasCommonModule,
+    UEditorModule
   ],
   declarations: [ 
     GovernmentComponent,

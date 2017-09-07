@@ -11,7 +11,7 @@
               <textarea [(ngModel)]="start.details" name="problem" rows="9" class="form-control" placeholder="请输入问题详情"></textarea>
             </div>
           </div>
-          <button class="btn btn-sm btn-primary" type="button" (click)="startProcess()"><i class="fa fa-search"></i>&nbsp; 发起</button>
+          <button class="btn btn-sm btn-primary" type="button" (click)="startProcess()">&nbsp; 发起</button>
         </tab>
 
         <tab (select)="getStartProcessList()">
@@ -61,7 +61,7 @@
           </div>
           <div class="form-group row" [class.hide]="plan.taskid == ''">
             <div class="col-md-2">
-              <button class="btn btn-sm btn-primary" type="button" (click)="submitPlan()"><i class="fa fa-search"></i>&nbsp; 确认</button>
+              <button class="btn btn-sm btn-primary" type="button" (click)="submitPlan()">&nbsp; 确认</button>
             </div>
           </div>
 
@@ -158,7 +158,7 @@
           </div>
           <div class="form-group row" [class.hide]="action.taskid == ''">
             <div class="col-md-2">
-              <button class="btn btn-sm btn-primary" type="button" (click)="submitActionResult()"><i class="fa fa-search"></i>&nbsp; 确认</button>
+              <button class="btn btn-sm btn-primary" type="button" (click)="submitActionResult()">&nbsp; 确认</button>
             </div>
           </div>
 

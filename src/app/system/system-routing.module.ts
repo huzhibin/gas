@@ -25,7 +25,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'role',
+        path: 'role/:departmentNumber',
         component: RoleComponent,
         data: {
           title: '角色分配'

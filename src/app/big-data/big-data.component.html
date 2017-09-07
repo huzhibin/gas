@@ -5,7 +5,7 @@
       <div class="col-md-3 col-sm-3 column" >
         <div class="row">
           <div class="col-md-12 column logo" [routerLink]="['/home']" style="cursor:pointer;">
-            <img src="/assets/img/home/logo.png" alt="">
+            <img src="assets/img/home/logo.png" alt="">
             <span>智慧燃气安全大数据统一监管平台</span>
           </div>
         </div>
@@ -13,7 +13,7 @@
       <div class="col-md-6 col-sm-6 column">
         <!-- <div class="row"> -->
         <div class="col-md-12 column home-top-mid">
-          <img src="/assets/img/home/visualization-top.png" alt="" style="width:100%;">
+          <img src="assets/img/home/visualization-top.png" alt="" style="width:100%;">
           <span class="header-time">{{curTime}}</span>
           <span class="header-date">{{DateTime}} </span>
         </div>
@@ -41,10 +41,10 @@
           <div class="col-xs-3">
             <section class="left">
               <h3>各监管节点</h3>
-              <h4 (click)="areaClick('总预览')"><img src="/assets/img/bigData/placename.png" alt="">温州市</h4>
+              <h4 (click)="areaClick('总预览')"><img src="assets/img/bigData/placename.png" alt="">温州市</h4>
               <ul class="geoList">
                 <li *ngFor="let area of alarmData" (click)="areaClick(area.name)">
-                  <img src="/assets/img/bigData/position.png"><span>{{ area.name }}</span><b [style.color]="colorList[area.value]">●</b>
+                  <img src="assets/img/bigData/position.png"><span>{{ area.name }}</span><b [style.color]="colorList[area.value]">●</b>
                 </li>
               </ul>
             </section>
@@ -130,7 +130,7 @@
       <div class="col-md-6 column">
         <div class="row">
           <div class="col-md-12 column home-bottom-mid">
-            <img src="/assets/img/home/visualization-bottom.png" style="width:100%;margin-top:0;" alt="">
+            <img src="assets/img/home/visualization-bottom.png" style="width:100%;margin-top:0;" alt="">
           </div>
         </div>
       </div>

@@ -62,8 +62,8 @@
 </div>
 <!--/.row-->
 
-<div bsModal #addModal="bs-modal" [config]="{ignoreBackdropClick: true, keyboard: false}" (onShow)="initAddForm()" class="modal fade"
-  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div bsModal #addModal="bs-modal" [config]="{ignoreBackdropClick: true, keyboard: false}" (onShow)="initAddForm();" (onShown)="addGraphChange();"
+  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -78,7 +78,7 @@
             <div class="card">
               <div class="card-block">
 
-                <!-- <form #ngAddForm="ngForm" class="form-horizontal"> -->
+                <form #ngAddForm="ngForm" class="form-horizontal">
                   <div class="form-group row" style="margin:.5rem;">
                     <label class="col-md-2 form-control-label" for="text-input">名称</label>
                     <div class="col-md-6">
@@ -88,10 +88,16 @@
                   </div>
                   <div class="form-group row" style="margin:.5rem;">
                     <label class="col-md-2 form-control-label" for="text-input">描述</label>
-                    <div class="col-md-6">
-                      <textarea type="text" rows="5" [(ngModel)]="addForm.describe" name="userName" maxlength="20" class="form-control form-control-sm"
-                        placeholder="描述"></textarea>
+                    <div class="col-md-12">
+                      <!-- <textarea type="text" rows="5" [(ngModel)]="addForm.describe" name="userName" maxlength="20" class="form-control form-control-sm"
+                        placeholder="描述"></textarea>                    -->
+
+                      <ueditor #addEditor></ueditor>
                     </div>
+                  </div>
+
+                  <div class="mermaid" id="addMermaid" style="background-color:white;margin:.5rem 0;height:auto;">
+                    graph LR 0(开始)
                   </div>
 
                   <table class="table table-bordered table-sm">
@@ -109,33 +115,33 @@
                       <tr *ngFor="let task of addForm.details">
                         <td>{{task.id}}
                         </td>
-                        <td><input type="text" [(ngModel)]="task.parentID" name="parentID" maxlength="20" class="form-control form-control-sm"
-                            placeholder="请输入父节点id" required>
+                        <td><input type="text" [(ngModel)]="task.parentID" (change)="addGraphChange();" [name]="task.id+'parentID'"
+                            maxlength="20" class="form-control form-control-sm" placeholder="请输入父节点id" required>
                         </td>
                         <td>
-                          <select name="department" [(ngModel)]="task.department" class="form-control form-control-sm">
+                          <select [name]="task.id+'department'" [(ngModel)]="task.department" (change)="addGraphChange();" class="form-control form-control-sm">
                                       <option *ngFor="let department of departmentList" [value]="department.departmentName">{{ department.departmentName }}</option>
                                     </select>
                         </td>
                         <td>
-                          <select name="transactor" [(ngModel)]="task.transactor" class="form-control form-control-sm">
+                          <select [name]="task.id+'transactor'" [(ngModel)]="task.transactor" (change)="addGraphChange();" class="form-control form-control-sm">
                                   <option *ngFor="let user of userList" [value]="user.realName">{{ user.realName }}</option>
                                 </select>
                         </td>
                         <td>
-                          <select name="operateType" [(ngModel)]="task.operateType" class="form-control form-control-sm">
+                          <select [name]="task.id+'operateType'" [(ngModel)]="task.operateType" (change)="addGraphChange();" class="form-control form-control-sm">
                                   <option *ngFor="let operateType of operateTypeList" [value]="operateType">{{ operateType }}</option>
                                 </select>
                         </td>
                         <td>
-                          <button class="btn btn-sm btn-outline-primary" type="button" (click)="addTask(addForm.details)">添加</button>
-                          <button class="btn btn-sm btn-outline-primary" type="button" (click)="deleteTask(task,addForm.details)">删除</button>
+                          <button class="btn btn-sm btn-outline-primary" type="button" (click)="addTask(addForm.details);addGraphChange();">添加</button>
+                          <button class="btn btn-sm btn-outline-primary" type="button" (click)="deleteTask(task,addForm.details);addGraphChange();">删除</button>
                         </td>
 
                       </tr>
                     </tbody>
                   </table>
-                <!-- </form> -->
+                </form>
 
               </div>
             </div>
@@ -144,14 +150,14 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="addModal.hide()">取消</button>
-        <button type="button" class="btn btn-primary" (click)="add(true,addModal)">保存</button>
+        <button type="button" class="btn btn-primary" (click)="add(ngAddForm.valid,addModal)">保存</button>
       </div>
     </div>
   </div>
 </div>
 
-<div bsModal #editModal="bs-modal" (onShow)="initEditForm()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+<div bsModal #editModal="bs-modal" (onShow)="initEditForm()" (onShown)="editGraphChange();" class="modal fade" tabindex="-1"
+  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-warning modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -161,69 +167,75 @@
           </button>
       </div>
       <div class="modal-body">
-        <!-- <form #ngEditForm="ngForm" class="form-horizontal"> -->
-        <div class="form-group row" style="margin:.5rem;">
-          <label class="col-md-2 form-control-label" for="text-input">名称</label>
-          <div class="col-md-6">
-            <input type="text" [(ngModel)]="editForm.name" name="name" maxlength="20" class="form-control form-control-sm" placeholder="名称"
-              required>
+        <form #ngEditForm="ngForm" class="form-horizontal">
+          <div class="form-group row" style="margin:.5rem;">
+            <label class="col-md-2 form-control-label" for="text-input">名称</label>
+            <div class="col-md-6">
+              <input type="text" [(ngModel)]="editForm.name" name="name" maxlength="20" class="form-control form-control-sm" placeholder="名称"
+                required>
+            </div>
           </div>
-        </div>
-        <div class="form-group row" style="margin:.5rem;">
-          <label class="col-md-2 form-control-label" for="text-input">描述</label>
-          <div class="col-md-6">
-            <textarea type="text" rows="5" [(ngModel)]="editForm.describe" name="userName" maxlength="20" class="form-control form-control-sm"
-              placeholder="描述"></textarea>
-          </div>
-        </div>
+          <div class="form-group row" style="margin:.5rem;">
+            <label class="col-md-2 form-control-label" for="text-input">描述</label>
+            <div class="col-md-12">
+              <!-- <textarea type="text" rows="5" [(ngModel)]="editForm.describe" name="userName" maxlength="20" class="form-control form-control-sm"
+                placeholder="描述"></textarea> -->
 
-        <table class="table table-bordered table-sm">
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>父节点id</th>
-              <th>部门</th>
-              <th>办理人</th>
-              <th>操作类型</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let task of editForm.details">
-              <td>
-                {{task.id}}
-              </td>
-              <td><input type="text" [(ngModel)]="task.parentID" name="parentID" maxlength="20" class="form-control form-control-sm"
-                  placeholder="请输入父节点id" required>
-              </td>
-              <td>
-                <select name="department" [(ngModel)]="task.department" class="form-control form-control-sm">
+              <ueditor #editEditor></ueditor>
+            </div>
+          </div>
+
+          <div class="mermaid" id="editMermaid" style="background-color:white;margin:.5rem 0;height:auto;">
+            graph LR 0(开始)
+          </div>
+
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>父节点id</th>
+                <th>部门</th>
+                <th>办理人</th>
+                <th>操作类型</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of editForm.details">
+                <td>
+                  {{task.id}}
+                </td>
+                <td><input type="text" [(ngModel)]="task.parentID" (change)="editGraphChange()" [name]="task.id+'parentID'" maxlength="20"
+                    class="form-control form-control-sm" placeholder="请输入父节点id" required>
+                </td>
+                <td>
+                  <select [name]="task.id+'department'" [(ngModel)]="task.department" (change)="editGraphChange()" class="form-control form-control-sm">
                                   <option *ngFor="let department of departmentList" [value]="department.departmentName">{{ department.departmentName }}</option>
                                 </select>
-              </td>
-              <td>
-                <select name="transactor" [(ngModel)]="task.transactor" class="form-control form-control-sm">
+                </td>
+                <td>
+                  <select [name]="task.id+'transactor'" [(ngModel)]="task.transactor" (change)="editGraphChange()" class="form-control form-control-sm">
                               <option *ngFor="let user of userList" [value]="user.realName">{{ user.realName }}</option>
                             </select>
-              </td>
-              <td>
-                <select name="operateType" [(ngModel)]="task.operateType" class="form-control form-control-sm">
+                </td>
+                <td>
+                  <select [name]="task.id+'operateType'" [(ngModel)]="task.operateType" (change)="editGraphChange()" class="form-control form-control-sm">
                               <option *ngFor="let operateType of operateTypeList" [value]="operateType">{{ operateType }}</option>
                             </select>
-              </td>
-              <td>
-                <button class="btn btn-sm btn-outline-primary" type="button" (click)="addTask(editForm.details)">添加</button>
-                <button class="btn btn-sm btn-outline-primary" type="button" (click)="deleteTask(task,editForm.details)">删除</button>
-              </td>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="addTask(editForm.details);editGraphChange()">添加</button>
+                  <button class="btn btn-sm btn-outline-primary" type="button" (click)="deleteTask(task,editForm.details);editGraphChange()">删除</button>
+                </td>
 
-            </tr>
-          </tbody>
-        </table>
-        <!-- </form> -->
+              </tr>
+            </tbody>
+          </table>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="editModal.hide()">取消</button>
-        <button type="button" class="btn btn-primary" (click)="edit(true,editModal)">保存</button>
+        <button type="button" class="btn btn-primary" (click)="edit(ngEditForm.valid,editModal)">保存</button>
       </div>
     </div>
   </div>

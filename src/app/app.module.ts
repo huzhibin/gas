@@ -11,6 +11,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { UEditorModule } from 'ngx-ueditor';
 
 // Routing Module
 import { AppRoutingModule } from './app.routing';
@@ -34,7 +35,13 @@ import { HttpService } from './service/http.service';
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
-    DatepickerModule.forRoot()
+    DatepickerModule.forRoot(),
+    UEditorModule.forRoot({
+      path: './assets/ueditor/',
+      options: {
+          themePath: (~location.href.indexOf('github') ? '/ngx-ueditor' : '') +  '/assets/ueditor/themes/'
+      }
+  })
   ],
   declarations: [
     AppComponent,

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 
 import { RoleService } from './role.service';
+import { DepartmentService } from '../department/department.service';
 
 @Component({
   templateUrl: 'role.component.html'
@@ -10,20 +12,23 @@ export class RoleComponent implements OnInit {
   totalItems: number;//总记录数
   currentPage: number;//当前页号
   pageSize: number;//分页大小
+  departmentList: any;
 
   searchParams: {
     roleName: string,
-    remark: string
+    remark: string,
+    departmentNumber: string
   };//查询参数
   theads: Array<string>;//表头字段
   roleList: Array<{
-    companyNumber: string,
-    createTime: number,
     id: number,
-    isDelete: number,
-    remark: string,
     roleName: string,
     roleNumber: string,
+    department: string,
+    departmentNumber: string,
+    isDelete: number,
+    remark: string,
+    createTime: number,
     updateTime: number,
     checked?: Boolean
   }>;//角色列表
@@ -32,9 +37,11 @@ export class RoleComponent implements OnInit {
   addForm: {
     roleName: string,
     remark: string,
+    departmentNumber: string
   };//添加对象表单
   editForm: {
     id: number,
+    departmentNumber: string,
     roleName: string,
     remark: string,
     roleNumber?: string
@@ -50,7 +57,11 @@ export class RoleComponent implements OnInit {
   alerts: any = [
   ];
 
-  constructor(private roleService: RoleService) {
+  constructor(
+    private roleService: RoleService,
+    private departmentService: DepartmentService,
+    private activatedRoute: ActivatedRoute
+  ) {
 
   }
   alertShift() {
@@ -168,6 +179,7 @@ export class RoleComponent implements OnInit {
     let params = {
       roleName: this.searchParams.roleName,
       remark: this.searchParams.remark,
+      departmentNumber: this.searchParams.departmentNumber,
       pageSize: this.pageSize,
       pageNumber: this.currentPage
     };
@@ -208,14 +220,16 @@ export class RoleComponent implements OnInit {
   initAddForm() {
     this.addForm = {
       roleName: '',
-      remark: ''
+      remark: '',
+      departmentNumber: ''
     };
   }
   initEditForm(editObj?) {
     this.editForm = {
       id: this.operand.id || '',
       roleName: this.operand.roleName || '',
-      remark: this.operand.remark || ''
+      remark: this.operand.remark || '',
+      departmentNumber: this.operand.departmentNumber || '',
     };
   }
   initDeleteForm(deleteObj?) {
@@ -231,20 +245,36 @@ export class RoleComponent implements OnInit {
 
     this.searchParams = {
       roleName: '',
-      remark: ''
+      remark: '',
+      departmentNumber: ''
     }
+
     this.operand = {};
     this.theads = [
       '角色名',
+      '部门',
       '创建时间',
       '备注',
       '操作'
     ];
 
+    this.departmentService.getDepartmentList({
+      pageNumber: 1,
+      pageSize: 999999
+    }).then(data => {
+      if (data.status == 0) {
+        this.departmentList = data.data.list;
+      }
+    })
     this.initAddForm();
     this.initEditForm();
     this.initDeleteForm();
 
-    this.getList();
+    this.activatedRoute.params.subscribe(params => {
+      console.dir(params);
+      this.searchParams.departmentNumber = params.departmentNumber;
+      this.getList();
+    })
+
   }
 }

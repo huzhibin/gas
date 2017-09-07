@@ -150,7 +150,7 @@ export class MapComponent implements OnInit {
         new this.AMap.Marker({
           map: this.map,
           position: [this.carList[index].longitude, this.carList[index].latitude],
-          icon: "/assets/img/car.png",
+          icon: "assets/img/car.png",
           offset: new this.AMap.Pixel(-16, -16),
           autoRotation: true,
           // animation: 'AMAP_ANIMATION_BOUNCE',
@@ -166,7 +166,7 @@ export class MapComponent implements OnInit {
         new this.AMap.Marker({
           map: this.map,
           position: [this.deliveryManList[index].longitude, this.deliveryManList[index].latitude],
-          icon: "/assets/img/delivery-man.png",
+          icon: "assets/img/delivery-man.png",
           offset: new this.AMap.Pixel(-16, -16),
           autoRotation: true,
           // animation: 'AMAP_ANIMATION_BOUNCE',
@@ -182,7 +182,7 @@ export class MapComponent implements OnInit {
         new this.AMap.Marker({
           map: this.map,
           position: this.gasList[index].position,
-          icon: "/assets/img/gas.png",
+          icon: "assets/img/gas.png",
           offset: new this.AMap.Pixel(-16, -16),
           autoRotation: true,
           // animation: 'AMAP_ANIMATION_DROP',
@@ -463,15 +463,15 @@ export class MapComponent implements OnInit {
           averageCenter: false,//聚合点的图标位置是否是所有聚合内点的中心点。默认为否，即聚合点的图标位置位于聚合内的第一个点处
           zoomOnClick: true, //点击聚合点时，是否散开，默认值为：true
           styles: [{
-            url: "/assets/img/gas-clusterer-32.png",
+            url: "assets/img/gas-clusterer-32.png",
             size: new self.AMap.Size(32, 32),
             offset: new self.AMap.Pixel(-16, -16)
           }, {
-            url: "/assets/img/gas-clusterer-48.png",
+            url: "assets/img/gas-clusterer-48.png",
             size: new self.AMap.Size(48, 48),
             offset: new self.AMap.Pixel(-24, -24)
           }, {
-            url: "/assets/img/gas-clusterer-64.png",
+            url: "assets/img/gas-clusterer-64.png",
             size: new self.AMap.Size(64, 64),
             offset: new self.AMap.Pixel(-32, -32)
           }]
@@ -486,15 +486,15 @@ export class MapComponent implements OnInit {
           averageCenter: false,//聚合点的图标位置是否是所有聚合内点的中心点。默认为否，即聚合点的图标位置位于聚合内的第一个点处
           zoomOnClick: true, //点击聚合点时，是否散开，默认值为：true
           styles: [{
-            url: "/assets/img/car-clusterer-32.png",
+            url: "assets/img/car-clusterer-32.png",
             size: new self.AMap.Size(32, 32),
             offset: new self.AMap.Pixel(-16, -16)
           }, {
-            url: "/assets/img/car-clusterer-48.png",
+            url: "assets/img/car-clusterer-48.png",
             size: new self.AMap.Size(48, 48),
             offset: new self.AMap.Pixel(-24, -24)
           }, {
-            url: "/assets/img/car-clusterer-64.png",
+            url: "assets/img/car-clusterer-64.png",
             size: new self.AMap.Size(64, 64),
             offset: new self.AMap.Pixel(-32, -32)
           }]
@@ -509,15 +509,15 @@ export class MapComponent implements OnInit {
           averageCenter: false,//聚合点的图标位置是否是所有聚合内点的中心点。默认为否，即聚合点的图标位置位于聚合内的第一个点处
           zoomOnClick: true, //点击聚合点时，是否散开，默认值为：true
           styles: [{
-            url: "/assets/img/delivery-man-clusterer-32.png",
+            url: "assets/img/delivery-man-clusterer-32.png",
             size: new self.AMap.Size(32, 32),
             offset: new self.AMap.Pixel(-16, -16)
           }, {
-            url: "/assets/img/delivery-man-clusterer-48.png",
+            url: "assets/img/delivery-man-clusterer-48.png",
             size: new self.AMap.Size(48, 48),
             offset: new self.AMap.Pixel(-24, -24)
           }, {
-            url: "/assets/img/delivery-man-clusterer-64.png",
+            url: "assets/img/delivery-man-clusterer-64.png",
             size: new self.AMap.Size(64, 64),
             offset: new self.AMap.Pixel(-32, -32)
           }]

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { UEditorComponent } from 'ngx-ueditor';
 
 import { FlowService } from "./flow.service";
 import { UserService } from "../../system/user/user.service";
@@ -15,7 +16,9 @@ import { DepartmentService } from "../../system/department/department.service";
   ]
 })
 export class FlowComponent implements OnInit {
-
+  @ViewChild('addEditor') addEditor: UEditorComponent;
+  @ViewChild('editEditor') editEditor: UEditorComponent;
+  full_source: string;
 
   totalItems: number;//总记录数
   currentPage: number;//当前页号
@@ -48,6 +51,7 @@ export class FlowComponent implements OnInit {
     name: string,//流程名称
     describe: string,//流程描述
     party: string,//关系人
+    flowChart: any,//流程图描述语句
     details: Array<{
       id: number,
       parentID: string,//父节点id
@@ -80,6 +84,7 @@ export class FlowComponent implements OnInit {
     private flowService: FlowService,
     private userService: UserService,
     private departmentService: DepartmentService,
+    private el: ElementRef
   ) {
 
   }
@@ -135,14 +140,14 @@ export class FlowComponent implements OnInit {
 
       let temp = '';
       for (let j = 0; j < this.addForm.details.length; j++) {
-        if(this.addForm.details[j].transactor)
-        temp += this.addForm.details[j].transactor + ',';
+        if (this.addForm.details[j].transactor)
+          temp += this.addForm.details[j].transactor + ',';
       }
 
       this.flowService.addFlow({
         name: this.addForm.name,
         founderId: this.addForm.founderId || 1,
-        describe: this.addForm.describe,
+        describe: this.addEditor.Instance.getPlainTxt(),
         party: temp,
         details: JSON.stringify(this.addForm.details),
       }).then(data => {
@@ -173,15 +178,15 @@ export class FlowComponent implements OnInit {
   edit(valid, modal) {
     if (valid) {
       let temp = '';
-      for (let j = 0; j < this.editForm .details.length; j++) {
-        if(this.editForm .details[j].transactor)
-        temp += this.editForm .details[j].transactor + ',';
+      for (let j = 0; j < this.editForm.details.length; j++) {
+        if (this.editForm.details[j].transactor)
+          temp += this.editForm.details[j].transactor + ',';
       }
       this.flowService.updateFlow({
         id: this.editForm.id,
         name: this.editForm.name,
         founderId: this.editForm.founderId,
-        describe: this.editForm.describe,
+        describe: this.editEditor.Instance.getPlainTxt(),
         party: temp,
         details: JSON.stringify(this.editForm.details),
       }).then(data => {
@@ -256,8 +261,8 @@ export class FlowComponent implements OnInit {
     this.flowService.getFlowList(params).then(data => {
       console.log(data);
       if (data.status == 0) {
-        this.flowList = data.data;
-        this.totalItems = data.data.length;
+        this.flowList = data.data.list;
+        this.totalItems = data.data.total;
       }
     });
   }
@@ -290,8 +295,9 @@ export class FlowComponent implements OnInit {
     this.addForm = {
       founderId: null,
       name: '',
-      describe: '',
+      describe: this.getAddDescribe(),
       party: '',
+      flowChart: ``,
       details: [
         {
           id: 1,
@@ -309,19 +315,30 @@ export class FlowComponent implements OnInit {
       id: this.operand.id || null,
       founderId: this.operand.founderId || null,
       name: this.operand.name || '',
-      describe: this.operand.describe || '',
+      describe: this.getEditDescribe(),
       party: this.operand.party || '',
-      details: JSON.parse(this.operand.details) || [
-        {
-          id: 1,
-          parentID: '0',
-          department: '',
-          transactor: '',
-          operateType: ''
-        }
-      ],
+      details: JSON.parse(this.operand.details),
     };
     console.dir(this.editForm);
+  }
+  getAddDescribe(){
+    if(this.addEditor.Instance){
+      console.dir(this.addEditor.Instance);
+      this.addEditor.Instance.setContent('');
+      return '';
+    }else{
+      return '';
+    }
+  }
+  getEditDescribe(){
+    if(this.editEditor.Instance){
+      console.dir(this.editEditor.Instance);
+      console.dir(this.operand.describe);
+      this.editEditor.Instance.setContent(this.operand.describe);
+      return this.operand.describe;
+    }else{
+      return '';
+    }
   }
   initDeleteForm(deleteObj?) {
     this.deleteForm = {
@@ -397,5 +414,51 @@ export class FlowComponent implements OnInit {
 
     this.getList();
   }
+
+  getGraphDefinition(definitionArr) {
+    let graphDefinition = `graph LR\n`;
+    //产生图定义数据
+    for (let i = 0; i < definitionArr.length; i++) {
+      let element = definitionArr[i];
+      let parents = element.parentID.split(',');
+      for (let j = 0; j < parents.length; j++) {
+        let parentID = parents[j] == '0' ? '0(0--开始)' : parents[j];
+        graphDefinition += `${parentID}-->${element.id}["${element.id}--${element.department}-${element.transactor}(${element.operateType})"]\n`;
+      }
+    }
+    return graphDefinition;
+  }
+
+  addGraphChange() {
+
+    let graphDefinition = this.getGraphDefinition(this.addForm.details);
+    console.log(graphDefinition);
+
+    let mermaidAPI = window['mermaidAPI'];
+    mermaidAPI.initialize({
+      startOnLoad: false
+    });
+    var element = document.querySelector("#addMermaid");
+    var insertSvg = function (svgCode) {
+      element.innerHTML = svgCode;
+    };
+    mermaidAPI.render('addGraph', graphDefinition, insertSvg, element);
+  }
+
+  editGraphChange() {
+    let graphDefinition = this.getGraphDefinition(this.editForm.details);
+    console.log(graphDefinition);
+
+    let mermaidAPI = window['mermaidAPI'];
+    mermaidAPI.initialize({
+      startOnLoad: false
+    });
+    var element = document.querySelector("#editMermaid");
+    var insertSvg = function (svgCode) {
+      element.innerHTML = svgCode;
+    };
+    mermaidAPI.render('editGraph', graphDefinition, insertSvg, element);
+  }
+
 }
 

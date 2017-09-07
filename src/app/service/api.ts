@@ -2,7 +2,8 @@ const nina = 'http://192.168.1.8:8089/';
 const tiejun = 'http://192.168.1.113:8080/';
 const feifeng = 'http://192.168.1.26:18080/';
 const guotao = 'http://192.168.1.107:28081/';
-const demo = 'http://localhost:8080/iecloud/'
+const demo = 'http://localhost:8080/iecloud/';
+const release = 'http://59.110.233.230/iecloud/';
 const url = guotao;
 
 export const API = {
@@ -28,10 +29,10 @@ export const API = {
   'deleteUser': url + 'user/delete.do',//删除用户
   'getUserList': url + 'user/getAdministrators.do',//获取用户列表
 
-  'addRole': url + 'systemSettings/roles/add.do',//新增角色
-  'updateRole': url + 'systemSettings/roles/update.do',//编辑角色
-  'deleteRole': url + 'systemSettings/roles/delete.do',//删除角色
-  'getRoleList': url + 'systemSettings/roles/get.do',//获取角色列表
+  'addRole': feifeng + 'systemSettings/roles/add.do',//新增角色
+  'updateRole': feifeng + 'systemSettings/roles/update.do',//编辑角色
+  'deleteRole': feifeng + 'systemSettings/roles/delete.do',//删除角色
+  'getRoleList': feifeng + 'systemSettings/roles/get.do',//获取角色列表
 
   'addDepartment': url + 'systemSettings/departments/add.do',//添加部门
   'updateDepartment': url + 'systemSettings/departments/update.do',//编辑部门
@@ -67,10 +68,10 @@ export const API = {
   'getFinishProcessDetail': url + 'activiti/processinfo.do',//获得已结束流程的详情
   'getProcessStateDiagram': url + 'activiti/traceprocess.do',//获得流程的状态图
 
-  'addFlow': url + 'process/add.do',
-  'deleteFlow': url + 'process/delete.do',
-  'getFlowList': url + 'process/select.do',
-  'updateFlow': url + 'process/update.do',
+  'addFlow': feifeng + 'process/add.do',
+  'deleteFlow': feifeng + 'process/delete.do',
+  'getFlowList': feifeng + 'process/select.do',
+  'updateFlow': feifeng + 'process/update.do',
 
   /**
   * 列表查询

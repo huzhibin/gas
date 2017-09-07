@@ -38,6 +38,7 @@
               <td>
                 <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(depart)?editModal.show():null">编辑</button>
                 <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(depart)?deleteModal.show():null">删除</button>
+                <button class="btn btn-sm btn-outline-primary" type="button" [routerLink]="['/system/role', depart.departmentNumber]">编辑角色</button>
               </td>
             </tr>
           </tbody>

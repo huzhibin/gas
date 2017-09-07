@@ -36,6 +36,7 @@
             <tr *ngFor="let role of roleList" (click)="role.checked = !role.checked" [class.active]="role.checked">
               <td><input type="checkbox" name="rolebox" [(ngModel)]="role.checked" (click)="$event.stopPropagation();"></td>
               <td>{{ role.roleName }}</td>
+              <td>{{ role.department }}</td>
               <td>{{ role.createTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
               <td>{{ role.remark }}</td>
 
@@ -76,6 +77,14 @@
             </div>
           </div>                
           <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">部门</label>
+            <div class="col-md-9">
+              <select name="depart" [(ngModel)]="addForm.departmentNumber" class="form-control form-control-sm" required>
+                <option *ngFor="let department of departmentList" [value]="department.departmentNumber">{{ department.departmentName }}</option>
+              </select>             
+            </div>
+          </div>                
+          <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">备注</label>
             <div class="col-md-9">
               <input type="text" [(ngModel)]="addForm.remark" name="remark" maxlength="50" class="form-control form-control-sm" placeholder="备注">
@@ -107,6 +116,14 @@
             <div class="col-md-9">
               <input type="text" [(ngModel)]="editForm.roleName" name="roleName" maxlength="20" class="form-control form-control-sm"
                 placeholder="角色名" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">部门</label>
+            <div class="col-md-9">
+              <select name="depart" [(ngModel)]="editForm.departmentNumber" class="form-control form-control-sm" required>
+                <option *ngFor="let department of departmentList" [value]="department.departmentNumber">{{ department.departmentName }}</option>
+              </select>             
             </div>
           </div>         
           <div class="form-group row">

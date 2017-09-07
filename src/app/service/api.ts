@@ -48,6 +48,7 @@ export const API = {
   /**
    * 统计报表
    */
+  'stateLawEnforcement': url + 'reportManagement/stateLawEnforcement.do',// 得到执法状态：各状态执法事件数量
 
   /**
   * 流程处理

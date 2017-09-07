@@ -153,14 +153,7 @@ exportParams: {
             });
             this.getList();
             
-          }).catch(data => {
-            this.alerts.push({
-                type: 'danger',
-                msg: '服务器出错了',
-                timeout: 1000
-            });
-            modal.hide();
-        });;
+          });
         } else {
           this.alerts.push({
             type: 'danger',
@@ -171,6 +164,7 @@ exportParams: {
       }
       
       delete(modal) {
+        modal.hide();
         this.CompanyService.DeleteCompany(this.deleteForm).then(data => {
           console.dir(data);
           this.alerts.push({
@@ -179,7 +173,7 @@ exportParams: {
             timeout: 1000
           });
           this.getList();
-          modal.hide();
+          
         });
       }
 
@@ -231,18 +225,21 @@ exportParams: {
 
     refresh() {
         this.getList();
-        this.initSearchParams();
+      
     }
     search() {
+        this.searchParams.pageNumber=1;
         this.getList();
-        this.initSearchParams();
+      
     }
-   
+    trim(string) {
+        return string.replace(/\s+/g, "");
+    }
     getList() {
           this.loading=true;
         let params = {
-            companyName: this.searchParams.companyName,
-            createUser: this.searchParams.createUser,
+            companyName: this.trim(this.searchParams.companyName),
+            createUser: this.trim(this.searchParams.createUser),
             pageNumber: this.searchParams.pageNumber,//当前显示页
             pageSize: this.searchParams.pageSize,//分页大小
         };

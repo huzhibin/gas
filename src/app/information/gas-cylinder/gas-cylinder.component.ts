@@ -246,6 +246,7 @@ export class GasCylinderComponent implements OnInit {
     }
 
     search() {
+        this.searchParams.pageNumber=1;
         this.getList();
     }
     TypeDate(date) {
@@ -261,6 +262,9 @@ export class GasCylinderComponent implements OnInit {
         }
     };
     // }
+    trim(string) {
+        return string.replace(/\s+/g, "");
+    }
     getList() {
 
         let params = {
@@ -270,8 +274,8 @@ export class GasCylinderComponent implements OnInit {
             endLandingDate: this.searchParams.endLandingDate,
             endLastInspectionDate: this.searchParams.endLastInspectionDate,
             endNextInspectionDate: this.searchParams.endNextInspectionDate,
-            cylinderBarcode: this.searchParams.cylinderBarcode,
-            manufacturingUnit: this.searchParams.manufacturingUnit,
+            cylinderBarcode: this.trim(this.searchParams.cylinderBarcode),
+            manufacturingUnit: this.trim(this.searchParams.manufacturingUnit),
             ownNumber: this.searchParams.ownNumber,
             pageSize: this.searchParams.pageSize,
             pageNumber: this.searchParams.pageNumber,

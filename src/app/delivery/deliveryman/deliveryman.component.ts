@@ -98,6 +98,7 @@ export class DeliverymanComponent implements OnInit {
     }
     
     search() {
+        this.searchParams.pageNumber=1;
         this.getList();
     }
     getList() {

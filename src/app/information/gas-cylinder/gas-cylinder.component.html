@@ -23,10 +23,7 @@
                     <div class="">
                         <input type="text" [(ngModel)]="searchParams.manufacturingUnit" name="manufacturingUnit" class="form-control form-control-sm" placeholder="请输入制造单位">
                     </div>  
-                    <label class=" form-control-label" for="text-input">自有编号：</label>
-                    <div class="">
-                        <input type="text" [(ngModel)]="searchParams.ownNumber" name="ownNumber" class="form-control form-control-sm" placeholder="请输入自有编号">
-                    </div> 
+                   
 
                     <!-- <label class=" form-control-label" for="text-input">时间类型：</label>
                     <div class="">
@@ -220,14 +217,14 @@
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="text-input">气瓶条码</label>
                         <div class="col-md-9">
-                            <input type="password" [(ngModel)]="addForm.cylinderBarcode" name="companyName" maxlength="20" class="form-control form-control-sm"
+                            <input type="text" [(ngModel)]="addForm.cylinderBarcode" name="companyName" maxlength="20" class="form-control form-control-sm"
                                 placeholder="气瓶条码" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="text-input">产权性质</label>
                         <div class="col-md-9">
-                            <input type="password" [(ngModel)]="addForm.propertyRights" name="companyType" maxlength="20" class="form-control form-control-sm"
+                            <input type="text" [(ngModel)]="addForm.propertyRights" name="companyType" maxlength="20" class="form-control form-control-sm"
                                 placeholder="产权性质" required>
                         </div>
                     </div>
@@ -285,14 +282,14 @@
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="text-input">气瓶条码</label>
                         <div class="col-md-9">
-                            <input type="password" [(ngModel)]="editForm.cylinderBarcode" name="companyName" maxlength="20" class="form-control form-control-sm"
+                            <input type="text" [(ngModel)]="editForm.cylinderBarcode" name="companyName" maxlength="20" class="form-control form-control-sm"
                                 placeholder="气瓶条码" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="text-input">产权性质</label>
                         <div class="col-md-9">
-                            <input type="password" [(ngModel)]="editForm.propertyRights" name="companyType" maxlength="20" class="form-control form-control-sm"
+                            <input type="text" [(ngModel)]="editForm.propertyRights" name="companyType" maxlength="20" class="form-control form-control-sm"
                                 placeholder="产权性质" required>
                         </div>
                     </div>

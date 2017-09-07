@@ -32,6 +32,13 @@ const routes: Routes = [
         },
       },
       {
+        path: 'role',
+        component: RoleComponent,
+        data: {
+          title: '角色分配'
+        },
+      },
+      {
         path: 'power',
         component: PowerComponent,
         data: {

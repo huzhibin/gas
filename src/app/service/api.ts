@@ -127,5 +127,11 @@ export const API = {
 
   'getGasStationleUrl': url + 'basicInformation/selectGasStationAll.do',//站点信息
 
+  'UpdateCompanyUrl': guotao + '',//更新企业信息
+  'DeleteCompanyUrl': guotao + '',//删除企业信息
+  'UpdateStoreCylinderUrl': guotao + 'basicInformation/updateGasStation.do',//更新站点信息
+  'DeleteStoreCylinderUrl': guotao + 'basicInformation/deleteGasStationByCode.do',//删除站点信息
+
+
 }
 

@@ -26,7 +26,8 @@ import { VideoComponent } from './video/video.component';
     TabsModule,
     InformationRoutingModule,
     BsDropdownModule,
-    GasCommonModule
+    GasCommonModule,
+    // UEditorModule
   ],
   declarations: [
     InformationComponent,

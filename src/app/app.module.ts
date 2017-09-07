@@ -39,7 +39,7 @@ import { HttpService } from './service/http.service';
     UEditorModule.forRoot({
       path: './assets/ueditor/',
       options: {
-          themePath: (~location.href.indexOf('github') ? '/ngx-ueditor' : '') +  '/assets/ueditor/themes/'
+          themePath: './assets/ueditor/themes/'
       }
   })
   ],

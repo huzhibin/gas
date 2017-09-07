@@ -311,7 +311,7 @@ export class OrderComponent implements OnInit {
       '订单状态',
       '价格',
       '订单来源',
-      '操作'
+      // '操作'
     ];
 
     this.initAddForm();

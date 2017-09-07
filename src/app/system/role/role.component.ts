@@ -272,7 +272,7 @@ export class RoleComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(params => {
       console.dir(params);
-      this.searchParams.departmentNumber = params.departmentNumber;
+      this.searchParams.departmentNumber = params.departmentNumber || '';
       this.getList();
     })
 

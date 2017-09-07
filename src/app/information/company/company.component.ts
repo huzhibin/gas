@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 import { CompanyService } from './company.service';
 import 'rxjs/Rx';
-import { API } from '../../service/api';
 
+import { API } from '../../service/api';
 @Component({
   templateUrl: 'company.component.html',
   styleUrls: ['company.component.scss'],
@@ -13,7 +13,7 @@ export class CompanyComponent implements OnInit {
   totalItems: number;//总记录数
   operand: any;//操作对象
   currentStep: any;
-
+  loading: Boolean;
   searchParams: {
     companyName: string,
     createUser: string,
@@ -105,18 +105,33 @@ export class CompanyComponent implements OnInit {
     console.log('Page changed to: ' + event.page);
     console.log('number items per page: ' + event.itemsPerPage);
   }
+
   add(valid, modal) {
     if (valid) {
       this.CompanyService.AddCompany(this.addForm).then(data => {
-        console.dir(data);
+        if (data.status == 0) {
+          this.alerts.push({
+            type: 'success',
+            msg: '添加成功',
+            timeout: 1000
+          });
+        } else {
+          this.alerts.push({
+            type: 'danger',
+            msg: '添加失败',
+            timeout: 1000
+          });
+          return false;
+        }
+      }).catch(data => {
         this.alerts.push({
-          type: 'success',
-          msg: '添加成功',
+          type: 'danger',
+          msg: '服务器出错了',
           timeout: 1000
         });
-        this.getList();
-        modal.hide();
       });
+      modal.hide();
+      this.getList();
     } else {
       this.alerts.push({
         type: 'danger',
@@ -125,24 +140,47 @@ export class CompanyComponent implements OnInit {
       });
     }
   }
-  edit(modal) {
-    this.alerts.push({
-      type: 'success',
-      msg: '编辑成功',
-      timeout: 1000
-    });
-    modal.hide();
-    this.getList();
+  edit(valid, modal) {
 
+    if (valid) {
+      modal.hide();
+      this.CompanyService.UpdateCompany(this.editForm).then(data => {
+
+        this.alerts.push({
+          type: 'success',
+          msg: '编辑成功',
+          timeout: 1000
+        });
+        this.getList();
+
+      }).catch(data => {
+        this.alerts.push({
+          type: 'danger',
+          msg: '服务器出错了',
+          timeout: 1000
+        });
+        modal.hide();
+      });;
+    } else {
+      this.alerts.push({
+        type: 'danger',
+        msg: '表单填写不正确',
+        timeout: 1000
+      });
+    }
   }
+
   delete(modal) {
-    this.alerts.push({
-      type: 'success',
-      msg: '删除成功',
-      timeout: 1000
+    this.CompanyService.DeleteCompany(this.deleteForm).then(data => {
+      console.dir(data);
+      this.alerts.push({
+        type: 'success',
+        msg: '删除成功',
+        timeout: 1000
+      });
+      this.getList();
+      modal.hide();
     });
-    modal.hide();
-    this.getList();
   }
 
   export(modal) {
@@ -193,12 +231,15 @@ export class CompanyComponent implements OnInit {
 
   refresh() {
     this.getList();
+    this.initSearchParams();
   }
   search() {
     this.getList();
+    this.initSearchParams();
   }
 
   getList() {
+    this.loading = true;
     let params = {
       companyName: this.searchParams.companyName,
       createUser: this.searchParams.createUser,
@@ -210,15 +251,17 @@ export class CompanyComponent implements OnInit {
       if (data.status == 0) {
         this.CompanyList = data.data.list;
         this.totalItems = data.data.total;
-      } else {
-        this.alerts.push({
-          type: 'danger',
-          msg: data.msg,
-          timeout: 1000
-        });
-        return false;
-      }
 
+      } else {
+        // this.alerts.push({
+        //     type: 'danger',
+        //     msg: data.msg,
+        //     timeout: 1000
+        // });
+        // return false;
+        this.CompanyList = [];
+      }
+      this.loading = false;
     }).catch(data => {
       this.alerts.push({
         type: 'danger',
@@ -308,6 +351,7 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit(): void {
     this.totalItems = 0;
+    this.loading = false;
     this.operand = {};
     this.theads = [
       '公司编号',
@@ -321,6 +365,7 @@ export class CompanyComponent implements OnInit {
       '联系邮件',
       '传真',
     ];
+    this.CompanyList = [];
     this.initEditForm();
     this.initAddForm();
     this.initDeleteForm();

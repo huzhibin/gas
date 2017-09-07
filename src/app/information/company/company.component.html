@@ -33,9 +33,16 @@
   <div class="col-lg-12">
     <div class="card">
 
+
       <div class="card-block ">
 
-        <div class="tab-h">
+        <div class="fixed-table-loading ta-c" *ngIf="loading">
+          <img src="assets/img/loading1.gif" alt="">
+        </div>
+        <div class="fixed-table-loading ta-c" *ngIf="!CompanyList.length && !loading">
+          <h5>查不到此信息</h5>
+        </div>
+        <div class="tab-h" *ngIf="CompanyList.length && !loading">
           <table class="table table-bordered  table-sm ">
             <thead>
 
@@ -45,7 +52,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let Company of CompanyList" (click)="Company.checked = !Company.checked">
+              <tr *ngFor="let Company of CompanyList" (click)="Company.checked = !Company.checked" [class.active]="Company.checked">
                 <td><input type="checkbox" name="Companybox" [(ngModel)]="Company.checked" (click)="$event.stopPropagation();"></td>
                 <td>{{ Company.companyNumber}}</td>
                 <td>{{ Company.companyName}}</td>
@@ -98,7 +105,7 @@
               <h6 class="ta-c">点击下载按钮，下载模板表格</h6>
             </div>
             <div style="margin-top:30px;margin-left:-25%;">
-              <a class="btn btn-primary" href="./../assets/test.xlsx" target="_blank" download="test.xlsx">
+              <a class="btn btn-primary" href="../assets/test.xlsx" target="_blank" download="test.xlsx">
                                             <span class="glyphicon glyphicon-download" style="color:#fff;"></span>
                                             <span style=" color:#fff;">下载</span>
                                         </a>
@@ -348,7 +355,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="editModal.hide()">取消</button>
-        <button type="button" class="btn btn-primary" (click)="edit(editModal)">保存</button>
+        <button type="button" class="btn btn-primary" (click)="edit(ngEditForm.valid,editModal)">保存</button>
       </div>
     </div>
   </div>

@@ -409,7 +409,17 @@ div.col-md-7 .font-p  a:hover{
 background-color: #11293e;
 border:1px solid #28cfd9 !important;
 }
-
+.imgu11{
+  width:40%;height:60%;float:left;margin-top:1.5vh; 
+}
+.ta-c{
+  text-align: center;
+  color: #20a8d8;
+  }
+  
+.fixed-table-loading {
+  margin: 60px 0;
+}
 // .spansj{
 //   height:30px;width:50%;float:left
 // }
@@ -417,15 +427,15 @@ border:1px solid #28cfd9 !important;
 
 // @media screen 首页样式部分自适应
 
-@media screen and (min-width:768px){
+// @media screen and (min-width:768px){
   
-  .spansj{
-  height:30px;width:50%;float:left;
-  }
-  .spanleft{
-    float: right
-  }
-}
+//   .spansj{
+//   height:30px;width:50%;float:left;
+//   }
+//   .spanleft{
+//     float: right
+//   }
+// }
 @media screen and (min-width:992px){
   .log-head{
     margin-top: 20px;
@@ -436,14 +446,14 @@ border:1px solid #28cfd9 !important;
     font-family: 微软雅黑 Bold, 微软雅黑;
   }
   .spansj{
-  height:30px;width:50%;float:left;
+  height:30px;width:50%;float:left;font-size: 0.9rem;
   }
   .spanleft{
     float: right
     // margin-left: 30%;
   }
   .nav-left{
-    width:100%;height: 59vh;;border:0px solid #28cfd9;
+    width:100%;height: 59vh;
   }
   .nav-first{
     height:13vh;border:1px solid #28cfd9;margin-bottom:0.2rem;color:#fff
@@ -455,7 +465,7 @@ border:1px solid #28cfd9 !important;
     height: 26vh;;border:1px solid #28cfd9
   }
  .table-tr{
-   margin: 5px;font-size: 14px;
+   margin: 5px;font-size: 1em;
 
  }
  .middle-first{
@@ -483,70 +493,70 @@ border:1px solid #28cfd9 !important;
   float: right;
   margin-right: 6px;
 }
-.imgu11{
-  width:100px;height:65px;float:left;margin-top:1.5vh; 
-}
+
 .p-title{
   display: block;
   margin-top:10px;color:#3399ff;font-size:20px;
 }
 .p-title1{
   display: block;
-  margin-top:10px;color:#fff;font-size:22px;
+  margin-top:10px;color:#fff;font-size:1.4rem;
 }
 }
 @media screen and (min-width:1200px){
 
   .spansj{
-  height:30px;width:50%;float:left;margin-left: 8%;margin-top: 3%
+  height:30px;width:50%;float:left;margin-left: 8%;margin-top: 1%
   }
   .spanleft{
     float: right
   }
-  .imgu11{
-    width:100px;height:140px;float:left
-  }
+ 
   .nav-left{
-    width:100%;height:600px;border:0px solid #28cfd9;
+    width:100%;height: 68vh;;border:0px solid #28cfd9;
   }
   .nav-first{
-    height:127px;border:1px solid #28cfd9;margin-bottom:0.2rem;color:#fff
+    height:16vh;border:1px solid #28cfd9;margin-bottom:0.2rem;color:#fff
   }
   .nav-second{
-    height:207px;border:1px solid #28cfd9;margin-bottom:0.2rem
+    height:22vh;border:1px solid #28cfd9;margin-bottom:0.2rem
   }
   .nav-third{
-    height:265px;border:1px solid #28cfd9
+    height:30vh;border:1px solid #28cfd9
   }
-  .table-tr{
-    margin: 15px;font-size: 20px;
-  }
+  
   .middle-first{
-    width: 100%;height: 345px;border:1px solid #28cfd9;margin-bottom: 10px
+    width: 100%;height: 40vh;border:1px solid #28cfd9;margin-bottom: 10px
   }
   .middle-second{
-   width: 100%;height: 245px;border:1px solid #28cfd9;
+   width: 100%;height: 27vh;border:1px solid #28cfd9;
  }
- .imgu11{
-  width:110px;height:80px;float:left
+ .table-tr{
+  margin: 5px;font-size: 1rem;
+
 }
 
 .p-title{
   display: block;
-  margin-top:10px;color:#3399ff;font-size:25px;
+  margin-top:10px;color:#3399ff;font-size:1.5rem;
 }
 .p-title1{
   display: block;
-  margin-top:10px;color:#fff;font-size:22px;
+  margin-top:10px;color:#fff;font-size:1.5rem;
 }
 }
-@media screen and (min-width:1400px){
+@media screen and (min-width:1300px){
   
     .spansj{
-    height:30px;width:50%;float:left;margin-left: 15%;
+    height:30px;width:50%;float:left;margin-left: 6%;
+    font-size: 1.1rem;
     }
     .spanleft{
       float: right
+    }
+    .table-tr{
+      margin: 5px;font-size: 1.4rem;
+   
     }
   }
 

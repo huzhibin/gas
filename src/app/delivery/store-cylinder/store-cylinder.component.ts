@@ -12,10 +12,10 @@ import { StoreCylinderService } from './store-cylinder.service'
 export class StoreCylinderComponent implements OnInit {
     totalItems: number;//总记录数
     operand: any;//操作对象
-
+    loading:boolean;
     // public bsValue: any ;
     searchParams: {
-        
+
         pageNumber: number,
         pageSize: number,
     };//查询参数
@@ -28,18 +28,32 @@ export class StoreCylinderComponent implements OnInit {
         parentCompany: string,
         address: string,
         serialNumber: string,
-        
+
         checked?: Boolean
     }>;//用户列表
-addForm:{
-    name: string,
-    code: string,
-    administrativeRegion: string,
-    parentCompany: string,
-    address: string,
-    serialNumber: string,
-    
-}
+    addForm: {
+        name: string,
+        code: string,
+        administrativeRegion: string,
+        parentCompany: string,
+        address: string,
+        serialNumber: string,
+
+    }
+
+    editForm: {
+        id: number,
+        name: string,
+        code: string,
+        administrativeRegion: string,
+        parentCompany: string,
+        address: string,
+        serialNumber: string,
+    }
+    deleteForm: {
+        id: number,
+        code: string
+    }
 
     constructor(
         private StoreCylinderService: StoreCylinderService) { };
@@ -70,26 +84,66 @@ addForm:{
         console.log('Page changed to: ' + event.page);
         console.log('number items per page: ' + event.itemsPerPage);
     }
+
     add(valid, modal) {
         if (valid) {
-          this.StoreCylinderService.AddStore(this.addForm).then(data => {
-            console.dir(data);
+            this.StoreCylinderService.AddStore(this.addForm).then(data => {
+                console.dir(data);
+                this.alerts.push({
+                    type: 'success',
+                    msg: '添加成功',
+                    timeout: 1000
+                });
+                this.getList();
+                modal.hide();
+            });
+        } else {
             this.alerts.push({
-              type: 'success',
-              msg: '添加成功',
-              timeout: 1000
+                type: 'danger',
+                msg: '表单填写不正确',
+                timeout: 1000
+            });
+        }
+    }
+
+    edit(valid, modal) {
+        if (valid) {
+            this.StoreCylinderService.UpdateStoreCylinder(this.editForm).then(data => {
+                this.alerts.push({
+                    type: 'success',
+                    msg: '编辑成功',
+                    timeout: 1000
+                });
+                this.getList();
+                modal.hide();
+            }).catch(data => {
+                this.alerts.push({
+                    type: 'danger',
+                    msg: '服务器出错了',
+                    timeout: 1000
+                });
+                modal.hide();
+            });;
+        } else {
+            this.alerts.push({
+                type: 'danger',
+                msg: '表单填写不正确',
+                timeout: 1000
+            });
+        }
+    }
+    delete(modal) {
+        this.StoreCylinderService.deleteStoreCylinder(this.deleteForm).then(data => {
+            this.alerts.push({
+                type: 'success',
+                msg: '删除成功',
+                timeout: 1000
             });
             this.getList();
             modal.hide();
-          });
-        } else {
-          this.alerts.push({
-            type: 'danger',
-            msg: '表单填写不正确',
-            timeout: 1000
-          });
-        }
-      }
+        });
+    }
+
 
     refresh() {
         this.getList();
@@ -114,10 +168,11 @@ addForm:{
     //     }
 
     // }
-    getList() {
 
+    getList() {
+        this.loading=true;
         let params = {
-            pageNumber:this.searchParams.pageNumber,
+            pageNumber: this.searchParams.pageNumber,
             pageSize: this.searchParams.pageSize,
         };
         // console.log('查询后台--getList:' + JSON.stringify(params));
@@ -125,17 +180,11 @@ addForm:{
             if (data.status == 0) {
                 this.StoreCylinderList = data.data.list;
                 this.totalItems = data.data.total;
-             
             }
             else {
-                this.alerts.push({
-                    type: 'danger',
-                    msg: '查询失败可能是输入的对象不准确',
-                    timeout: 1000
-                });
-                return false;
+                this.StoreCylinderList = data.data.list;
             }
-
+            this.loading=false;
         }).catch(data => {
             this.alerts.push({
                 type: 'danger',
@@ -170,32 +219,49 @@ addForm:{
         }
     }
 
-    
+
     initSearchParams() {
         this.searchParams = {
-            
+
             pageNumber: 1,
             pageSize: 10,
         }
     }
-    initAddForm(){
-        this.addForm={
+    initAddForm() {
+        this.addForm = {
             name: '',
             code: '',
             administrativeRegion: '',
             parentCompany: '',
             address: '',
             serialNumber: '',
-            
+
         }
     }
-
+    initEditForm() {
+        this.editForm = {
+            id: this.operand.id || null,
+            name: this.operand.name || '',
+            code: this.operand.code || '',
+            administrativeRegion: this.operand.administrativeRegion || '',
+            parentCompany: this.operand.parentCompany || '',
+            address: this.operand.address || '',
+            serialNumber: this.operand.serialNumber || '',
+        }
+    }
+    initDeleteForm(deleteObj?) {
+        // deleteObj = Object.assign({}, deleteObj);
+        this.deleteForm = {
+            id: this.operand.id || '',
+            code: this.operand.code || '',
+        };
+    }
     ngOnInit(): void {
         this.totalItems = 0;
         // this.currentPage = 1;
         // this.pageSize = 10;
 
-
+        this.StoreCylinderList=[];
         this.operand = {};
 
         this.theads = [
@@ -219,6 +285,8 @@ addForm:{
         ];
         this.initSearchParams();
         this.initAddForm();
+        this.initEditForm();
+        this.initDeleteForm();
         this.getList();
     }
 }

@@ -67,7 +67,13 @@
 
                     <button class="btn btn-sm btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i>&nbsp; 查询</button>
                 </div> -->
-                <div class="tab-h">
+                <div class="fixed-table-loading ta-c" *ngIf="loading">
+                    <img src="assets/img/loading1.gif" alt="">
+                </div>
+                <div class="fixed-table-loading ta-c" *ngIf="!StoreCylinderList.length && !loading">
+                    <h5>查不到此信息</h5>
+                </div>
+                <div class="tab-h" *ngIf="StoreCylinderList.length && !loading">
                     <table class="table table-bordered  table-sm">
                         <thead>
                             <tr>
@@ -176,60 +182,60 @@
         </div>
     </div>
 </div>
-<!-- <div bsModal #editModal="bs-modal" (onShow)="initEditForm()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div bsModal #editModal="bs-modal" (onShow)="initEditForm()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true">
 <div class="modal-dialog modal-warning modal-primary" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title"> 编辑 </h4>
+            <h4 class="modal-title"> 编辑站点信息</h4>
             <button type="button" class="close" (click)="editModal.hide()" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <span aria-hidden="true">&times;</span>
+  </button>
         </div>
         <div class="modal-body">
             <form #ngEditForm="ngForm" class="form-horizontal">
-                  <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">编号</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.name" name="DeliverId" maxlength="20" class="form-control form-control-sm" placeholder="编号"
-                                required>
-                        </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label" for="text-input">名称</label>
+                    <div class="col-md-9">
+                        <input type="text" [(ngModel)]="editForm.name" name="name" maxlength="20" class="form-control form-control-sm" placeholder="名称"
+                            required>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">姓名</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.code" name="username" maxlength="20" class="form-control form-control-sm" placeholder="姓名"
-                                required>
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label" for="text-input">基本编码</label>
+                    <div class="col-md-9">
+                        <input type="text" [(ngModel)]="editForm.code" name="code" maxlength="20" class="form-control form-control-sm" placeholder="基本编码"
+                            required>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">手机号</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.administrativeRegion" name="mobile" maxlength="20" class="form-control form-control-sm" placeholder="手机号"
-                                required>
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label" for="text-input">行政区域编号</label>
+                    <div class="col-md-9">
+                        <input type="text" [(ngModel)]="editForm.administrativeRegion" name="administrativeRegion" maxlength="20" class="form-control form-control-sm"
+                            placeholder="行政区域编号" required>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">身份证</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.parentCompany" name="identity" maxlength="20" class="form-control form-control-sm" placeholder="身份证号"
-                                required>
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label" for="text-input">归属公司编号</label>
+                    <div class="col-md-9">
+                        <input type="text" [(ngModel)]="editForm.parentCompany" name="parentCompany" maxlength="20" class="form-control form-control-sm"
+                            placeholder="归属公司编号" required>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">用户评价</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.address" name="comment" maxlength="20" class="form-control form-control-sm" placeholder="用户评价"
-                                required>
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label" for="text-input">地址</label>
+                    <div class="col-md-9">
+                        <input type="text" [(ngModel)]="editForm.address" name="address" maxlength="20" class="form-control form-control-sm" placeholder="地址"
+                            required>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">状态</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.serialNumber" name="statement" maxlength="20" class="form-control form-control-sm" placeholder="状态"
-                                required>
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label" for="text-input">唯一编号</label>
+                    <div class="col-md-9">
+                        <input type="text" [(ngModel)]="editForm.serialNumber" name="serialNumber" maxlength="20" class="form-control form-control-sm"
+                            placeholder="唯一编号" required>
                     </div>
+                </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -238,7 +244,30 @@ aria-hidden="true">
         </div>
     </div>
 </div>
-</div> -->
+</div>
+
+
+
+<div class="modal" bsModal #deleteModal="bs-modal" (onShow)="initDeleteForm()" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
+    tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-danger " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">删除站点信息</h4>
+                <button type="button" class="close" (click)="deleteModal.hide()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+            </div>
+            <div class="modal-body">
+                <p>确认删除站点信息<strong>{{deleteForm.code}}</strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">取消</button>
+                <button type="button" class="btn btn-primary" (click)="delete(deleteModal)">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="alert" [class.hide]="alerts<1">
     <alert *ngFor="let alert of alerts" [dismissOnTimeout]="alert.timeout" [type]="alert.type" (onClosed)="alertShift()"><span [innerHtml]="alert.msg"></span></alert>

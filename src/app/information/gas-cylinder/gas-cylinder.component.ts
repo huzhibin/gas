@@ -4,7 +4,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 // import { GasCylinderList } from '../data/gas-tank';
 
 import { GasCylinderService } from './gas-cylinder.service';
-
+import { API } from '../../service/api';
 @Component({
     templateUrl: 'gas-cylinder.component.html',
     styleUrls: ['gas-cylinder.component.css'],
@@ -17,7 +17,7 @@ export class GasCylinderComponent implements OnInit {
     // @Input() bsValue;
     // public bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
     // departList: any;//部门列表
-
+    loading: any;
     operand: any;//操作对象
     searchParams: {
         beginLandingDate: string,
@@ -100,9 +100,9 @@ export class GasCylinderComponent implements OnInit {
 
         pressureTestPressure: string,
         nominalOperatingPressure: string,
-       
+
     };//用户列表
-    addForm:{
+    addForm: {
         ownNumber: string,
         cylinderBarcode: string,
         propertyRights: string,
@@ -111,8 +111,8 @@ export class GasCylinderComponent implements OnInit {
         manufacturingUnit: string,
         useTheRegistrationCode: string,
     }
-    editForm:{
-        id:string,
+    editForm: {
+        id: string,
         ownNumber: string,
         cylinderBarcode: string,
         propertyRights: string,
@@ -120,19 +120,29 @@ export class GasCylinderComponent implements OnInit {
         propertyUnit: string,
         manufacturingUnit: string,
         useTheRegistrationCode: string,
+    }
+    exportParams: {
+        beginLandingDate: string,
+        beginLastInspectionDate: string,
+        beginNextInspectionDate: string,
+        endLandingDate: string,
+        endLastInspectionDate: string,
+        endNextInspectionDate: string,
+        manufacturingUnit: string,
+        exportUrl: any;
     }
     constructor(
-        private GasCylinderService : GasCylinderService ,) { };
+        private GasCylinderService: GasCylinderService, ) { };
 
     // // TODO:在提示消失的时候，将它从数组中清除
     alerts: any = [
     ];
-   
+
     alertShift() {
         this.alerts.shift();
     }
 
- 
+
     changePage(event) {
         this.searchParams.pageSize = event.itemsPerPage;
         this.searchParams.pageNumber = event.page;
@@ -159,44 +169,67 @@ export class GasCylinderComponent implements OnInit {
     add(valid, modal) {
         if (valid) {
             this.alerts.push({
-              type: 'success',
-              msg: '添加成功',
-              timeout: 1000
+                type: 'success',
+                msg: '添加成功',
+                timeout: 1000
             });
             this.getList();
             modal.hide();
-        
+
         }
-      }
-      edit(modal){
+    }
+    edit(modal) {
         this.alerts.push({
             type: 'success',
             msg: '编辑成功',
             timeout: 1000
-          });
-          modal.hide();
-          this.getList();
-          
-      }
-      delete(modal){
+        });
+        modal.hide();
+        this.getList();
+
+    }
+    delete(modal) {
         this.alerts.push({
             type: 'success',
             msg: '删除成功',
             timeout: 1000
-          });
-          modal.hide();
-          this.getList();
-      }
-
-      export(modal) {
+        });
         modal.hide();
+        this.getList();
+    }
 
+    export(modal) {
+        modal.hide();
+        let params = {
+            beginLandingDate: this.exportParams.beginLandingDate,
+            beginLastInspectionDate: this.exportParams.beginLastInspectionDate,
+            beginNextInspectionDate: this.exportParams.beginNextInspectionDate,
+            endLandingDate: this.exportParams.endLandingDate,
+            endLastInspectionDate: this.exportParams.endLastInspectionDate,
+            endNextInspectionDate: this.exportParams.endNextInspectionDate,
+            manufacturingUnit: this.exportParams.manufacturingUnit,
+
+        }
+        this.GasCylinderService.exportExcelGasCylinder(params).then(data => {
+            if (data.status == 0) {
+                this.exportParams.exportUrl = API.URL + data.data;
+                window.location.href = this.exportParams.exportUrl;
+            }
+            else {
                 this.alerts.push({
                     type: 'danger',
                     msg: '导出失败',
                     timeout: 1000
                 });
-
+                return false;
+            }
+        }).catch(data => {
+            this.alerts.push({
+                type: 'danger',
+                msg: '服务器出错了',
+                timeout: 1000
+            });
+        });
     }
     import(modal) {
         this.alerts.push({
@@ -211,7 +244,7 @@ export class GasCylinderComponent implements OnInit {
     refresh() {
         this.getList();
     }
-    
+
     search() {
         this.getList();
     }
@@ -229,7 +262,7 @@ export class GasCylinderComponent implements OnInit {
     };
     // }
     getList() {
-       
+
         let params = {
             beginLandingDate: this.searchParams.beginLandingDate,
             beginLastInspectionDate: this.searchParams.beginLastInspectionDate,
@@ -239,26 +272,21 @@ export class GasCylinderComponent implements OnInit {
             endNextInspectionDate: this.searchParams.endNextInspectionDate,
             cylinderBarcode: this.searchParams.cylinderBarcode,
             manufacturingUnit: this.searchParams.manufacturingUnit,
-            ownNumber:this.searchParams.ownNumber,
+            ownNumber: this.searchParams.ownNumber,
             pageSize: this.searchParams.pageSize,
             pageNumber: this.searchParams.pageNumber,
         };
-
+        this.loading = true;
         // console.log('查询后台--getList:' + JSON.stringify(params));
         this.GasCylinderService.getGasCylinderList(params).then(data => {
             if (data.status == 0) {
                 this.GasCylinderList = data.data.list;
                 this.totalItems = data.data.total;
-        
-            }else {
-                this.alerts.push({
-                    type: 'danger',
-                    msg: '查询失败可能是输入的对象不准确',
-                    timeout: 1000
-                });
-                return false;
-            }
 
+            } else {
+                this.GasCylinderList=[];
+            }
+            this.loading = false;
         }).catch(data => {
             this.alerts.push({
                 type: 'danger',
@@ -310,16 +338,16 @@ export class GasCylinderComponent implements OnInit {
             pageSize: 10,
         }
     }
-   
-    initDetailList(){
-        this.detailList={
+
+    initDetailList() {
+        this.detailList = {
             id: this.operand.id || null,
             ownNumber: this.operand.ownNumber || '',
             cylinderBarcode: this.operand.cylinderBarcode || '',
-            propertyRights:this.operand.propertyRights || '', 
+            propertyRights: this.operand.propertyRights || '',
 
             propertyUnit: this.operand.propertyUnit || '',
-            manufacturingUnit:this.operand.manufacturingUnit || '' ,
+            manufacturingUnit: this.operand.manufacturingUnit || '',
             landingDate: this.operand.landingDate || '',
 
             useTheRegistrationCode: this.operand.useTheRegistrationCode || '',
@@ -331,51 +359,61 @@ export class GasCylinderComponent implements OnInit {
             equipmentVariety: this.operand.equipmentVariety || '',
 
             lastInspectionDate: this.operand.lastInspectionDate || '',
-            nextInspectionDate:this.operand.nextInspectionDate || '',
+            nextInspectionDate: this.operand.nextInspectionDate || '',
             cylinderStatus: this.operand.cylinderStatus || '',
 
-            inspectionNumber:this.operand.inspectionNumber || '',
+            inspectionNumber: this.operand.inspectionNumber || '',
             originalWeight: this.operand.originalWeight || '',
             volume: this.operand.volume || '',
 
             designWallThickness: this.operand.designWallThickness || '',
-            pressureTestPressure:this.operand.pressureTestPressure || '',
+            pressureTestPressure: this.operand.pressureTestPressure || '',
             nominalOperatingPressure: this.operand.nominalOperatingPressure || '',
         }
     }
 
-    initAddForm(){
-        this.addForm={
+    initAddForm() {
+        this.addForm = {
             ownNumber: '',
-            cylinderBarcode:'',
+            cylinderBarcode: '',
             propertyRights: '',
-    
+
             propertyUnit: '',
             manufacturingUnit: '',
             useTheRegistrationCode: '',
         }
     }
-    initEditForm(){
-        this.editForm={
+    initEditForm() {
+        this.editForm = {
             id: this.operand.id || '',
             ownNumber: this.operand.ownNumber || '',
             cylinderBarcode: this.operand.cylinderBarcode || '',
-            propertyRights:this.operand.propertyRights || '', 
+            propertyRights: this.operand.propertyRights || '',
 
             propertyUnit: this.operand.propertyUnit || '',
-            manufacturingUnit:this.operand.manufacturingUnit || '' ,
+            manufacturingUnit: this.operand.manufacturingUnit || '',
 
             useTheRegistrationCode: this.operand.useTheRegistrationCode || '',
         }
     }
+
+    initExportParams() {
+        this.exportParams = {
+            beginLandingDate: '',
+            beginLastInspectionDate: '',
+            beginNextInspectionDate: '',
+            endLandingDate: '',
+            endLastInspectionDate: '',
+            endNextInspectionDate: '',
+            manufacturingUnit: '',
+            exportUrl: '',
+        }
+    }
     ngOnInit(): void {
         this.totalItems = 0;
-        // this.currentPage = 1;
-        // this.pageSize = 20;
-
-
+        this.loading = false;
         this.operand = {};
-
+        this.GasCylinderList = [];
         this.theads = [
             '自有编号',
             '气瓶条码',
@@ -405,7 +443,7 @@ export class GasCylinderComponent implements OnInit {
             '自有编号',
             '气瓶条码',
             '产权性质',
-            
+
             '产权单位',
             '制造单位',
             '进站日期',
@@ -433,6 +471,7 @@ export class GasCylinderComponent implements OnInit {
         this.initSearchParams();
         this.initAddForm();
         this.initEditForm();
+        this.initExportParams();
         this.initDetailList();
         this.getList();
     }

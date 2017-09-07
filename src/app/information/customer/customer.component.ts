@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 import { CustomerService } from './customer.service';
 import 'rxjs/Rx' ;
-
+import { API } from '../../service/api';
 @Component({
     templateUrl: 'customer.component.html',
     styleUrls: ['customer.component.scss'],
@@ -41,6 +41,9 @@ export class CustomerComponent implements OnInit {
         contactTelephone3: string,
         checked?: Boolean
     }>;//用户列表
+
+
+
     exportParams: {
         clientName: string,
         gas: string,
@@ -109,7 +112,7 @@ export class CustomerComponent implements OnInit {
         }
         this.CustomerService.exportExcelCustomer(params).then(data=>{
             if(data.status==0){
-                this.exportParams.exportUrl="http://192.168.1.107;28081"+data.data;
+                this.exportParams.exportUrl=API.URL+data.data;
                 window.location.href=this.exportParams.exportUrl;
             }
             else{

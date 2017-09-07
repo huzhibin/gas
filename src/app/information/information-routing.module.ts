@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes,RouterModule } from '@angular/router';
 
 import { InformationComponent } from './information.component';
-import { OrderComponent } from './order/order.component';
+// import { OrderComponent } from './order/order.component';
 import { MapComponent } from './map/map.component';
 import { CustomerComponent } from './customer/customer.component';
 import { GasCylinderComponent } from './gas-cylinder/gas-cylinder.component';
@@ -11,11 +11,12 @@ import { CompanyComponent } from './company/company.component';
 import { CodeComponent} from './Code/code.component';
 import { CylinderCodeComponent} from './cylinderCode/cylinderCode.component';
 import { StationCodeComponent} from './stationCode/stationCode.component';
+// import { DemoComponent } from './editor/demo.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'company ',
+    redirectTo: 'company',
     pathMatch: 'full',
   },
   {
@@ -25,13 +26,13 @@ const routes: Routes = [
       title: '基础信息监管管理'
     },
     children: [
-      {
-        path: 'order',
-        component: OrderComponent,
-        data: {
-          title: '订单管理'
-        },
-      },
+      // {
+      //   path: 'order',
+      //   component: DemoComponent,
+      //   data: {
+      //     title: '订单管理'
+      //   },
+      // },
       {
         path: 'map',
         component: MapComponent,

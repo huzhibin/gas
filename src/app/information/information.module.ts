@@ -9,7 +9,7 @@ import { GasCommonModule } from '../component/gas-common.module';
 
 import { InformationRoutingModule } from './information-routing.module';
 import { InformationComponent } from './information.component';
-import { OrderComponent } from './order/order.component';
+// import { DemoComponent } from './editor/demo.component';
 import { MapComponent } from './map/map.component';
 
 import { CustomerComponent } from './customer/customer.component';
@@ -22,7 +22,7 @@ import { CompanyComponent } from './company/company.component';
 import { CodeComponent} from './Code/code.component';
 import { CylinderCodeComponent} from './cylinderCode/cylinderCode.component';
 import { StationCodeComponent} from './stationCode/stationCode.component';
-
+// import { UEditorModule } from 'ngx-ueditor';
 @NgModule({
   imports: [
     CommonModule,
@@ -33,11 +33,12 @@ import { StationCodeComponent} from './stationCode/stationCode.component';
     TabsModule,
     InformationRoutingModule,
     BsDropdownModule,
-    GasCommonModule
+    GasCommonModule,
+    // UEditorModule
   ],
   declarations: [
     InformationComponent,
-    OrderComponent,
+    // DemoComponent,
     MapComponent,
     CustomerComponent ,
     CodeComponent,

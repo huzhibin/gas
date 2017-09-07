@@ -32,20 +32,25 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-         
+
             <div class="card-block ">
-               
-                <div class="tab-h">
-                    <table class="table table-bordered  table-sm " >
+                <div class="fixed-table-loading ta-c" *ngIf="loading">
+                    <img src="assets/img/loading1.gif" alt="">
+                </div>
+                <div class="fixed-table-loading ta-c" *ngIf="!CompanyList.length && !loading">
+                    <h5>查不到此信息</h5>
+                </div>
+                <div class="tab-h" *ngIf="CompanyList.length && !loading">
+                    <table class="table table-bordered  table-sm ">
                         <thead>
-                                
+
                             <tr class="mx-0">
                                 <th><input #checkedAll type="checkbox" name="Companybox" (change)="selectAll(checkedAll.checked)"></th>
                                 <th *ngFor="let th of theads">{{ th }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let Company of CompanyList" (click)="Company.checked = !Company.checked">
+                            <tr *ngFor="let Company of CompanyList" (click)="Company.checked = !Company.checked" [class.active]="Company.checked">
                                 <td><input type="checkbox" name="Companybox" [(ngModel)]="Company.checked" (click)="$event.stopPropagation();"></td>
                                 <td>{{ Company.companyNumber}}</td>
                                 <td>{{ Company.companyName}}</td>
@@ -348,7 +353,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="editModal.hide()">取消</button>
-                <button type="button" class="btn btn-primary" (click)="edit(editModal)">保存</button>
+                <button type="button" class="btn btn-primary" (click)="edit(ngEditForm.valid,editModal)">保存</button>
             </div>
         </div>
     </div>

@@ -32,6 +32,7 @@ import { HttpService } from './service/http.service';
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
+  
   ],
   declarations: [
     AppComponent,

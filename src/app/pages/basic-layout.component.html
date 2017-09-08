@@ -1,0 +1,101 @@
+<div class="container basic" style="margin:0;padding:0;">
+
+  <header style="height:8vh;">
+    
+      <div class="col-md-3 col-sm-3 column">
+        <div class="row">
+          <div class="col-md-12 column logo">
+            <img src="assets/img/home/logo.png" alt="">
+            <span>智慧燃气安全大数据统一监管平台</span>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-6 column">
+        <div class="row">
+          <div class="col-md-12 column home-top-mid">
+            <img src="assets/img/home/visualization-top.png" alt="">
+            <span class="header-time">{{curTime}}</span>
+            <span class="header-date">{{DateTime}} </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 column" >
+        <div class="row" style="">
+          <div class="col-md-12 column alarm">
+            <div class="col-md-6" style="padding:0;color:white;font-size:1.3rem;font-weight:500;text-align:center;line-height:3rem;">
+              监管信息 1
+            </div>
+            <div class="col-md-6" style="padding:0;color:red;font-size:1.3rem;font-weight:500;text-align:center;line-height:3rem;">
+              严重事件 3
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+  </header>
+
+  <div class="col-md-12 col-sm-12" style="height:76vh;overflow-x:hidden; overflow-y:hidden;padding-top:0.5vh;">
+    <router-outlet></router-outlet>
+  </div>
+  
+  <footer>
+    <div class="row clearfix" style="height:12vh;bottom: 2rem;width: 100%;margin:4vh 0 0 0;">
+      <div class="col-md-1 column">
+      </div>
+      <div class="col-md-10 column">
+        <ul class="home-list">
+          <li>
+            <a href="javascript:;" [routerLink]="['/home']">
+                <img src="assets/img/home/home-icon.png" alt="">
+                <span>首页</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/information']">
+                <img src="assets/img/home/information-icon.png" alt="">
+                <span>基础信息监管</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/delivery']">
+                <img src="assets/img/home/deliver-icon.png" alt="">
+                <span>配送业务监管</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/standard']">
+                <img src="assets/img/home/standard-icon.png" alt="">
+                <span>数据规范标准</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/government']">
+                <img src="assets/img/home/regulation-icon.png" alt="">
+                <span>政府监管事务</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/report']">
+                <img src="assets/img/home/statistic-icon.png" alt="">
+                <span>统计查询</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/system']">
+                <img src="assets/img/home/power-icon.png" alt="">
+                <span>系统权限配置</span>
+              </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/big-data']">
+                <img src="assets/img/home/visualization-icon.png" alt="">
+                <span>大数据可视化</span>
+              </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-1 column">
+      </div>
+    </div>
+  </footer>
+</div>

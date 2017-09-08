@@ -1,0 +1,153 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> 组织架构
+        <span class="card-btn-group">
+          <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+          <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+          <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
+          <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
+          <button class="btn btn-sm btn-secondary" type="button" (click)="export()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
+        </span>
+      </div>
+      
+      <div class="card-block">
+        <div class="form-group row search-table">
+          <label class="form-control-label" for="text-input">部门：</label>
+          <div class="">
+            <input type="text" [(ngModel)]="searchParams.departmentName" name="departmentName" class="form-control form-control-sm" placeholder="请输入部门名称">
+          </div>       
+          <button class="btn btn-sm btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i>&nbsp; 查询</button>
+        </div>
+
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th><input #checkedAll type="checkbox" name="departbox" (change)="selectAll(checkedAll.checked)"></th>
+              <th *ngFor="let th of theads">{{ th }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let depart of departList" (click)="depart.checked = !depart.checked" [class.active]="depart.checked">
+              <td><input type="checkbox" name="departbox" [(ngModel)]="depart.checked" (click)="$event.stopPropagation();"></td>
+              <td>{{ depart.departmentName }}</td>
+              <td>{{ depart.parentName }}</td>
+              <td>{{ depart.createTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+
+              <td>
+                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(depart)?editModal.show():null">编辑</button>
+                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(depart)?deleteModal.show():null">删除</button>
+                <button class="btn btn-sm btn-outline-primary" type="button" [routerLink]="['/system/role', depart.departmentNumber]">编辑角色</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <pagination-comp [totalItems]="totalItems" [currentPage]="currentPage" [itemsPerPage]="pageSize" (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+<!--/.row-->
+
+<div bsModal #addModal="bs-modal" [config]="{ignoreBackdropClick: true, keyboard: false}" (onShow)="initAddForm()"
+  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> 新增部门 </h4>
+        <button type="button" class="close" (click)="addModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #ngAddForm="ngForm" class="form-horizontal">
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">部门名称</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="addForm.departmentName" name="departmentName" maxlength="20" class="form-control form-control-sm"
+                placeholder="部门名称" required>               
+            </div>
+          </div>               
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="select">上级部门</label>
+            <div class="col-md-9">
+              <select [(ngModel)]="addForm.parentNumber" name="depart" class="form-control form-control-sm">
+                  <option *ngFor="let depart of departList" [value]="depart.departmentNumber">{{ depart.departmentName }}</option>                
+                </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="addModal.hide()">取消</button>
+        <button type="button" class="btn btn-primary" (click)="add(ngAddForm.valid,addModal)">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #editModal="bs-modal" (onShow)="initEditForm()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-warning modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> 编辑部门 </h4>
+        <button type="button" class="close" (click)="editModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #ngEditForm="ngForm" class="form-horizontal">
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="text-input">部门名称</label>
+            <div class="col-md-9">
+              <input type="text" [(ngModel)]="editForm.departmentName" name="departmentName" maxlength="20" class="form-control form-control-sm"
+                placeholder="部门名" required>
+            </div>
+          </div>         
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="select">上级部门</label>
+            <div class="col-md-9">
+              <select [(ngModel)]="editForm.parentNumber" name="depart" class="form-control form-control-sm">
+                  <option *ngFor="let depart of departList" [value]="depart.departmentNumber">{{ depart.departmentName }}</option>                
+                </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="editModal.hide()">取消</button>
+        <button type="button" class="btn btn-primary" (click)="edit(ngEditForm.valid,editModal)">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" bsModal #deleteModal="bs-modal" (onShow)="initDeleteForm()" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
+  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-danger modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">删除部门</h4>
+        <button type="button" class="close" (click)="deleteModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>确认删除部门<strong>{{ deleteForm.departmentName }}</strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">取消</button>
+        <button type="button" class="btn btn-primary" (click)="delete(deleteModal)">确认</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="alert" [class.hide]="alerts<1">
+  <alert *ngFor="let alert of alerts" [dismissOnTimeout]="alert.timeout" [type]="alert.type" (onClosed)="alertShift()"><span [innerHtml]="alert.msg"></span></alert>
+</div>

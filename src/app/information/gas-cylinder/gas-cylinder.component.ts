@@ -1,98 +1,163 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
-import { GasTankList } from '../data/gas-tank';
+// import { GasCylinderList } from '../data/gas-tank';
 
-// import { GasTankService} from './gas-tank.service'
-
+import { GasCylinderService } from './gas-cylinder.service';
+import { API } from '../../service/api';
 @Component({
     templateUrl: 'gas-cylinder.component.html',
-    styleUrls: [],
-    providers: []
+    styleUrls: ['gas-cylinder.component.css'],
+    providers: [GasCylinderService]
 })
 export class GasCylinderComponent implements OnInit {
     totalItems: number;//总记录数
-    currentPage: number;//当前页号
-    pageSize: number;//分页大小
+    // currentPage: number;//当前页号
+    // pageSize: number;//分页大小
     // @Input() bsValue;
     // public bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
     // departList: any;//部门列表
-
+    loading: any;
     operand: any;//操作对象
     searchParams: {
-        chipNum: string,
-        cylinderNum : string,
-    } = {
-        chipNum: '',
-        cylinderNum: '',
+        beginLandingDate: string,
+        beginLastInspectionDate: string,
+        beginNextInspectionDate: string,
+        endLandingDate: string,
+        endLastInspectionDate: string,
+        endNextInspectionDate: string,
+        cylinderBarcode: string,
+        manufacturingUnit: string,
+        ownNumber: string,
+        timeType: number,
+        startTime: string,
+        endTime: string,
+        pageNumber: number,
+        pageSize: number,
     };//查询参数
     theads: Array<string>;//表头字段
-    gasTankList: Array<{
+    detail: Array<string>;
+    GasCylinderList: Array<{
         id: number,
-        chipNum: string,
-        cylinderNum: string,
-        createTime: string,
-        arrivalTime: string,
-        scrapTime: string,
-        gasType: string,
-        infTime: string,
-        orderNum: string,
+
+        ownNumber: string,
+        cylinderBarcode: string,
+        propertyRights: string,
+
+        propertyUnit: string,
+        manufacturingUnit: string,
+        landingDate: string,
+
+        useTheRegistrationCode: string,
+        serialNumber: string,
+        yearOfManufacture: string,
+
+        fillingMedia: string,
+        cylinderModel: string,
+        equipmentVariety: string,
+
+        lastInspectionDate: string,
+        nextInspectionDate: string,
+        cylinderStatus: string,
+
+        inspectionNumber: string,
+        originalWeight: string,
+        volume: string,
+
+        designWallThickness: string,
+        pressureTestPressure: string,
+        nominalOperatingPressure: string,
+
         checked?: Boolean
     }>;//用户列表
 
+    detailList: {
+        id: number,
+        ownNumber: string,
+        cylinderBarcode: string,
+        propertyRights: string,
+
+        propertyUnit: string,
+        manufacturingUnit: string,
+        landingDate: string,
+        useTheRegistrationCode: string,
+
+        serialNumber: string,
+        yearOfManufacture: string,
+        fillingMedia: string,
+
+        cylinderModel: string,
+        equipmentVariety: string,
+        lastInspectionDate: string,
+
+        nextInspectionDate: string,
+        cylinderStatus: string,
+        inspectionNumber: string,
+
+        originalWeight: string,
+        volume: string,
+        designWallThickness: string,
+
+        pressureTestPressure: string,
+        nominalOperatingPressure: string,
+
+    };//用户列表
     addForm: {
-        chipNum: string,
-        cylinderNum: string,
-        createTime: string,
-        arrivalTime: string,
-        scrapTime: string,
-        gasType: string,
-        infTime: string,
-        orderNum: string,
-    };//添加用户表单
-    editForm: {
-        id: number,
-        chipNum: string,
-        cylinderNum: string,
-        createTime: string,
-        arrivalTime: string,
-        scrapTime: string,
-        gasType: string,
-        infTime: string,
-        orderNum: string,
-    };//编辑用户表单
-    deleteForm: {
-        id: number,
-        chipNum: string,
+        ownNumber: string,
+        cylinderBarcode: string,
+        propertyRights: string,
+
+        propertyUnit: string,
+        manufacturingUnit: string,
+        useTheRegistrationCode: string,
     }
-    // constructor(
-    //     private GasTankService: GasTankService,) { };
+    editForm: {
+        id: string,
+        ownNumber: string,
+        cylinderBarcode: string,
+        propertyRights: string,
+
+        propertyUnit: string,
+        manufacturingUnit: string,
+        useTheRegistrationCode: string,
+    }
+    exportParams: {
+        beginLandingDate: string,
+        beginLastInspectionDate: string,
+        beginNextInspectionDate: string,
+        endLandingDate: string,
+        endLastInspectionDate: string,
+        endNextInspectionDate: string,
+        manufacturingUnit: string,
+        exportUrl: any;
+    }
+    constructor(
+        private GasCylinderService: GasCylinderService, ) { };
 
     // // TODO:在提示消失的时候，将它从数组中清除
     alerts: any = [
     ];
-   
+
     alertShift() {
         this.alerts.shift();
     }
 
- 
 
     changePage(event) {
-        this.pageSize = event.itemsPerPage;
-        this.currentPage = event.page;
+        this.searchParams.pageSize = event.itemsPerPage;
+        this.searchParams.pageNumber = event.page;
         this.getList();
     }
 
     changeSize(event) {
-        this.pageSize = event;
-        this.currentPage = 1;
+        this.searchParams.pageSize = event;
+        this.searchParams.pageNumber = 1;
         this.getList();
     }
 
     selectAll(checkedAll) {
-        for (let index = 0; index < this.gasTankList.length; index++) {
-            this.gasTankList[index].checked = checkedAll ? true : false;
+        for (let index = 0; index < this.GasCylinderList.length; index++) {
+            this.GasCylinderList[index].checked = checkedAll ? true : false;
         }
     }
 
@@ -103,75 +168,82 @@ export class GasCylinderComponent implements OnInit {
 
     add(valid, modal) {
         if (valid) {
-            this.alerts.push({
-                type: 'success',
-                msg: '添加成功',
-                timeout: 1000
-            });
-            let gasTank = {
-                id: Math.random(),
-                chipNum: this.addForm.chipNum,
-                cylinderNum: this.addForm.cylinderNum,
-                createTime: this.addForm.createTime,
-                arrivalTime: this.addForm.arrivalTime,
-                scrapTime: this.addForm.scrapTime,
-                gasType: this.addForm.gasType,
-                infTime:this.addForm.infTime,
-                orderNum: this.addForm.orderNum,
-            }
-            GasTankList.push(gasTank);
-            modal.hide();
+            // this.alerts.push({
+            //     type: 'success',
+            //     msg: '添加成功',
+            //     timeout: 1000
+            // });
             this.getList();
+            modal.hide();
 
-        } else {
-            this.alerts.push({
-                type: 'danger',
-                msg: '表单填写不正确',
-                timeout: 1000
-            });
+        }
+        else {
+          this.alerts.push({
+            type: 'danger',
+            msg: '表单填写不正确',
+            timeout: 1000
+          });
         }
     }
-    edit(valid, modal) {
-        if (valid) {
-            this.alerts.push({
-                type: 'success',
-                msg: '编辑成功',
-                timeout: 1000
-            });
-            for (let index = 0; index < GasTankList.length; index++) {
-                if (GasTankList[index].id == this.editForm.id) {
-                    GasTankList[index].chipNum = this.editForm.chipNum;
-                    GasTankList[index].cylinderNum = this.editForm.cylinderNum;
-                    GasTankList[index].createTime= this.editForm.createTime;
-                    GasTankList[index].arrivalTime= this.editForm.arrivalTime;
-                    GasTankList[index].scrapTime = this.editForm.scrapTime;
-                    GasTankList[index].gasType = this.editForm.gasType;
-                    GasTankList[index].infTime = this.editForm.infTime;
-                    GasTankList[index].orderNum = this.editForm.orderNum;
-                }
-            }
-            modal.hide();
-            this.getList();
+    edit(modal) {
+        // this.alerts.push({
+        //     type: 'success',
+        //     msg: '编辑成功',
+        //     timeout: 1000
+        // });
+        modal.hide();
+        this.getList();
 
-        } else {
-            this.alerts.push({
-                type: 'danger',
-                msg: '表单填写不正确',
-                timeout: 1000
-            });
-        }
     }
     delete(modal) {
+        // this.alerts.push({
+        //     type: 'success',
+        //     msg: '删除成功',
+        //     timeout: 1000
+        // });
+        modal.hide();
+        this.getList();
+    }
+
+    export(modal) {
+        modal.hide();
+        let params = {
+            beginLandingDate: this.exportParams.beginLandingDate,
+            beginLastInspectionDate: this.exportParams.beginLastInspectionDate,
+            beginNextInspectionDate: this.exportParams.beginNextInspectionDate,
+            endLandingDate: this.exportParams.endLandingDate,
+            endLastInspectionDate: this.exportParams.endLastInspectionDate,
+            endNextInspectionDate: this.exportParams.endNextInspectionDate,
+            manufacturingUnit: this.exportParams.manufacturingUnit,
+
+        }
+        this.GasCylinderService.exportExcelGasCylinder(params).then(data => {
+            if (data.status == 0) {
+                this.exportParams.exportUrl = API.URL + data.data;
+                window.location.href = this.exportParams.exportUrl;
+            }
+            else {
+                this.alerts.push({
+                    type: 'danger',
+                    msg: '导出失败',
+                    timeout: 1000
+                });
+                return false;
+            }
+        }).catch(data => {
+            this.alerts.push({
+                type: 'danger',
+                msg: '服务器出错了',
+                timeout: 1000
+            });
+        });
+    }
+    import(modal) {
         this.alerts.push({
             type: 'success',
-            msg: '删除成功',
+            msg: '导入成功',
             timeout: 1000
         });
-        for (let index = 0; index < GasTankList.length; index++) {
-            if (GasTankList[index].id == this.deleteForm.id) {
-                GasTankList.splice(index, 1);
-            }
-        }
         modal.hide();
         this.getList();
     }
@@ -179,34 +251,66 @@ export class GasCylinderComponent implements OnInit {
     refresh() {
         this.getList();
     }
-    export() {
 
-    }
     search() {
+      this.searchParams.pageNumber=1;
         this.getList();
     }
+    TypeDate(date) {
+        if (!date) {
+            return null;
+        }
+        else {
+            date = new Date(date);
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            var s = date.getDate();
+            return y + '-' + (m < 10 ? '0' + m : m) + '-' + (s < 10 ? ('0' + s) : s);
+        }
+    };
+    trim(string) {
+      return string.replace(/\s+/g, "");
+  }
     getList() {
-        let params = {
-            chipNum: this.searchParams.chipNum,
-            cylinderNum: this.searchParams.cylinderNum,
-            pageSize: this.pageSize,
-            currentPage: this.currentPage
-        };
-        // console.log('查询后台--getList:' + JSON.stringify(params));
-        // this.GasTankService.getGasTankList(params).then(data => {
-        //   this.gasTankList = data.data.list;
-        //   this.totalItems = data.data.totalItems
-        // });
 
-        this.gasTankList = GasTankList.slice(params.pageSize * (params.currentPage - 1), params.pageSize * params.currentPage);
-        this.totalItems = GasTankList.length;
+        let params = {
+            beginLandingDate: this.searchParams.beginLandingDate,
+            beginLastInspectionDate: this.searchParams.beginLastInspectionDate,
+            beginNextInspectionDate: this.searchParams.beginNextInspectionDate,
+            endLandingDate: this.searchParams.endLandingDate,
+            endLastInspectionDate: this.searchParams.endLastInspectionDate,
+            endNextInspectionDate: this.searchParams.endNextInspectionDate,
+            cylinderBarcode: this.trim(this.searchParams.cylinderBarcode),
+            manufacturingUnit:this.trim(this.searchParams.manufacturingUnit),
+            ownNumber: this.searchParams.ownNumber,
+            pageSize: this.searchParams.pageSize,
+            pageNumber: this.searchParams.pageNumber,
+        };
+        this.loading = true;
+        // console.log('查询后台--getList:' + JSON.stringify(params));
+        this.GasCylinderService.getGasCylinderList(params).then(data => {
+            if (data.status == 0) {
+                this.GasCylinderList = data.data.list;
+                this.totalItems = data.data.total;
+
+            } else {
+                this.GasCylinderList=[];
+            }
+            this.loading = false;
+        }).catch(data => {
+            this.alerts.push({
+                type: 'danger',
+                msg: '服务器出错了',
+                timeout: 1000
+            });
+        });
     }
 
     // //获取选中的第一个对象
     getChecked() {
-        for (let i = 0; i < this.gasTankList.length; i++) {
-            if (this.gasTankList[i].checked) {
-                return this.gasTankList[i];
+        for (let i = 0; i < this.GasCylinderList.length; i++) {
+            if (this.GasCylinderList[i].checked) {
+                return this.GasCylinderList[i];
             }
         }
         return null;
@@ -226,66 +330,160 @@ export class GasCylinderComponent implements OnInit {
         }
     }
 
+    initSearchParams() {
+        this.searchParams = {
+            beginLandingDate: '',
+            beginLastInspectionDate: '',
+            beginNextInspectionDate: '',
+            endLandingDate: '',
+            endLastInspectionDate: '',
+            endNextInspectionDate: '',
+            cylinderBarcode: '',
+            manufacturingUnit: '',
+            ownNumber: '',
+            timeType: 0,
+            startTime: '',
+            endTime: '',
+            pageNumber: 1,
+            pageSize: 10,
+        }
+    }
+
+    initDetailList() {
+        this.detailList = {
+            id: this.operand.id || null,
+            ownNumber: this.operand.ownNumber || '',
+            cylinderBarcode: this.operand.cylinderBarcode || '',
+            propertyRights: this.operand.propertyRights || '',
+
+            propertyUnit: this.operand.propertyUnit || '',
+            manufacturingUnit: this.operand.manufacturingUnit || '',
+            landingDate: this.operand.landingDate || '',
+
+            useTheRegistrationCode: this.operand.useTheRegistrationCode || '',
+            serialNumber: this.operand.serialNumber || '',
+            yearOfManufacture: this.operand.yearOfManufacture || '',
+
+            fillingMedia: this.operand.fillingMedia || '',
+            cylinderModel: this.operand.cylinderModel || '',
+            equipmentVariety: this.operand.equipmentVariety || '',
+
+            lastInspectionDate: this.operand.lastInspectionDate || '',
+            nextInspectionDate: this.operand.nextInspectionDate || '',
+            cylinderStatus: this.operand.cylinderStatus || '',
+
+            inspectionNumber: this.operand.inspectionNumber || '',
+            originalWeight: this.operand.originalWeight || '',
+            volume: this.operand.volume || '',
+
+            designWallThickness: this.operand.designWallThickness || '',
+            pressureTestPressure: this.operand.pressureTestPressure || '',
+            nominalOperatingPressure: this.operand.nominalOperatingPressure || '',
+        }
+    }
+
     initAddForm() {
         this.addForm = {
-            chipNum: '',
-            cylinderNum: '',
-            createTime: '',
-            arrivalTime: '',
-            scrapTime: '',
-            gasType: '',
-            infTime: '',
-            orderNum: '',
+            ownNumber: '',
+            cylinderBarcode: '',
+            propertyRights: '',
 
-        };
+            propertyUnit: '',
+            manufacturingUnit: '',
+            useTheRegistrationCode: '',
+        }
     }
-    initEditForm(editObj?) {
-        // editObj = Object.assign({}, editObj);
+    initEditForm() {
         this.editForm = {
             id: this.operand.id || '',
-            chipNum: this.operand.chipNum || '',
-            cylinderNum: this.operand.cylinderNum || '',
-            createTime: this.operand.createTime || '',
-            arrivalTime: this.operand.arrivalTime|| '',
-            scrapTime: this.operand.scrapTime || '',
-            gasType: this.operand.gasType || '',
-            infTime: this.operand.infTime || '',
-            orderNum: this.operand.orderNum || '',
-            
-        };
-    }
-    initDeleteForm(deleteObj?) {
-        // deleteObj = Object.assign({}, deleteObj);
-        this.deleteForm = {
-            id: this.operand.id || '',
-            chipNum: this.operand.chipNum|| '',
-        };
+            ownNumber: this.operand.ownNumber || '',
+            cylinderBarcode: this.operand.cylinderBarcode || '',
+            propertyRights: this.operand.propertyRights || '',
+
+            propertyUnit: this.operand.propertyUnit || '',
+            manufacturingUnit: this.operand.manufacturingUnit || '',
+
+            useTheRegistrationCode: this.operand.useTheRegistrationCode || '',
+        }
     }
 
+    initExportParams() {
+        this.exportParams = {
+            beginLandingDate: '',
+            beginLastInspectionDate: '',
+            beginNextInspectionDate: '',
+            endLandingDate: '',
+            endLastInspectionDate: '',
+            endNextInspectionDate: '',
+            manufacturingUnit: '',
+            exportUrl: '',
+        }
+    }
     ngOnInit(): void {
         this.totalItems = 0;
-        this.currentPage = 1;
-        this.pageSize = 20;
-
-
+        this.loading = false;
         this.operand = {};
-
+        this.GasCylinderList = [];
         this.theads = [
-            '芯片编号',
-            '钢瓶编号',
-            '生产日期',
+            '自有编号',
+            '气瓶条码',
+            '产权性质',
+            '产权单位',
+            '制造单位',
             '进站日期',
-            '报废日期',
-            '气瓶规格',
-            '充气时间',
-            '订单编号',
-            
+            '使用登记代码',
+            '所属行政区域',
+            '唯一编码',
+            '制造年月',
+            '充装介质',
+            '详细信息',
+            // '气瓶型号',
+            // '设备品种',
+            // '末次检查年月',
+            // '下次检查年月',
+            // '气瓶状态',
+            // '检验编号',
+            // '原始重量',
+            // '容积',
+            // '设计壁厚',
+            // '水压试验压力',
+            // '公称工作压力',
         ];
+        this.detail = [
+            '自有编号',
+            '气瓶条码',
+            '产权性质',
 
+            '产权单位',
+            '制造单位',
+            '进站日期',
+
+            '使用登记代码',
+            '出厂编号',
+            '制造年月',
+
+            '充装介质',
+            '气瓶型号',
+            '设备品种',
+
+            '末次检查年月',
+            '下次检查年月',
+            '气瓶状态',
+
+            '检验编号',
+            '原始重量',
+            '容积',
+
+            '设计壁厚',
+            '水压试验压力',
+            '公称工作压力',
+        ];
+        this.initSearchParams();
         this.initAddForm();
         this.initEditForm();
-        this.initDeleteForm();
-
+        this.initExportParams();
+        this.initDetailList();
+        this.initEditForm();
         this.getList();
     }
 }

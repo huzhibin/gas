@@ -2,19 +2,69 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> 气瓶管理
+                <i class="fa fa-align-justify"></i> 气瓶档案信息
                 <span class="card-btn-group">
-          <!-- <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
-          <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
-          <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button> -->
-          <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
-        <button class="btn btn-sm btn-secondary" type="button" (click)="import()"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
-          <button class="btn btn-sm btn-secondary" type="button" (click)="export()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
-        </span>
+              <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+              <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+              <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
+              <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
+              <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show();currentStep=1;"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
+              <button class="btn btn-sm btn-secondary" type="button" (click)="exportModal.show()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
+            </span>
 
             </div>
             <div class="card-block">
                 <div class="form-group row search-table">
+                    <label class="form-control-label " for="text-input">气瓶条码：</label>
+                    <div class="">
+                        <input type="text" [(ngModel)]="searchParams.cylinderBarcode" name="cylinderBarcode" class="form-control form-control-sm" placeholder="请输入气瓶条码">
+                    </div>
+                    <label class=" form-control-label" for="text-input">制造单位：</label>
+                    <div class="">
+                        <input type="text" [(ngModel)]="searchParams.manufacturingUnit" name="manufacturingUnit" class="form-control form-control-sm" placeholder="请输入制造单位">
+                    </div>  
+                    <!-- <label class=" form-control-label" for="text-input">自有编号：</label>
+                    <div class="">
+                        <input type="text" [(ngModel)]="searchParams.ownNumber" name="ownNumber" class="form-control form-control-sm" placeholder="请输入自有编号">
+                    </div>  -->
+
+                    <!-- <label class=" form-control-label" for="text-input">时间类型：</label>
+                    <div class="">
+                      <select name="values" [(ngModel)]="searchParams.timeType"  class="form-control form-control-sm">
+                          
+                        <option *ngFor="let values of selValue" [value]="values.id">{{ values.name }}</option>
+                      </select>
+                    </div>
+                    <label class=" form-control-label" for="text-input">起始日期：</label> -->
+                    <!-- <div class="">
+                            <input type="text" value="{{searchParams.startTime | date:'y-MM-dd'}}" bsDatepicker [(bsValue)]="searchParams.startTime" name="startDate" class="form-control form-control-sm" placeholder="请输入起始时间">
+                        </div>   
+                    <label class=" form-control-label" for="text-input">截止日期：</label>
+                    <div class="">
+                            <input type="text" value="{{ searchParams.endTime | date:'y-MM-dd'}}" bsDatepicker [(bsValue)]="searchParams.endTime" name="startDate" class="form-control form-control-sm" placeholder="请输入截止时间">
+                        </div>  -->
+                    <button class="btn btn-sm btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i>&nbsp; 查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <!-- <div class="card-header">
+                <i class="fa fa-align-justify"></i> 气瓶管理
+                <span class="card-btn-group">
+              <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
+              <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+              <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
+              <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
+              <button class="btn btn-sm btn-secondary" type="button" (click)="import()"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
+              <button class="btn btn-sm btn-secondary" type="button" (click)="export()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>
+              </span>
+            </div> -->
+            <div class="card-block cleanfix">
+                <!-- <div class="form-group row search-table">
                     <label class="form-control-label " for="text-input">芯片编号：</label>
                     <div class="">
                         <input type="text" [(ngModel)]="searchParams.chipNum" name="chipNum" class="form-control form-control-sm" placeholder="请输入芯片编号">
@@ -22,99 +72,187 @@
                     <label class=" form-control-label" for="text-input">钢瓶编号：</label>
                     <div class="">
                         <input type="text" [(ngModel)]="searchParams.cylinderNum" name="cylinderNum" class="form-control form-control-sm" placeholder="请输入钢瓶编号">
-                    </div>    
+                    </div>
                     <button class="btn btn-sm btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i>&nbsp; 查询</button>
+                </div> -->
+                <div class="fixed-table-loading ta-c" *ngIf="loading">
+                    <img src="assets/img/loading1.gif" alt="">
                 </div>
+                <div class="fixed-table-loading ta-c" *ngIf="!GasCylinderList.length && !loading">
+                    <h5>查不到此信息</h5>
+                </div>
+                <div class="tab-h" *ngIf="GasCylinderList.length && !loading">
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th><input #checkedAll type="checkbox" name="deliverCarbox" (change)="selectAll(checkedAll.checked)"></th>
+                                <th *ngFor="let th of theads">{{ th }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let gasCylinder of GasCylinderList" (click)="gasCylinder.checked = !gasCylinder.checked" [class.active]="gasCylinder.checked">
+                                <td><input type="checkbox" name="deliverCarbox" [(ngModel)]="gasCylinder.checked" (click)="$event.stopPropagation();"></td>
+                                <td>{{ gasCylinder.ownNumber }}</td>
+                                <td>{{ gasCylinder.cylinderBarcode }}</td>
+                                <td>{{ gasCylinder.propertyRights }}</td>
+                                <td>{{ gasCylinder.propertyUnit }}</td>
+                                <td>{{ gasCylinder.manufacturingUnit }}</td>
+                                <td>{{ gasCylinder.landingDate | date: "y-MM-dd" }}</td>
 
-                <table class="table table-bordered table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th><input #checkedAll type="checkbox" name="deliverCarbox" (change)="selectAll(checkedAll.checked)"></th>
-                            <th *ngFor="let th of theads">{{ th }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let gasTank of gasTankList" (click)="gasTank.checked = !gasTank.checked" [class.active]="gasTank.checked">
-                            <td><input type="checkbox" name="deliverCarbox" [(ngModel)]="gasTank.checked" (click)="$event.stopPropagation();"></td>
-                            <td>{{ gasTank.chipNum }}</td>
-                            <td>{{ gasTank.cylinderNum }}</td>
-                            <td>{{ gasTank.createTime }}</td>
-                            <td>{{ gasTank.arrivalTime }}</td>
-                            <td>{{ gasTank.scrapTime }}</td>
-                            <td>{{ gasTank.gasType }}</td>
-                            <td>{{ gasTank.infTime }}</td>
-                            <td>{{ gasTank.orderNum }}</td>
-                            <!-- <td>
-                                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(gasTank)?editModal.show():null">编辑</button>
-                                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(gasTank)?deleteModal.show():null">删除</button>
-                            </td> -->
-                        </tr>
-                    </tbody>
-                </table>
+                                <td>{{ gasCylinder.useTheRegistrationCode }}</td>
+                                <td>乐清市</td>
+                                <td>{{ gasCylinder.serialNumber }}</td>
+                                <td>{{ gasCylinder.yearOfManufacture | date: "y-MM-dd"}}</td>
+                                <td>{{ gasCylinder.fillingMedia }}</td>
+                                <td> <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(gasCylinder)?detailModal.show():null">详细</button></td>
+                                <!-- <td>{{ gasCylinder.cylinderModel }}</td>
+                            <td>{{ gasCylinder.equipmentVariety }}</td>
+                            <td>{{ gasCylinder.lastInspectionDate | date: "y-MM-dd" }}</td>
+                            <td>{{ gasCylinder.nextInspectionDate | date: "y-MM-dd" }}</td>
+                            <td>{{ gasCylinder.cylinderStatus }}</td>
 
-                <pagination-comp [totalItems]="totalItems" [currentPage]="currentPage" (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
+                            <td>{{ gasCylinder.inspectionNumber }}</td>
+                            <td>{{ gasCylinder.originalWeight }}</td>
+
+                            <td>{{ gasCylinder.volume }}</td>
+                            <td>{{ gasCylinder.designWallThickness }}</td>
+                            <td>{{ gasCylinder.pressureTestPressure }}</td>
+                            <td>{{ gasCylinder.nominalOperatingPressure }}</td> -->
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 
+                <pagination-comp [totalItems]="totalItems" [currentPage]="searchParams.pageNumber" [itemsPerPage]="searchParams.pageSize"
+                    (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp> -->
             </div>
         </div>
     </div>
-    <!--/.col-->
 </div>
-<!--/.row-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <pagination-comp [totalItems]="totalItems" [currentPage]="searchParams.pageNumber" [itemsPerPage]="searchParams.pageSize"
+                    (changePage)="changePage($event)" (changeSize)="changeSize($event)"></pagination-comp>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div bsModal #detailModal="bs-modal" [config]="{ignoreBackdropClick: true, keyboard: false}" (onShow)="initDetailList()"
+    class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> 气瓶详细信息 </h4>
+                <button type="button" class="close" (click)="detailModal.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+            </div>
+            <div class="modal-body list">
+                <ul style="float:left;width:50%;list-style:none;">
+                    <li *ngFor="let detail of detail" style="">{{detail}}</li>
+                </ul>
+                <ul style="float:right;width:50%;list-style:none;margin-left:-50px;" (click)="$event.stopPropagation();">
+
+                    <li>{{detailList.ownNumber}}</li>
+                    <li>{{detailList.cylinderBarcode}}</li>
+                    <li>{{detailList.propertyRights}}</li>
+
+                    <li>{{detailList.propertyUnit}}</li>
+                    <li>{{detailList.manufacturingUnit}}</li>
+                    <li>{{detailList.landingDate | date: "y-MM-dd"}}</li>
+
+                    <li>{{detailList.useTheRegistrationCode}}</li>
+                    <li>{{detailList.serialNumber}}</li>
+                    <li>{{detailList.yearOfManufacture | date: "y-MM-dd"}}</li>
+
+                    <li>{{detailList.fillingMedia}}</li>
+                    <li>{{detailList.cylinderModel}}</li>
+                    <li>{{detailList.equipmentVariety}}</li>
+
+                    <li>{{detailList.lastInspectionDate | date: "y-MM-dd"}}</li>
+                    <li>{{detailList.nextInspectionDate | date: "y-MM-dd"}}</li>
+                    <li>{{detailList.cylinderStatus}}</li>
+
+                    <li>{{detailList.inspectionNumber}}</li>
+                    <li>{{detailList.originalWeight}}</li>
+                    <li>{{detailList.volume}}</li>
+
+                    <li>{{detailList.designWallThickness}}</li>
+                    <li>{{detailList.pressureTestPressure}}</li>
+                    <li>{{detailList.nominalOperatingPressure}}</li>
+
+                </ul>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="detailModal.hide()">取消</button>
+                <button type="button" class="btn btn-primary" (click)="detail(addModal)">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div bsModal #addModal="bs-modal" [config]="{ignoreBackdropClick: true, keyboard: false}" (onShow)="initAddForm()" class="modal fade"
     tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">添加气瓶</h4>
+                <h4 class="modal-title"> 增加气瓶信息 </h4>
                 <button type="button" class="close" (click)="addModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <span aria-hidden="true">&times;</span>
+  </button>
             </div>
+
             <div class="modal-body">
                 <form #ngAddForm="ngForm" class="form-horizontal">
                     <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">芯片编号</label>
+                        <label class="col-md-3 form-control-label" for="text-input">自有编号</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.chipNum" name="chipNum" maxlength="20" class="form-control form-control-sm"
-                                placeholder="请输入芯片编号" required>
+                            <input type="text" [(ngModel)]="addForm.ownNumber" name="companyNumber" maxlength="20" class="form-control form-control-sm"
+                                placeholder="自有编号" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">钢瓶编号</label>
+                        <label class="col-md-3 form-control-label" for="text-input">气瓶条码</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.cylinderNum" name="cylinderNum" maxlength="20" class="form-control form-control-sm" placeholder="请输入钢瓶编号"
+                            <input type="text" [(ngModel)]="addForm.cylinderBarcode" name="companyName" maxlength="20" class="form-control form-control-sm"
+                                placeholder="气瓶条码" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="text-input">产权性质</label>
+                        <div class="col-md-9">
+                            <input type="text" [(ngModel)]="addForm.propertyRights" name="companyType" maxlength="20" class="form-control form-control-sm"
+                                placeholder="产权性质" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="text-input">产权单位</label>
+                        <div class="col-md-9">
+                            <input type="text" [(ngModel)]="addForm.propertyUnit" name="createUser" class="form-control form-control-sm" placeholder="产权单位"
                                 required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">生产日期</label>
+                        <label class="col-md-3 form-control-label" for="text-input">制造单位</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.createTime"  name="createTime" maxlength="20" class="form-control form-control-sm" placeholder="请输入生产日期"
-                                required>
-                       </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">进站日期</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.arrivalTime" name="arrivalTime" maxlength="20" class="form-control form-control-sm" placeholder="请输入进站日期"
+                            <input type="text" [(ngModel)]="addForm.manufacturingUnit" name="address" class="form-control form-control-sm" placeholder="制造单位"
                                 required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">报废日期</label>
+                        <label class="col-md-3 form-control-label" for="text-input">使用登记代码</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.scrapTime" name="scrapTime" maxlength="20" class="form-control form-control-sm" placeholder="请输入报废日期"
+                            <input type="text" [(ngModel)]="addForm.useTheRegistrationCode" name="description" class="form-control form-control-sm" placeholder="使用登记代码"
                                 required>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">气瓶规格</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="addForm.gasType" name="gasType" maxlength="20" class="form-control form-control-sm" placeholder="请输入气瓶规格"
-                                required>
-                        </div>
-                    </div>
-                    
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -124,6 +262,7 @@
         </div>
     </div>
 </div>
+
 <div bsModal #editModal="bs-modal" (onShow)="initEditForm()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-warning modal-primary" role="document">
@@ -131,76 +270,62 @@
             <div class="modal-header">
                 <h4 class="modal-title"> 编辑气瓶信息 </h4>
                 <button type="button" class="close" (click)="editModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <span aria-hidden="true">&times;</span>
+  </button>
             </div>
             <div class="modal-body">
                 <form #ngEditForm="ngForm" class="form-horizontal">
                     <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">芯片编号</label>
+                        <label class="col-md-3 form-control-label" for="text-input">自有编号</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="editForm.chipNum" name="chipNum" maxlength="20" class="form-control form-control-sm" placeholder="请输入芯片编号"
+                            <input type="text" [(ngModel)]="editForm.ownNumber" name="companyNumber" maxlength="20" class="form-control form-control-sm"
+                                placeholder="自有编号" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="text-input">气瓶条码</label>
+                        <div class="col-md-9">
+                            <input type="text" [(ngModel)]="editForm.cylinderBarcode" name="companyName" maxlength="20" class="form-control form-control-sm"
+                                placeholder="气瓶条码" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="text-input">产权性质</label>
+                        <div class="col-md-9">
+                            <input type="text" [(ngModel)]="editForm.propertyRights" name="companyType" maxlength="20" class="form-control form-control-sm"
+                                placeholder="产权性质" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="text-input">产权单位</label>
+                        <div class="col-md-9">
+                            <input type="text" [(ngModel)]="editForm.propertyUnit" name="createUser" class="form-control form-control-sm" placeholder="产权单位"
                                 required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">钢瓶编号</label>
+                        <label class="col-md-3 form-control-label" for="text-input">制造单位</label>
                         <div class="col-md-9">
-                            <input type="text"  [(ngModel)]="editForm.cylinderNum" name="cylinderNum" maxlength="20" class="form-control form-control-sm" 
-                                placeholder="请输入钢瓶编号" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">生产日期</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="editForm.createTime" name="createTime" maxlength="20" class="form-control form-control-sm"
-                                placeholder="请输入生产日期" required>
-                            
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">进站日期</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="editForm.arrivalTime" name="arrivalTime" maxlength="20" class="form-control form-control-sm"
-                                placeholder="请输入进站日期" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">报废日期</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="editForm.scrapTime" name="scrapTime" maxlength="20" class="form-control form-control-sm" placeholder="请输入报废日期"
+                            <input type="text" [(ngModel)]="editForm.manufacturingUnit" name="address" class="form-control form-control-sm" placeholder="制造单位"
                                 required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">气瓶规格</label>
+                        <label class="col-md-3 form-control-label" for="text-input">使用登记代码</label>
                         <div class="col-md-9">
-                            <input type="text" [(ngModel)]="editForm.gasType" name="gasType" maxlength="20" class="form-control form-control-sm" placeholder="请输入气瓶规格"
-                                required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">充气时间</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="editForm.infTime" name="infTime" maxlength="20" class="form-control form-control-sm" placeholder="请输入充气时间"
-                                required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">订单编号</label>
-                        <div class="col-md-9">
-                            <input type="text" [(ngModel)]="editForm.orderNum" name="orderNum" maxlength="20" class="form-control form-control-sm" placeholder="请输入订单编号"
-                                required>
+                            <input type="text" [(ngModel)]="editForm.useTheRegistrationCode" name="description" class="form-control form-control-sm"
+                                placeholder="使用登记代码" required>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="editModal.hide()">取消</button>
-                <button type="button" class="btn btn-primary" (click)="edit(ngEditForm.valid,editModal)">保存</button>
+                <button type="button" class="btn btn-primary" (click)="edit(editModal)">保存</button>
             </div>
         </div>
     </div>
+
 </div>
 
 <div class="modal" bsModal #deleteModal="bs-modal" (onShow)="initDeleteForm()" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
@@ -208,31 +333,45 @@
     <div class="modal-dialog modal-danger modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">删除气瓶</h4>
+                <h4 class="modal-title">删除气瓶档案信息</h4>
                 <button type="button" class="close" (click)="deleteModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <span aria-hidden="true">&times;</span>
+  </button>
             </div>
             <div class="modal-body">
-                <p>确认删除气瓶<strong>{{ deleteForm.chipNum }}</strong>?</p>
+                <p>确认删除气瓶档案信息<strong></strong>?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">取消</button>
                 <button type="button" class="btn btn-primary" (click)="delete(deleteModal)">确认</button>
             </div>
         </div>
-        <!-- /.modal-content -->
+
     </div>
-    <!-- /.modal-dialog -->
-</div>
 
-
-<!-- <div class="card">
-    <pre class="form-control form-control-sm"><input type="text" value="{{getDate() | date:'y-MM-dd'}}"/></pre>
 </div>
-<div style="display:inline-block; min-height:280px;width:200px;">
-    <datepicker [(ngModel)]="dt" [minDate]="minDate" [showWeeks]="true" [dateDisabled]="dateDisabled"></datepicker>
-</div> -->
+<div class="modal" bsModal #exportModal="bs-modal" [config]="{animated:false,backdrop: false, ignoreBackdropClick:true}"
+tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">导出气瓶信息</h4>
+            <button type="button" class="close" (click)="exportModal.hide()" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+        </div>
+        <div class="modal-body ta-c">
+            <h5>确定导出气瓶信息？</h5>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="exportModal.hide()">取消</button>
+            <a class="" target="_blank">
+                <button type="button" class="btn btn-primary" (click)="export(exportModal)">确认下载</button>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
 
 <div class="alert" [class.hide]="alerts<1">
     <alert *ngFor="let alert of alerts" [dismissOnTimeout]="alert.timeout" [type]="alert.type" (onClosed)="alertShift()"><span [innerHtml]="alert.msg"></span></alert>

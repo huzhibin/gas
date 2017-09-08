@@ -1,1 +1,191 @@
-<router-outlet></router-outlet>
+<div class="container basic" style="margin:0;padding:0; overflow:hidden;">
+
+  <header style="height:8vh;margin:0;padding:0;">
+    <div class="row" style="margin-left:0">
+      <div class="col-md-3 col-sm-3 column">
+        <div class="row">
+          <div class="col-md-12 column logo">
+            <img src="assets/img/home/logo.png" alt="">
+            <span>智慧燃气安全大数据统一监管平台</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 column">
+        <!-- <div class="row"> -->
+        <div class="col-md-12 column home-top-mid">
+          <img src="assets/img/home/visualization-top.png" alt="" style="width:100%;">
+          <span class="header-time">{{curTime}}</span>
+          <span class="header-date">{{DateTime}} </span>
+        </div>
+        <!-- </div> -->
+      </div>
+      <div class="col-md-3  col-sm-3 column">
+        <div class="row" style="margin-right:0">
+          <div class="col-md-12 column alarm">
+            <div class="col-md-6" style="padding:0;color:white;font-size:1.1rem;font-weight:500;text-align:center;line-height:3rem;">
+              监管信息 1
+            </div>
+            <div class="col-md-6" style="padding:0;color:red;font-size:1.1rem;font-weight:500;text-align:center;line-height:3rem;">
+              严重事件 3
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content row clearfix" style="height:76vh;overflow-x:hidden; overflow-y:hidden;padding:1rem 0.5rem;margin:0;">
+    <div class="col-md-3 column">
+      <div class="row">
+        <div class="col-md-12 column" class="nav-left">
+          <div class="g nav-first bgc-color">
+            <span class="p-title">
+                        &nbsp; 待办事项：
+                   </span>
+            <span>
+                       
+                        &nbsp;  共<span style="border-bottom:1px solid white;font-weight:700;font-size: 20px;">&nbsp;1&nbsp;</span>件，其中
+            <span style="border-bottom:1px solid white;font-weight:700;color:red;font-size: 20px;">&nbsp;1&nbsp;</span>件加急事项。
+            </span>
+          </div>
+          <div class=" nav-second bgc-color">
+            <span class="p-title">
+                                &nbsp; 督察督办：
+                        </span>
+            <img src="assets/img/u111.png" class="imgu11">
+            <span class="span1">
+                           <span class="spansj color1">①超期<span class="spanleft">2</span></span>
+            <span class="spansj color2">②处理中<span class="spanleft">12</span></span>
+            <span class="spansj color3">③未处理<span class="spanleft">3</span></span>
+            </span>
+          </div>
+          <div class="nav-third bgc-color" style="height:auto">
+            <span class="p-title1">
+                                    &nbsp; 辖区钢瓶信息：
+                            </span>
+            <div class="table-tr">
+              <table class="table table-bordered table-sm ">
+                <tr class="color1">
+                  <td>正常</td>
+                  <td>2138712</td>
+                </tr>
+                <tr class="color2">
+                  <td>即将到期</td>
+                  <td>34712</td>
+                </tr>
+                <tr class="color-red">
+                  <td>已超期</td>
+                  <td>672</td>
+                </tr>
+                <tr class="color3">
+                  <td>总计</td>
+                  <td>2174096</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7 column">
+      <div class="row">
+        <div class="col-md-12 column nav-left ">
+          <div class="middle-first nav-radius bgc-color">
+            <p class="head-fir p-left">重要通知</p>
+            <span class="font-p">
+                    <p class="p-left "><span>[置顶]</span><span><a href="http://www.zjjs.com.cn/n17/n26/n28/n42/c358166/content.html" target="_blank">关于加强瓶装燃气市场监管的实施意见。</a></span>
+            <span class="fl-right">2017-02-23</span>
+            </p>
+            <p class="p-left"><span><a href="javascript:;"target="_blank">关于进一步加强安全生产宣传教育工作的通知。</a></span><span class="fl-right">2017-08-28</span></p>
+            <p class="p-left"><span><a href="javascript:;"target="_blank">关于印发《温州市瓶装燃气销售管控工作方案》的通知</a></span><span class="fl-right">2016-07-01</span></p>
+            </span>
+          </div>
+          <div class="middle-second nav-radius bgc-color">
+            <p class="head-fir p-left">待办事项</p>
+            <span class="font-p">
+                        <p class="p-left "><span style="color:red">[加急]</span><span><a href="http://www.zjjs.com.cn/n17/n26/n28/n42/c358166/content.html" target="_blank">关于印发《温州市瓶装燃气销售管控工作方案》的通知。</a></span>
+            <span class="fl-right">2017-08-28</span>
+            </p>
+
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 column nav-radius" style="border:1px solid #28cfd9">
+      <div class="row">
+        <div class="col-md-12 column  nav-left  color-white ">
+          <p class="head-fir p-left">信息滚动：</p>
+          <span class="font-p">
+                                <p class="p-left "><span >1.乐清市XX气站员工未按规范持证上岗。</span><span>2017-08-23 10:33</span></p>
+
+          </span>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <footer>
+    <div class="row clearfix" style="height:12vh;width: 100%;margin:4vh 0 0 0;">
+      <div class="col-md-1 column">
+      </div>
+      <div class="col-md-10 column">
+        <ul class="home-list">
+          <li>
+            <a href="javascript:;" [routerLink]="['/home']">
+                  <img src="assets/img/home/home-icon.png" alt="">
+                  <span>首页</span>
+                </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/information']">
+                  <img src="assets/img/home/information-icon.png" alt="">
+                  <span>基础信息监管</span>
+                </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/delivery']">
+                  <img src="assets/img/home/deliver-icon.png" alt="">
+                  <span>配送业务监管</span>
+                </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/standard']">
+                  <img src="assets/img/home/standard-icon.png" alt="">
+                  <span>数据规范标准</span>
+                </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/government']">
+                  <img src="assets/img/home/regulation-icon.png" alt="">
+                  <span>政府监管事务</span>
+                </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/report']">
+                  <img src="assets/img/home/statistic-icon.png" alt="">
+                  <span>统计查询</span>
+                </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/system']">
+                  <img src="assets/img/home/power-icon.png" alt="">
+                  <span>系统权限配置</span>
+                </a>
+          </li>
+          <li>
+            <a href="javascript:;" [routerLink]="['/big-data']">
+                  <img src="assets/img/home/visualization-icon.png" alt="">
+                  <span>大数据可视化</span>
+                </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-1 column">
+      </div>
+    </div>
+  </footer>
+</div>

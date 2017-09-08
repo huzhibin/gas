@@ -1,0 +1,142 @@
+<div class="container big-data" style="margin:0;padding:0; overflow:hidden;">
+
+  <header style="height:8vh;margin:0;padding:0;">
+    <div class="row" style="margin-left:0;" >
+      <div class="col-md-3 col-sm-3 column" >
+        <div class="row">
+          <div class="col-md-12 column logo" [routerLink]="['/home']" style="cursor:pointer;">
+            <img src="assets/img/home/logo.png" alt="">
+            <span>智慧燃气安全大数据统一监管平台</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 column">
+        <!-- <div class="row"> -->
+        <div class="col-md-12 column home-top-mid">
+          <img src="assets/img/home/visualization-top.png" alt="" style="width:100%;">
+          <span class="header-time">{{curTime}}</span>
+          <span class="header-date">{{DateTime}} </span>
+        </div>
+        <!-- </div> -->
+      </div>
+      <div class="col-md-3  col-sm-3 column">
+        <div class="row" style="margin-right:0">
+          <div class="col-md-12 column alarm">
+            <div class="col-md-6" style="padding:0;color:white;font-size:1.1rem;font-weight:500;text-align:center;line-height:3rem;">
+              监管信息 1
+            </div>
+            <div class="col-md-6" style="padding:0;color:red;font-size:1.1rem;font-weight:500;text-align:center;line-height:3rem;">
+              严重事件 3
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <div class="content row clearfix" style="height:86vh;overflow-x:hidden; overflow-y:hidden;padding:1rem 0.5rem;margin:0;">
+    <div class="col-md-3 column">
+      <div class="row">
+        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:76vh;overflow:auto;margin:4px;background:rgb(16,40,63)">
+          <div class="col-xs-3">
+            <section class="left">
+              <h3>各监管节点</h3>
+              <h4 (click)="areaClick('总预览')"><img src="assets/img/bigData/placename.png" alt="">温州市</h4>
+              <ul class="geoList">
+                <li *ngFor="let area of alarmData" (click)="areaClick(area.name)">
+                  <img src="assets/img/bigData/position.png"><span>{{ area.name }}</span><b [style.color]="colorList[area.value]">●</b>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 column">
+      <div class="row">
+        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:76vh; margin:4px;overflow:hidden">
+          <button (click)="fullScreen()" class="btn btn-info fullScreenBtn">{{isFullScreen?"退出全屏":"点击全屏"}}</button>
+          <div id="main" style="height: 100%" (window:resize)="myChart.resize()"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 column">
+      <div class="row">
+        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:160px; margin:4px;">
+          <div class="everyday">
+            <div class="title">
+              督察督办：
+            </div>
+            <ul>
+              <li [ngStyle]="{color:'rgb(255,153,0)'}">①超期 <span>2</span></li>
+              <li [ngStyle]="{color:'rgb(146,208,80)'}">②处理中 <span>12</span></li>
+              <li [ngStyle]="{color:'rgb(255,255,255)'}">③未处理 <span>3</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 column" style="border:1px solid #1792ab;width:100%;height:auto; margin:0.5rem;">
+          <div class="gasInfo">
+            <div class="title">
+              气瓶信息：
+            </div>
+            <ul style="padding:10px 0;">
+              <li class="clearfix" [ngStyle]="{color:'rgb(146,208,80)'}">
+                <div class="Fleft">正常</div>
+                <div class="Fright">2138712</div>
+              </li>
+              <li class="clearfix" [ngStyle]="{color:'rgb(255,153,0)'}">
+                <div class="Fleft">即将到期</div>
+                <div class="Fright">34712</div>
+              </li>
+              <li class="clearfix" [ngStyle]="{color:'rgb(255,0,0)'}">
+                <div class="Fleft">已超期</div>
+                <div class="Fright">672</div>
+              </li>
+              <li class="clearfix" [ngStyle]="{color:'rgb(255,255,255)'}">
+                <div class="Fleft">总计</div>
+                <div class="Fright">2174096</div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 column" style="width:100%;height:auto;">
+          <div class="news">
+            <div class="title">
+              动态信息：
+            </div>
+            <ul style="padding:0;">
+              <li style="color:red">
+                1. 永嘉县XX小区违规用气爆炸引发火灾事项通报。 2017-08-23 14:03
+              </li>
+              <li>
+                2. 乐清市XX气站员工未按规范持证上岗。 2017-08-23 10:33
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="row clearfix" style="height:6vh;width: 100%;margin:0;">
+      <div class="col-md-3 column">
+      </div>
+      <div class="col-md-6 column">
+        <div class="row">
+          <div class="col-md-12 column home-bottom-mid">
+            <img src="assets/img/home/visualization-bottom.png" alt="" style="width:100%">
+            <img src="assets/img/bigData/bottom-center-ico.png" alt=""style="left:50%;bottom:50%;transform:translateX(-50%);position:absolute;">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 column">
+      </div>
+    </div>
+  </footer>
+</div>

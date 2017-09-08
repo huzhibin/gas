@@ -1,55 +1,49 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 
-import { DeliverCarList } from '../data/deliver-car';
-
+// import { DeliverCarList } from '../data/deliver-car';
+import {CarService} from './car.service';
 @Component({
     templateUrl: 'car.component.html',
-    styleUrls: [],
-    providers: []
+    styleUrls: ['car.component.scss'],
+    providers: [CarService]
 })
 export class CarComponent implements OnInit {
     totalItems: number;//总记录数
-    currentPage: number;//当前页号
-    pageSize: number;//分页大小
+  
 
     // departList: any;//部门列表
 
     operand: any;//操作对象
     searchParams: {
-        deliverCarId: string,
-        gpsId: string,
-        deliverId: string,
-    } = {
-        deliverCarId: '',
-        gpsId: '',
-        deliverId: '',
+       
+        pageNumber:number,
+       pageSize:number,
     };//查询参数
     theads: Array<string>;//表头字段
+   
     deliverCarList: Array<{
         id: number,
-        deliverCarId: string,
-        gpsId: string,
-        deliverId:string;
+        // task_id:string,
+        // timestamp:string,
+        // latitud:string,
+        // longitude:string,
+        carLicensePlate:string,
+        company:string,
+        phoneResponsible:string,
+        responsible:string,
+        station:string,
+        taskId:string,
+        timestamp:string,
         checked?: Boolean
     }>;//用户列表
 
-    addForm: {
-        deliverCarId: string,
-        gpsId: string,
-        deliverId: string;
-    };//添加用户表单
-    editForm: {
-        id: number,
-        deliverCarId: string,
-        gpsId: string,
-        deliverId: string;
-    };//编辑用户表单
-    deleteForm: {
-        id: number,
-        deliverCarId: string,
-    }
+addForm:{
+    task_id:string,
+    timestamp:string,
+    latitud: string,
 
+}
    
     // // TODO:在提示消失的时候，将它从数组中清除
     alerts: any = [
@@ -59,19 +53,19 @@ export class CarComponent implements OnInit {
         this.alerts.shift();
     }
 
-    // // constructor(private userService: UserService) {
+    constructor(private CarService: CarService) {
 
-    // // }
+    }
 
     changePage(event) {
-        this.pageSize = event.itemsPerPage;
-        this.currentPage = event.page;
+        this.searchParams.pageSize = event.itemsPerPage;
+        this.searchParams.pageNumber = event.page;
         this.getList();
     }
 
     changeSize(event) {
-        this.pageSize = event;
-        this.currentPage = 1;
+        this.searchParams.pageSize = event;
+        this.searchParams.pageNumber = 1;
         this.getList();
     }
 
@@ -85,28 +79,31 @@ export class CarComponent implements OnInit {
         console.log('Page changed to: ' + event.page);
         console.log('number items per page: ' + event.itemsPerPage);
     }
-    import(modal) {
-        this.alerts.push({
-            type: 'success',
-            msg: '导入成功',
-            timeout: 1000
-        });
-        modal.hide();
-        this.getList();
-    }
+    // import(modal) {
+    //     this.alerts.push({
+    //         type: 'success',
+    //         msg: '导入成功',
+    //         timeout: 1000
+    //     });
+    //     modal.hide();
+    //     this.getList();
+    // }
     
+    // add( modal) {
+    //     modal.hide();
+    //     this.getList();
+    // }
 
 
-
-    export(modal) {
-        this.alerts.push({
-            type: 'success',
-            msg: '导出成功',
-            timeout: 1000
-        });
-        modal.hide();
-        this.getList();
-    }
+    // export(modal) {
+    //     this.alerts.push({
+    //         type: 'success',
+    //         msg: '导出成功',
+    //         timeout: 1000
+    //     });
+    //     modal.hide();
+    //     this.getList();
+    // }
    
 
     refresh() {
@@ -114,24 +111,24 @@ export class CarComponent implements OnInit {
     }
     
     search() {
+      this.searchParams.pageNumber=1;
         this.getList();
     }
-    getList(deliverCarId?: string, gpsId?: string, deliverId?: string, pageSize?: number, currentPage?: number) {
+
+    getList() {
         let params = {
-            deliverCarId: this.searchParams.deliverCarId,
-            gpsId: this.searchParams.gpsId,
-            deliverId: this.searchParams.deliverId,
-            pageSize: this.pageSize,
-            currentPage: this.currentPage
+            
+            // pageSize:this.searchParams.pageSize,
+            // pageNumber: this.searchParams.pageNumber
         };
         console.log('查询后台--getList:' + JSON.stringify(params));
-        // this.userService.getCustomerList(params).then(data => {
-        //   this.CustomerList = data.data.list;
-        //   this.totalItems = data.data.totalItems
-        // });
+        this.CarService.getCarList(params).then(data => {
+          this.deliverCarList = data.data;
+          this.totalItems = data.data.total;
+        });
 
-        this.deliverCarList = DeliverCarList.slice(params.pageSize * (params.currentPage - 1), params.pageSize * params.currentPage);
-        this.totalItems = DeliverCarList.length;
+        // this.deliverCarList = DeliverCarList.slice(params.pageSize * (params.pageNumber - 1), params.pageSize * params.pageNumber);
+        // this.totalItems = DeliverCarList.length;
     }
 
     // //获取选中的第一个对象
@@ -158,22 +155,37 @@ export class CarComponent implements OnInit {
         }
     }
 
+    intiSearchParams(){
+        this.searchParams={
+            
+            pageNumber:1,
+            pageSize:10,
+        }
+    }
+
+    initAddForm(){
+        this.addForm={
+            task_id:'',
+            timestamp:'',
+            latitud:'',
+        }
+    }
     ngOnInit(): void {
         this.totalItems = 0;
-        this.currentPage = 1;
-        this.pageSize = 20;
-
-
         this.operand = {};
-
         this.theads = [
-            '配送车编号',
-            '配送车GPS终端ID',
-            '配送员编号',
-            
+            '归属公司编号',
+            '配送车辆牌照',
+            '责任人电话',
+            '责任人编号'	,
+            '所属地区',
+            'GPS定位',
+            '任务编号',
+            '时间戳',
+            '图像',
         ];
 
-        
+        this.intiSearchParams();
 
         this.getList();
     }

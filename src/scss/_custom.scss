@@ -2,13 +2,21 @@
 // body.modal-open{
 //   overflow-y: auto !important;
 // }
-div.search-table{
+html,
+body {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+div.search-table {
   padding-right: 15px;
   padding-left: 15px;
 }
-div.search-table div{
- margin-right: 2rem;
- width: 8rem;
+
+div.search-table div {
+  margin-right: 2rem;
+  width: 8rem;
 }
 
 .card-header {
@@ -40,7 +48,7 @@ button[disable] {
 }
 
 table tr.active {
-  background-color: cornsilk !important;
+  background-color: rgb(31, 76, 107) !important;
 }
 
 input.ng-valid[required],
@@ -57,6 +65,854 @@ select.ng-invalid:not(form) {
   border-color: rgb(248, 108, 107);
 }
 
-.hide{
+.hide {
   display: none;
 }
+
+div.container {
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100% !important;
+  background-size: 100% 100%;
+}
+
+div.basic {
+  background-image: url(../assets/img/home/home-bg.png);
+}
+
+div.big-data {
+  background-image: url(../assets/img/home/visualization-bg.jpg);
+}
+
+div.logo {
+  display: flex;
+  margin: 0.5rem;
+  height: 3rem;
+  border-left: 5px solid #00acf8;
+  border-right: 5px solid #00acf8;
+}
+
+div.home-top-mid {
+  margin: 1rem;
+  height: 3rem;
+}
+
+div.home-bottom-mid {
+  margin: 1rem;
+  height: 3rem;
+}
+
+div.home-top-mid img {
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+}
+
+div.home-bottom-mid img {
+  display: block;
+  margin: 0 auto;
+}
+
+span.header-time {
+  text-align: center;
+  display: block;
+  color: white;
+  font-size: 2rem;
+  margin: 0 auto;
+  margin-top: -2rem;
+}
+
+span.header-date {
+  text-align: center;
+  display: block;
+  color: white;
+  font-size: 1.2rem;
+  margin: -0.5rem auto 0 auto;
+  font-weight: bold;
+}
+
+div.alarm {
+  display: flex;
+  margin: 0.5rem;
+  height: 3rem;
+  border-left: 5px solid #f3b400;
+  border-right: 5px solid #f3b400;
+}
+
+div.logo img {
+  height: 3rem;
+}
+
+div.logo span {
+  display: block;
+  font-size: 1rem;
+  color: white;
+  text-align: center;
+  margin-left: 20px;
+  font-weight: 700;
+  font-family: 微软雅黑 Bold, 微软雅黑;
+}
+
+ul.home-list {
+  color: white;
+  display: block;
+  width: 100%;
+  height: 11vh;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 0.5vh solid white;
+  display: flex;
+}
+
+ul.home-list li {
+  /* float: left; */
+  display: block;
+  /* height: 4rem; */
+  width: 12.5%;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
+ul.home-list li a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+
+ul.home-list li a:hover img {
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3) translateY(-0.4rem);
+  zoom: 1.3;
+}
+
+ul.home-list li a img {
+  margin: 0 auto;
+  display: block;
+  height: 2rem;
+  -webkit-transition: -webkit-transform .2s;
+  transition: transform .2s;
+}
+
+ul.sider-item {
+  color: white;
+  display: block;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+ul.sider-item li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+ul.sider-item li a {
+  background-color: #182734;
+  border-radius: 5px;
+  display: block;
+  text-decoration: none;
+  color: white;
+  margin: 2px;
+  padding: 0.5rem;
+  text-align: center;
+  border: 2px solid #182734;
+}
+
+ul.sider-item li a.active {
+  border: 2px solid #17518b; // border-style: groove;
+}
+
+ul.sider-item li a:hover {
+  border: 2px solid #17518b; // border-style: groove;
+}
+
+.card div.card-block {
+  background-color: #0a223a;
+  color: white;
+  font-size: 0.875rem;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #1792ab;
+}
+
+.page-item.disabled .page-link {
+  color: #20a8d8;
+  pointer-events: none;
+  background-color: #263238;
+  border-color: #263238;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #20a8d8;
+  background-color: #263238;
+  border: 1px solid #263238;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+}
+
+ ::-webkit-scrollbar-thumb,
+ ::-webkit-scrollbar-thumb:horizontal {
+  border-radius: 6px;
+  background: #1792ab;
+}
+
+ ::-webkit-scrollbar-button {
+  display: none;
+}
+
+ ::-webkit-scrollbar-track,
+ ::-webkit-scrollbar-track-piece {
+  background: -webkit-gradient(linear, left);
+}
+
+ ::-webkit-scrollbar-track-piece {
+  background: #0c2745;
+}
+
+table tr.active {
+  background-color: #31708f !important;
+}
+
+.card {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: #fff;
+  border: 0px solid #cfd8dc;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 1px solid #1792ab;
+}
+
+.table {
+  margin-bottom: 0px;
+}
+
+.card {
+  color: white;
+}
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: #263238;
+  border-bottom: 1px solid #263238;
+}
+
+.btn-secondary {
+  color: #060505;
+  background-color: #F3F9F9;
+  border-color: #263238;
+}
+
+.modal-content {
+  background-color: #263238;
+  color: white;
+}
+
+// .form-group {
+//   margin-bottom: 0rem;
+// }
+.form-control {
+  background-color: #263238;
+  border-radius: 5px;
+}
+
+.close {
+  color: white;
+}
+
+.card div.card-block .form-group {
+  margin-bottom: 0rem;
+}
+
+.tab-h {
+  height: 370px;
+  overflow: auto;
+}
+
+.modal-header {
+  border-bottom: 1px solid #1985ac;
+}
+
+.modal-footer {
+  border-top: 1px solid #1985ac;
+}
+
+.list ul li{
+  border-bottom:1px solid #2cb9e2;
+  height: 25px;
+  overflow-x: hidden
+}
+.span1{
+  color: white;
+}
+
+.color1{
+  color:#FF9900
+}
+.color2{
+  color:#92D050
+}
+.color3{
+  color:#fff
+}
+.color-red{
+  color:red;
+}
+.color-white{
+  color:white;
+}
+.table-tr{
+  text-align: center
+}
+.nav-radius{
+  border-radius: 12px;
+}
+div.container .mar-top{
+  margin-top: 0.5rem;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+div.col-md-7 .font-p .p-left a{
+  color: white;
+}
+div.col-md-7 .font-p  a:hover{
+  color:#20a8d8;
+}
+.bgc-color{
+background-color: #11293e;
+border:1px solid #28cfd9 !important;
+}
+.imgu11{
+  width:40%;height:60%;float:left;margin-top:1.5vh; 
+}
+.ta-c{
+  text-align: center;
+  color: #20a8d8;
+  }
+  
+.fixed-table-loading {
+  margin: 60px 0;
+}
+// .spansj{
+//   height:30px;width:50%;float:left
+// }
+
+
+// @media screen 首页样式部分自适应
+
+// @media screen and (min-width:768px){
+  
+//   .spansj{
+//   height:30px;width:50%;float:left;
+//   }
+//   .spanleft{
+//     float: right
+//   }
+// }
+@media screen and (min-width:992px){
+  .log-head{
+    margin-top: 20px;
+    margin-left: -120px;
+    font-size: 1rem; 
+    color: white;
+    font-weight: 700;
+    font-family: 微软雅黑 Bold, 微软雅黑;
+  }
+  .spansj{
+  height:30px;width:50%;float:left;font-size: 0.9rem;
+  }
+  .spanleft{
+    float: right
+    // margin-left: 30%;
+  }
+  .nav-left{
+    width:100%;height: 59vh;
+  }
+  .nav-first{
+    height:13vh;border:1px solid #28cfd9;margin-bottom:0.2rem;color:#fff
+  }
+  .nav-second{
+    height: 20vh;;border:1px solid #28cfd9;margin-bottom:0.2rem
+  }
+  .nav-third{
+    height: 26vh;;border:1px solid #28cfd9
+  }
+ .table-tr{
+   margin: 5px;font-size: 1em;
+
+ }
+ .middle-first{
+   width: 100%;height: 35vh;border:1px solid #28cfd9;margin-bottom: 5px;
+   color: #fff;
+ }
+ .middle-second{
+  width: 100%;height: 24vh;border:1px solid #28cfd9;
+  color: #fff;
+}
+.head-fir{
+  font-family: 微软雅黑 Bold, 微软雅黑;
+  font-weight: 700;
+  font-size: 22px;
+}
+.p-left{
+  margin-left: 3%
+}
+.font-p{
+  font-size: 15px;
+  font-family: 微软雅黑 Regular, 微软雅黑;
+  font-weight: 400;
+}
+.fl-right{
+  float: right;
+  margin-right: 6px;
+}
+
+.p-title{
+  display: block;
+  margin-top:10px;color:#3399ff;font-size:20px;
+}
+.p-title1{
+  display: block;
+  margin-top:10px;color:#fff;font-size:1.4rem;
+}
+}
+@media screen and (min-width:1200px){
+
+  .spansj{
+  height:30px;width:50%;float:left;margin-left: 8%;margin-top: 1%
+  }
+  .spanleft{
+    float: right
+  }
+ 
+  .nav-left{
+    width:100%;height: 68vh;;border:0px solid #28cfd9;
+  }
+  .nav-first{
+    height:16vh;border:1px solid #28cfd9;margin-bottom:0.2rem;color:#fff
+  }
+  .nav-second{
+    height:22vh;border:1px solid #28cfd9;margin-bottom:0.2rem
+  }
+  .nav-third{
+    height:30vh;border:1px solid #28cfd9
+  }
+  
+  .middle-first{
+    width: 100%;height: 40vh;border:1px solid #28cfd9;margin-bottom: 10px
+  }
+  .middle-second{
+   width: 100%;height: 27vh;border:1px solid #28cfd9;
+ }
+ .table-tr{
+  margin: 5px;font-size: 1rem;
+
+}
+
+.p-title{
+  display: block;
+  margin-top:10px;color:#3399ff;font-size:1.5rem;
+}
+.p-title1{
+  display: block;
+  margin-top:10px;color:#fff;font-size:1.5rem;
+}
+}
+@media screen and (min-width:1300px){
+  
+    .spansj{
+    height:30px;width:50%;float:left;margin-left: 6%;
+    font-size: 1.1rem;
+    }
+    .spanleft{
+      float: right
+    }
+    .table-tr{
+      margin: 5px;font-size: 1.4rem;
+   
+    }
+  }
+
+
+/*
+* 流程图样式
+*/
+/* Flowchart variables */
+/* Sequence Diagram variables */
+/* Gantt chart variables */
+.mermaid .label {
+  color: #333;
+}
+.node rect,
+.node circle,
+.node ellipse,
+.node polygon {
+  fill: #ECECFF;
+  stroke: #CCCCFF;
+  stroke-width: 1px;
+}
+.arrowheadPath {
+  fill: #333333;
+}
+.edgePath .path {
+  stroke: #333333;
+}
+.edgeLabel {
+  background-color: #e8e8e8;
+}
+.cluster rect {
+  fill: #ffffde !important;
+  rx: 4 !important;
+  stroke: #aaaa33 !important;
+  stroke-width: 1px !important;
+}
+.cluster text {
+  fill: #333;
+}
+.actor {
+  stroke: #CCCCFF;
+  fill: #ECECFF;
+}
+text.actor {
+  fill: black;
+  stroke: none;
+}
+.actor-line {
+  stroke: grey;
+}
+.messageLine0 {
+  stroke-width: 1.5;
+  stroke-dasharray: "2 2";
+  marker-end: "url(#arrowhead)";
+  stroke: #333;
+}
+.messageLine1 {
+  stroke-width: 1.5;
+  stroke-dasharray: "2 2";
+  stroke: #333;
+}
+#arrowhead {
+  fill: #333;
+}
+#crosshead path {
+  fill: #333 !important;
+  stroke: #333 !important;
+}
+.messageText {
+  fill: #333;
+  stroke: none;
+}
+.labelBox {
+  stroke: #CCCCFF;
+  fill: #ECECFF;
+}
+.labelText {
+  fill: black;
+  stroke: none;
+}
+.loopText {
+  fill: black;
+  stroke: none;
+}
+.loopLine {
+  stroke-width: 2;
+  stroke-dasharray: "2 2";
+  marker-end: "url(#arrowhead)";
+  stroke: #CCCCFF;
+}
+.note {
+  stroke: #aaaa33;
+  fill: #fff5ad;
+}
+.noteText {
+  fill: black;
+  stroke: none;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 14px;
+}
+/** Section styling */
+.section {
+  stroke: none;
+  opacity: 0.2;
+}
+.section0 {
+  fill: rgba(102, 102, 255, 0.49);
+}
+.section2 {
+  fill: #fff400;
+}
+.section1,
+.section3 {
+  fill: white;
+  opacity: 0.2;
+}
+.sectionTitle0 {
+  fill: #333;
+}
+.sectionTitle1 {
+  fill: #333;
+}
+.sectionTitle2 {
+  fill: #333;
+}
+.sectionTitle3 {
+  fill: #333;
+}
+.sectionTitle {
+  text-anchor: start;
+  font-size: 11px;
+  text-height: 14px;
+}
+/* Grid and axis */
+.grid .tick {
+  stroke: lightgrey;
+  opacity: 0.3;
+  shape-rendering: crispEdges;
+}
+.grid path {
+  stroke-width: 0;
+}
+/* Today line */
+.today {
+  fill: none;
+  stroke: red;
+  stroke-width: 2px;
+}
+/* Task styling */
+/* Default task */
+.task {
+  stroke-width: 2;
+}
+.taskText {
+  text-anchor: middle;
+  font-size: 11px;
+}
+.taskTextOutsideRight {
+  fill: black;
+  text-anchor: start;
+  font-size: 11px;
+}
+.taskTextOutsideLeft {
+  fill: black;
+  text-anchor: end;
+  font-size: 11px;
+}
+/* Specific task settings for the sections*/
+.taskText0,
+.taskText1,
+.taskText2,
+.taskText3 {
+  fill: white;
+}
+.task0,
+.task1,
+.task2,
+.task3 {
+  fill: #8a90dd;
+  stroke: #534fbc;
+}
+.taskTextOutside0,
+.taskTextOutside2 {
+  fill: black;
+}
+.taskTextOutside1,
+.taskTextOutside3 {
+  fill: black;
+}
+/* Active task */
+.active0,
+.active1,
+.active2,
+.active3 {
+  fill: #bfc7ff;
+  stroke: #534fbc;
+}
+.activeText0,
+.activeText1,
+.activeText2,
+.activeText3 {
+  fill: black !important;
+}
+/* Completed task */
+.done0,
+.done1,
+.done2,
+.done3 {
+  stroke: grey;
+  fill: lightgrey;
+  stroke-width: 2;
+}
+.doneText0,
+.doneText1,
+.doneText2,
+.doneText3 {
+  fill: black !important;
+}
+/* Tasks on the critical line */
+.crit0,
+.crit1,
+.crit2,
+.crit3 {
+  stroke: #ff8888;
+  fill: red;
+  stroke-width: 2;
+}
+.activeCrit0,
+.activeCrit1,
+.activeCrit2,
+.activeCrit3 {
+  stroke: #ff8888;
+  fill: #bfc7ff;
+  stroke-width: 2;
+}
+.doneCrit0,
+.doneCrit1,
+.doneCrit2,
+.doneCrit3 {
+  stroke: #ff8888;
+  fill: lightgrey;
+  stroke-width: 2;
+  cursor: pointer;
+  shape-rendering: crispEdges;
+}
+.doneCritText0,
+.doneCritText1,
+.doneCritText2,
+.doneCritText3 {
+  fill: black !important;
+}
+.activeCritText0,
+.activeCritText1,
+.activeCritText2,
+.activeCritText3 {
+  fill: black !important;
+}
+.titleText {
+  text-anchor: middle;
+  font-size: 18px;
+  fill: black;
+}
+g.classGroup text {
+  fill: #9370DB;
+  stroke: none;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 10px;
+}
+g.classGroup rect {
+  fill: #ECECFF;
+  stroke: #9370DB;
+}
+g.classGroup line {
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+svg .classLabel .box {
+  stroke: none;
+  stroke-width: 0;
+  fill: #ECECFF;
+  opacity: 0.5;
+}
+svg .classLabel .label {
+  fill: #9370DB;
+  font-size: 10px;
+}
+.relation {
+  stroke: #9370DB;
+  stroke-width: 1;
+  fill: none;
+}
+.composition {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+#compositionStart {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+#compositionEnd {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+.aggregation {
+  fill: #ECECFF;
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+#aggregationStart {
+  fill: #ECECFF;
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+#aggregationEnd {
+  fill: #ECECFF;
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+#dependencyStart {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+#dependencyEnd {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+#extensionStart {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+#extensionEnd {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1;
+}
+.node text {
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 14px;
+}
+// div.mermaidTooltip {
+//   position: absolute;
+//   text-align: center;
+//   max-width: 200px;
+//   padding: 2px;
+//   font-family: 'trebuchet ms', verdana, arial;
+//   font-size: 12px;
+//   background: #ffffde;
+//   border: 1px solid #aaaa33;
+//   border-radius: 2px;
+//   pointer-events: none;
+//   z-index: 100;
+// }
+/* end 流程图样式*/

@@ -111,6 +111,7 @@ addForm:{
     }
     
     search() {
+      this.searchParams.pageNumber=1;
         this.getList();
     }
 

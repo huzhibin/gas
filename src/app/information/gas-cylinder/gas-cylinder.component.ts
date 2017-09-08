@@ -168,32 +168,39 @@ export class GasCylinderComponent implements OnInit {
 
     add(valid, modal) {
         if (valid) {
-            this.alerts.push({
-                type: 'success',
-                msg: '添加成功',
-                timeout: 1000
-            });
+            // this.alerts.push({
+            //     type: 'success',
+            //     msg: '添加成功',
+            //     timeout: 1000
+            // });
             this.getList();
             modal.hide();
 
         }
+        else {
+          this.alerts.push({
+            type: 'danger',
+            msg: '表单填写不正确',
+            timeout: 1000
+          });
+        }
     }
     edit(modal) {
-        this.alerts.push({
-            type: 'success',
-            msg: '编辑成功',
-            timeout: 1000
-        });
+        // this.alerts.push({
+        //     type: 'success',
+        //     msg: '编辑成功',
+        //     timeout: 1000
+        // });
         modal.hide();
         this.getList();
 
     }
     delete(modal) {
-        this.alerts.push({
-            type: 'success',
-            msg: '删除成功',
-            timeout: 1000
-        });
+        // this.alerts.push({
+        //     type: 'success',
+        //     msg: '删除成功',
+        //     timeout: 1000
+        // });
         modal.hide();
         this.getList();
     }
@@ -246,6 +253,7 @@ export class GasCylinderComponent implements OnInit {
     }
 
     search() {
+      this.searchParams.pageNumber=1;
         this.getList();
     }
     TypeDate(date) {
@@ -260,7 +268,9 @@ export class GasCylinderComponent implements OnInit {
             return y + '-' + (m < 10 ? '0' + m : m) + '-' + (s < 10 ? ('0' + s) : s);
         }
     };
-    // }
+    trim(string) {
+      return string.replace(/\s+/g, "");
+  }
     getList() {
 
         let params = {
@@ -270,8 +280,8 @@ export class GasCylinderComponent implements OnInit {
             endLandingDate: this.searchParams.endLandingDate,
             endLastInspectionDate: this.searchParams.endLastInspectionDate,
             endNextInspectionDate: this.searchParams.endNextInspectionDate,
-            cylinderBarcode: this.searchParams.cylinderBarcode,
-            manufacturingUnit: this.searchParams.manufacturingUnit,
+            cylinderBarcode: this.trim(this.searchParams.cylinderBarcode),
+            manufacturingUnit:this.trim(this.searchParams.manufacturingUnit),
             ownNumber: this.searchParams.ownNumber,
             pageSize: this.searchParams.pageSize,
             pageNumber: this.searchParams.pageNumber,

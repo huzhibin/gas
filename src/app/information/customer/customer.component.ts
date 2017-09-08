@@ -137,6 +137,7 @@ export class CustomerComponent implements OnInit {
         this.getList();
     }
     search() {
+      this.searchParams.pageNumber=1;
         this.getList();
     }
     trim(string) {

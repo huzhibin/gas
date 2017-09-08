@@ -4,9 +4,9 @@
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> 人员信息
                 <span class="card-btn-group">
-                  <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();"><i class="fa fa-plus"></i>&nbsp; 新增</button>
-                  <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;"><i class="fa fa-edit"></i>&nbsp; 编辑</button>
-                  <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null"><i class="fa fa-close"></i>&nbsp; 删除</button>
+                  <button class="btn btn-sm btn-primary" type="button" (click)="addModal.show();" disabled><i class="fa fa-plus" ></i>&nbsp; 新增</button>
+                  <button class="btn btn-sm btn-warning" type="button" (click)="checkOperand()?editModal.show():null;" disabled><i class="fa fa-edit"></i>&nbsp; 编辑</button>
+                  <button class="btn btn-sm btn-danger" type="button" (click)="checkOperand()?deleteModal.show():null" disabled><i class="fa fa-close"></i>&nbsp; 删除</button>
                   <button class="btn btn-sm btn-success" type="button" (click)="refresh()"><i class="fa fa-refresh"></i>&nbsp; 刷新</button>
                   <button class="btn btn-sm btn-secondary" type="button" (click)="importModal.show();currentStep=1;"><i class="fa fa-cloud-upload"></i>&nbsp; 导入</button>
                   <button class="btn btn-sm btn-secondary" type="button" (click)="exportModal.show()"><i class="fa fa-cloud-download"></i>&nbsp; 导出</button>

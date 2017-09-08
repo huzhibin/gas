@@ -139,6 +139,7 @@ export class StoreCylinderComponent implements OnInit {
                 msg: '删除成功',
                 timeout: 1000
             });
+            this.searchParams.pageNumber=1;
             this.getList();
             modal.hide();
         });
@@ -149,6 +150,7 @@ export class StoreCylinderComponent implements OnInit {
         this.getList();
     }
     search() {
+      this.searchParams.pageNumber=1;
         this.getList();
     };
 

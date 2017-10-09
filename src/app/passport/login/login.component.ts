@@ -6,8 +6,8 @@ import { PassportService } from "../passport.service";
   templateUrl: 'login.component.html'
 })
 export class LoginComponent implements OnInit {
-  private userName: string;
-  private password: string;
+  public userName: string;
+  public password: string;
 
   constructor(
     private passportService: PassportService,

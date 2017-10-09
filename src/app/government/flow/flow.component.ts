@@ -277,7 +277,7 @@ export class FlowComponent implements OnInit {
     return null;
   }
   //检查并设置操作对象
-  checkOperand(obj) {
+  checkOperand(obj?: any) {
     if (obj || this.getChecked()) {
       this.operand = obj || this.getChecked();
       return true;
@@ -321,22 +321,22 @@ export class FlowComponent implements OnInit {
     };
     console.dir(this.editForm);
   }
-  getAddDescribe(){
-    if(this.addEditor.Instance){
+  getAddDescribe() {
+    if (this.addEditor.Instance) {
       console.dir(this.addEditor.Instance);
       this.addEditor.Instance.setContent('');
       return '';
-    }else{
+    } else {
       return '';
     }
   }
-  getEditDescribe(){
-    if(this.editEditor.Instance){
+  getEditDescribe() {
+    if (this.editEditor.Instance) {
       console.dir(this.editEditor.Instance);
       console.dir(this.operand.describe);
       this.editEditor.Instance.setContent(this.operand.describe);
       return this.operand.describe;
-    }else{
+    } else {
       return '';
     }
   }

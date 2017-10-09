@@ -243,7 +243,7 @@ export class UserComponent implements OnInit {
     return null;
   }
   //检查并设置操作对象
-  checkOperand(obj) {
+  checkOperand(obj?: any) {
     if (obj || this.getChecked()) {
       this.operand = obj || this.getChecked();
       return true;

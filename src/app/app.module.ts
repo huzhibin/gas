@@ -23,6 +23,7 @@ import { BasicLayoutComponent } from './pages/basic-layout.component';
 
 import { AuthGuard } from './service/auth-guard.service';
 import { HttpService } from './service/http.service';
+import { API } from './service/api';
 
 @NgModule({
   imports: [
@@ -55,7 +56,11 @@ import { HttpService } from './service/http.service';
       useClass: HashLocationStrategy
     },
     AuthGuard,
-    HttpService
+    HttpService,
+    {
+      provide: "API",
+      useValue: API
+    }
   ],
   bootstrap: [AppComponent]
 })

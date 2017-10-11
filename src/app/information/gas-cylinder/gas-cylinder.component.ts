@@ -4,7 +4,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 // import { GasCylinderList } from '../data/gas-tank';
 
 import { GasCylinderService } from './gas-cylinder.service';
-import { API } from '../../service/api';
+import { API } from '../../core/api';
 @Component({
     templateUrl: 'gas-cylinder.component.html',
     styleUrls: ['gas-cylinder.component.css'],

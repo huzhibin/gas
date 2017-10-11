@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { GasCommonModule } from '../component/gas-common.module';
+import { SharedModule } from '../shared/shared.module';
 import { UEditorModule } from 'ngx-ueditor';
 
 import { GovernmentRoutingModule } from './government-routing.module';
@@ -20,7 +20,7 @@ import { AffairComponent } from './affair/affair.component';
     AlertModule,
     TabsModule,
     ModalModule,
-    GasCommonModule,
+    SharedModule,
     UEditorModule
   ],
   declarations: [ 

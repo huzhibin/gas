@@ -4,18 +4,16 @@ import { Routes, RouterModule } from '@angular/router';
 // Layouts
 import { HomeComponent } from './home/home.component';
 import { BigDataComponent } from './big-data/big-data.component';
-import { BasicLayoutComponent } from './pages/basic-layout.component';
+import { BasicLayoutComponent } from './shared/basic-layout/basic-layout.component';
 
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 
-import { AuthGuard } from './service/auth-guard.service';
-
+import { AuthGuard } from './core/auth-guard.service';
 
 export const routes: Routes = [
   {
     path: '',
-    // redirectTo: '',
-    component: BasicLayoutComponent,
-    canActivate: [AuthGuard],
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -27,14 +25,14 @@ export const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     canActivate: [AuthGuard],
+    data: {
+      title: '首页'
+    },
   },
   {
     path: '',
     component: BasicLayoutComponent,
     canActivate: [AuthGuard],
-    data: {
-      title: '首页'
-    },
     children: [
       {
         path: 'information',
@@ -59,11 +57,7 @@ export const routes: Routes = [
       {
         path: 'system',
         loadChildren: './system/system.module#SystemModule'
-      },
-      // {
-      //   path: 'big-data',
-      //   loadChildren: './big-data/big-data.module#BigDataModule'
-      // }
+      }
     ]
   },
   {
@@ -72,7 +66,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'login'
+    component: PageNotFoundComponent
   }
 ];
 

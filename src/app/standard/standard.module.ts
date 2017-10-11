@@ -5,7 +5,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { GasCommonModule } from '../component/gas-common.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { StandardRoutingModule } from './standard-routing.module';
 import { StandardComponent } from './standard.component';
@@ -31,7 +31,7 @@ import { StationCodeComponent } from './stationCode/stationCode.component';
     TabsModule,
     StandardRoutingModule,
     BsDropdownModule,
-    GasCommonModule
+    SharedModule
 
   ],
   declarations: [

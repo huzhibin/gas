@@ -33,37 +33,44 @@
           <button class="btn btn-sm btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i>&nbsp; 查询</button>
         </div>
 
-        <table class="table table-bordered table-sm">
-          <thead>
-            <tr>
-              <th><input #checkedAll type="checkbox" name="userbox" (change)="selectAll(checkedAll.checked)"></th>
-              <th *ngFor="let th of theads" draggable="true">{{ th }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of userList" (click)="user.checked = !user.checked" [class.active]="user.checked">
-              <td><input type="checkbox" name="userbox" [(ngModel)]="user.checked" (click)="$event.stopPropagation();"></td>
-              <td>{{ user.userName }}</td>
-              <td>{{ user.realName }}</td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.mobile }}</td>
-              <td>{{ user.phone }}</td>
-              <td>{{ user.createTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
-              <td>{{ user.departmentName }}</td>
-              <td>{{ user.roleName }}</td>
-              <td>{{ user.remark }}</td>
-              <td>
-                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(user)?editModal.show():null">编辑</button>
-                <!-- <button class="btn btn-sm btn-outline-primary" type="button" (click)="">打印</button> -->
-                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(user)?resetPwdModal.show():null">重置密码</button>
-                <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(user)?deleteModal.show():null">删除</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <p-dataTable 
+          [value]="userList" 
+          scrollable="true" 
+          scrollHeight="400px" 
+          [rows]="10" 
+          [paginator]="true" 
+          [rowsPerPageOptions]="[5,10,20]"
+          [(selection)]="selectedUsers" 
+          dataKey="userName"
+          resizableColumns="true"
+          reorderableColumns="true"
+          [totalRecords]="totalItems"
+          [lazy]="true"
+          (onLazyLoad)="getList($event)"
+        >
+          
+          <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+          <p-column field="userName" header="用户名" [sortable]="true"></p-column>
+          <p-column field="realName" header="真名"></p-column>
+          <p-column field="email" header="邮箱"></p-column>
+          <p-column field="mobile" header="手机号"></p-column>
+          <p-column field="phone" header="电话"></p-column>
+          <p-column field="createTime" header="创建时间"></p-column>
+          <p-column field="departmentName" header="部门名称"></p-column>
+          <p-column field="roleName" header="角色名称"></p-column>
+          <p-column field="remark" header="备注"></p-column>
+          <p-column>
+            <ng-template pTemplate="header">
+              操作
+            </ng-template>
+            <ng-template pTemplate="body">
+              <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(user)?editModal.show():null">编辑</button>
+              <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(user)?resetPwdModal.show():null">重置密码</button>
+              <button class="btn btn-sm btn-outline-primary" type="button" (click)="$event.stopPropagation();checkOperand(user)?deleteModal.show():null">删除</button>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
 
-        <pagination-comp [totalItems]="totalItems" [currentPage]="currentPage" [itemsPerPage]="pageSize" (changePage)="changePage($event)"
-          (changeSize)="changeSize($event)"></pagination-comp>
       </div>
     </div>
   </div>

@@ -65,8 +65,8 @@
             </div>
           </div>
 
-          <pagination-comp [totalItems]="plan.totalItems" [currentPage]="plan.pageNumber" [itemsPerPage]="plan.pageSize" (changePage)="plan.pageNumber=$event.page;plan.pageSize=$event.itemsPerPage;getStartProcessList()"
-            (changeSize)="plan.pageNumber=1;plan.pageSize=$event;getStartProcessList()"></pagination-comp>
+          <gas-pagination [totalItems]="plan.totalItems" [currentPage]="plan.pageNumber" [itemsPerPage]="plan.pageSize" (changePage)="plan.pageNumber=$event.page;plan.pageSize=$event.itemsPerPage;getStartProcessList()"
+            (changeSize)="plan.pageNumber=1;plan.pageSize=$event;getStartProcessList()"></gas-pagination>
         </tab>
 
         <tab (select)="getPlanList()">
@@ -107,8 +107,8 @@
             </tbody>
           </table>
 
-          <pagination-comp [totalItems]="verify.totalItems" [currentPage]="verify.pageNumber" [itemsPerPage]="verify.pageSize" (changePage)="verify.pageNumber=$event.page;verify.pageSize=$event.itemsPerPage;getPlanList()"
-            (changeSize)="verify.pageNumber=1;verify.pageSize=$event;getPlanList()"></pagination-comp>
+          <gas-pagination [totalItems]="verify.totalItems" [currentPage]="verify.pageNumber" [itemsPerPage]="verify.pageSize" (changePage)="verify.pageNumber=$event.page;verify.pageSize=$event.itemsPerPage;getPlanList()"
+            (changeSize)="verify.pageNumber=1;verify.pageSize=$event;getPlanList()"></gas-pagination>
         </tab>
 
         <tab (select)="getVerifyList()">
@@ -162,8 +162,8 @@
             </div>
           </div>
 
-          <pagination-comp [totalItems]="action.totalItems" [currentPage]="action.pageNumber" [itemsPerPage]="action.pageSize" (changePage)="action.pageNumber=$event.page;action.pageSize=$event.itemsPerPage;getVerifyList()"
-            (changeSize)="action.pageNumber=1;action.pageSize=$event;getVerifyList()"></pagination-comp>
+          <gas-pagination [totalItems]="action.totalItems" [currentPage]="action.pageNumber" [itemsPerPage]="action.pageSize" (changePage)="action.pageNumber=$event.page;action.pageSize=$event.itemsPerPage;getVerifyList()"
+            (changeSize)="action.pageNumber=1;action.pageSize=$event;getVerifyList()"></gas-pagination>
         </tab>
 
         <tab (select)="getActionList()">
@@ -204,8 +204,8 @@
             </tbody>
           </table>
 
-          <pagination-comp [totalItems]="finish.totalItems" [currentPage]="finish.pageNumber" [itemsPerPage]="finish.pageSize" (changePage)="finish.pageNumber=$event.page;finish.pageSize=$event.itemsPerPage;getActionList()"
-            (changeSize)="finish.pageNumber=1;finish.pageSize=$event;getActionList()"></pagination-comp>
+          <gas-pagination [totalItems]="finish.totalItems" [currentPage]="finish.pageNumber" [itemsPerPage]="finish.pageSize" (changePage)="finish.pageNumber=$event.page;finish.pageSize=$event.itemsPerPage;getActionList()"
+            (changeSize)="finish.pageNumber=1;finish.pageSize=$event;getActionList()"></gas-pagination>
         </tab>
 
         <tab (select)="getMyStartProcess()">
@@ -287,8 +287,8 @@
           </table>
 
 
-          <pagination-comp [totalItems]="history.totalItems" [currentPage]="history.pageNumber" [itemsPerPage]="history.pageSize" (changePage)="history.pageNumber=$event.page;history.pageSize=$event.itemsPerPage;"
-            (changeSize)="history.pageNumber=1;history.pageSize=$event;getMyStartProcess();getMyParticipateProcess();getMyFinishProcess()"></pagination-comp>
+          <gas-pagination [totalItems]="history.totalItems" [currentPage]="history.pageNumber" [itemsPerPage]="history.pageSize" (changePage)="history.pageNumber=$event.page;history.pageSize=$event.itemsPerPage;"
+            (changeSize)="history.pageNumber=1;history.pageSize=$event;getMyStartProcess();getMyParticipateProcess();getMyFinishProcess()"></gas-pagination>
         </tab>
       </tabset>
     </div>

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { GasCommonModule } from '../component/gas-common.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { SystemRoutingModule } from './system-routing.module';
 import { SystemComponent } from './system.component';
@@ -28,7 +28,7 @@ import { RoleService } from "./role/role.service";
     ModalModule,
     AlertModule,
     TabsModule,
-    GasCommonModule
+    SharedModule
   ],
   declarations: [
     SystemComponent,

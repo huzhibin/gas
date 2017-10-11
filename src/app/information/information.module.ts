@@ -5,7 +5,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { GasCommonModule } from '../component/gas-common.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { InformationRoutingModule } from './information-routing.module';
 import { InformationComponent } from './information.component';
@@ -26,7 +26,7 @@ import { VideoComponent } from './video/video.component';
     TabsModule,
     InformationRoutingModule,
     BsDropdownModule,
-    GasCommonModule,
+    SharedModule,
     // UEditorModule
   ],
   declarations: [

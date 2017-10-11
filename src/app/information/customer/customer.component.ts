@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 import { CustomerService } from './customer.service';
 import 'rxjs/Rx' ;
-import { API } from '../../service/api';
+import { API } from '../../core/api';
 @Component({
     templateUrl: 'customer.component.html',
     styleUrls: ['customer.component.scss'],

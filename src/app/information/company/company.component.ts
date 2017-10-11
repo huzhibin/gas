@@ -3,7 +3,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 import { CompanyService } from './company.service';
 import 'rxjs/Rx';
 
-import { API } from '../../service/api';
+import { API } from '../../core/api';
 @Component({
   templateUrl: 'company.component.html',
   styleUrls: ['company.component.scss'],

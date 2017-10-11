@@ -52,8 +52,8 @@
           </tbody>
         </table>
         <div *ngIf="orderList.length == 0">未查询到数据</div>
-        <pagination-comp [totalItems]="totalItems" [currentPage]="currentPage" [itemsPerPage]="pageSize" (changePage)="changePage($event)"
-          (changeSize)="changeSize($event)"></pagination-comp>
+        <gas-pagination [totalItems]="totalItems" [currentPage]="currentPage" [itemsPerPage]="pageSize" (changePage)="changePage($event)"
+          (changeSize)="changeSize($event)"></gas-pagination>
       </div>
     </div>
   </div>

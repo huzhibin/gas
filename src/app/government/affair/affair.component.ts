@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AffairService } from "./affair.service";
-import { API } from "../../service/api";
+import { API } from "../../core/api";
 @Component({
   templateUrl: 'affair.component.html',
   styleUrls: ['affair.component.css'],

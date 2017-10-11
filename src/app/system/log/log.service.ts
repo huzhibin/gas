@@ -3,8 +3,8 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { API } from '../../service/api';
-import { HttpService } from "../../service/http.service";
+import { API } from '../../core/api';
+import { HttpService } from "../../core/http.service";
 
 @Injectable()
 export class LogService {

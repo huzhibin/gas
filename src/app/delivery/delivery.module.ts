@@ -6,7 +6,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
-import { GasCommonModule } from '../component/gas-common.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { DeliveryRoutingModule } from './delivery-routing.module';
 import { DeliveryComponent} from './delivery.component';
@@ -26,7 +26,7 @@ import { DeliverymanComponent } from './deliveryman/deliveryman.component';
     DeliveryRoutingModule,
     BsDropdownModule,
     DatepickerModule,
-    GasCommonModule
+    SharedModule
   ],
   declarations: [
     DeliveryComponent,

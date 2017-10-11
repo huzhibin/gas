@@ -6,7 +6,6 @@ export class AuthGuard implements CanActivate {
 
   constructor(private router: Router) { }
   canActivate() {
-    console.log('AuthGuard#canActivate called');
     if(!sessionStorage.getItem("user")){
       this.router.navigate(['/login']);
     }

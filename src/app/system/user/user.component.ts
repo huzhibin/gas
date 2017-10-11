@@ -15,6 +15,8 @@ export class UserComponent implements OnInit {
   currentPage: number;//当前页号
   pageSize: number;//分页大小
 
+  selectedUsers: any[];
+
   departList: any;//部门列表
   roleList: any;//角色列表
 
@@ -24,7 +26,6 @@ export class UserComponent implements OnInit {
     department: string,
     roleNumber: string
   };//查询参数
-  theads: Array<string>;//表头字段
   userList: Array<{
     id: number,
     userCode: string,
@@ -42,7 +43,7 @@ export class UserComponent implements OnInit {
     resources?: Array<any>,
     // loginCount: string,
     checked?: Boolean
-  }>;//用户列表
+  }> = [];//用户列表
 
   addForm: {
     userName: string,
@@ -214,7 +215,11 @@ export class UserComponent implements OnInit {
     this.currentPage = 1;
     this.getList();
   }
-  getList(userName?: string, department?: number, roleNumber?: number, pageSize?: number, currentPage?: number) {
+  getList(event?: any) {
+    if (event) {
+      this.pageSize = event.rows;
+      this.currentPage = event.first / event.rows + 1;
+    }
 
     let params = {
       pageSize: this.pageSize,
@@ -310,10 +315,10 @@ export class UserComponent implements OnInit {
       pageNumber: 1,
       pageSize: 999999,
       departmentName: ''
-    }).then(data=>{
-      if(data.status == 0){
+    }).then(data => {
+      if (data.status == 0) {
         this.departList = data.data.list;
-      }else{
+      } else {
 
       }
     });
@@ -322,33 +327,20 @@ export class UserComponent implements OnInit {
       pageSize: 999999,
       roleName: '',
       remark: ''
-    }).then(data=>{
-      if(data.status == 0){
+    }).then(data => {
+      if (data.status == 0) {
         this.roleList = data.data.list;
-      }else{
+      } else {
 
       }
     })
-   
+
     this.searchParams = {
       userName: '',
       department: '',
       roleNumber: ''
     }
     this.operand = {};
-
-    this.theads = [
-      '用户名',
-      '真名',
-      '邮箱',
-      '手机',
-      '固定电话',
-      '创建时间',
-      '部门',
-      '角色',
-      '备注',
-      '操作'
-    ];
 
     this.initAddForm();
     this.initEditForm();
